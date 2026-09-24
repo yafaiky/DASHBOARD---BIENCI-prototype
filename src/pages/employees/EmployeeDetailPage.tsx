@@ -43,7 +43,7 @@ export const EmployeeDetailPage: React.FC = () => {
             <img
               src={employee.avatar}
               alt={employee.name}
-              className="w-20 h-20 -2xl object-cover ring-4 ring-slate-100 shadow-sm"
+              className="w-20 h-20 -2xl object-cover rounded-full ring-4 ring-slate-100 shadow-sm"
             />
             <div>
               <div className="flex items-center gap-3">
@@ -59,7 +59,7 @@ export const EmployeeDetailPage: React.FC = () => {
                         : "bg-blue-50 text-blue-700"
                   }`}
                 >
-                  <span className="w-1.5 h-1.5 -full bg-current" />
+                  {/* <span className="w-1.5 h-1.5 -full bg-current" /> */}
                   {employee.status}
                 </span>
               </div>
