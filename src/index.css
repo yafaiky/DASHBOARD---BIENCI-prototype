@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Instrument Sans', sans-serif;
+}
+
+:root {
+  --font-sans: 'Instrument Sans', sans-serif;
+  font-family: 'Instrument Sans', sans-serif;
+}
+
+html, body, #root, button, input, select, textarea, table, * {
+  font-family: 'Instrument Sans', sans-serif !important;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #1f2937;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Dark sidebar scrollbar */
+.sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #262b40 transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #262b40;
+  border-radius: 9999px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: #373e5c;
+}
