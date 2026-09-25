@@ -616,3 +616,197 @@ export const mockComplianceItems: ComplianceItem[] = [
     assignedTo: 'GA & Retail Facility Management'
   }
 ];
+
+// Q17: Tren Demografi dan Produktivitas Karyawan: Area Timur vs Area Barat
+export const regionalDemographicsProductivityData = {
+  west: {
+    regionName: 'Area Barat',
+    code: 'Barat' as const,
+    coverage: 'Sumatera, DKI Jakarta, Banten, Jawa Barat',
+    totalStores: 218,
+    totalHeadcount: 7180,
+    avgAge: 23.4,
+    avgTenureYears: 1.8,
+    revenuePerFte: 71200000, // Rp 71.2 Juta / FTE
+    targetAchievement: 104.2, // %
+    turnoverRate: 11.4, // %
+    supervisionRatio: '1 : 8.4',
+    tenureCohorts: [
+      { label: '< 1 Tahun (Staf Baru)', pct: 42, count: 3015 },
+      { label: '1 – 3 Tahun (Terkonfirmasi)', pct: 38, count: 2728 },
+      { label: '> 3 Tahun (Senior / Core)', pct: 20, count: 1437 },
+    ],
+    ageCohorts: [
+      { range: '< 21 Thn', pct: 22 },
+      { range: '21 – 25 Thn', pct: 52 },
+      { range: '26 – 30 Thn', pct: 18 },
+      { range: '> 30 Thn', pct: 8 },
+    ],
+    productivityTitle: 'High-Velocity Footfall',
+    operationalTrait: 'Didominasi talenta muda Gen-Z usia produktif awal dengan dinamika sales floor cepat di mall-mall kota besar.',
+    keyChallenge: 'Turnover tahun pertama relatif tinggi (11.4%) karena perputaran retail perkotaan dan rekrutmen agresif kompetitor.'
+  },
+  east: {
+    regionName: 'Area Timur',
+    code: 'Timur' as const,
+    coverage: 'Jawa Tengah, Jawa Timur, Bali, NTB/NTT, Kalimantan, Sulawesi, Papua',
+    totalStores: 124,
+    totalHeadcount: 4060,
+    avgAge: 25.8,
+    avgTenureYears: 3.2,
+    revenuePerFte: 64800000, // Rp 64.8 Juta / FTE
+    targetAchievement: 107.5, // %
+    turnoverRate: 6.8, // %
+    supervisionRatio: '1 : 9.2',
+    tenureCohorts: [
+      { label: '< 1 Tahun (Staf Baru)', pct: 22, count: 893 },
+      { label: '1 – 3 Tahun (Terkonfirmasi)', pct: 48, count: 1949 },
+      { label: '> 3 Tahun (Senior / Core)', pct: 30, count: 1218 },
+    ],
+    ageCohorts: [
+      { range: '< 21 Thn', pct: 10 },
+      { range: '21 – 25 Thn', pct: 42 },
+      { range: '26 – 30 Thn', pct: 34 },
+      { range: '> 30 Thn', pct: 14 },
+    ],
+    productivityTitle: 'High-Tenure Quota Consistency',
+    operationalTrait: 'Stabilitas staf sangat kokoh dengan rata-rata masa kerja 3.2 tahun, loyalitas tinggi, dan penguasaan pelanggan lokal.',
+    keyChallenge: 'Pertumbuhan basket size lebih bergantung pada daya beli regional, namun target sales tercapai konsisten (107.5%).'
+  },
+  comparisonMetrics: [
+    {
+      metric: 'Rata-Rata Usia Karyawan',
+      westVal: '23.4 Tahun',
+      eastVal: '25.8 Tahun',
+      diff: '+2.4 thn lebih matang di Timur',
+      indicator: 'Demografi Usia',
+      winner: 'Timur Lebih Stabil'
+    },
+    {
+      metric: 'Rata-Rata Masa Kerja (Tenure)',
+      westVal: '1.8 Tahun',
+      eastVal: '3.2 Tahun',
+      diff: '+1.4 thn masa kerja lebih panjang',
+      indicator: 'Masa Kerja',
+      winner: 'Timur Lebih Loyal'
+    },
+    {
+      metric: 'Turnover Tahunan Toko',
+      westVal: '11.4%',
+      eastVal: '6.8%',
+      diff: '-4.6% turnover lebih rendah di Timur',
+      indicator: 'Retensi HR',
+      winner: 'Timur Unggul Retensi'
+    },
+    {
+      metric: 'Produktivitas Sales (Revenue / FTE)',
+      westVal: 'Rp 71.2 Juta',
+      eastVal: '64.8 Juta',
+      diff: '+Rp 6.4 Jt/FTE lebih tinggi di Barat',
+      indicator: 'Produktivitas Sales',
+      winner: 'Barat Unggul Per-Kapita'
+    },
+    {
+      metric: 'Pencapaian Target Penjualan',
+      westVal: '104.2%',
+      eastVal: '107.5%',
+      diff: '+3.3% konsistensi kuota lebih tinggi',
+      indicator: 'Pencapaian Target',
+      winner: 'Timur Unggul Target'
+    },
+    {
+      metric: 'Total Toko Aktif & Headcount',
+      westVal: '218 Toko (7,180 Staf)',
+      eastVal: '124 Toko (4,060 Staf)',
+      diff: '64% populasi toko ritel nasional',
+      indicator: 'Jaringan Toko',
+      winner: 'Barat Skala Terbesar'
+    }
+  ]
+};
+
+// Q16: Kesenjangan (Tenure Gap) Masa Kerja Antara Store Manager (Senior) dan Staf Baru
+export const storeTenureGapData = {
+  overallGapYears: 5.0, // Gap 5.8 yrs (SM) vs 0.8 yrs (Staf Baru)
+  storeManagerTenure: 5.8,
+  frontlineStaffTenure: 0.8,
+  jobLevelBreakdown: [
+    {
+      role: 'Store Manager (Kepala Toko)',
+      level: 'Senior Leadership',
+      headcount: 342,
+      avgTenureYears: 5.8,
+      tenureSpread: {
+        lessThan1Year: 4, // %
+        oneToThreeYears: 14,
+        moreThan3Years: 82
+      },
+      conflictRisk: 'Low Direct Exit',
+      culturalTrait: 'Sangat loyal, memegang teguh SOP tradisional retail & target omset ketat.'
+    },
+    {
+      role: 'Assistant Store Manager / Supervisor',
+      level: 'Store Middle Management',
+      headcount: 420,
+      avgTenureYears: 3.2,
+      tenureSpread: {
+        lessThan1Year: 12,
+        oneToThreeYears: 48,
+        moreThan3Years: 40
+      },
+      conflictRisk: 'Medium Friction Buffer',
+      culturalTrait: 'Jembatan komunikasi penting antara instruksi Store Manager dan dinamika tim lapangan.'
+    },
+    {
+      role: 'Senior Store Associate / Cashier Head',
+      level: 'Core Operational Staff',
+      headcount: 1850,
+      avgTenureYears: 2.1,
+      tenureSpread: {
+        lessThan1Year: 24,
+        oneToThreeYears: 56,
+        moreThan3Years: 20
+      },
+      conflictRisk: 'Low Friction',
+      culturalTrait: 'Menjadi peer mentor bagi staf baru; stabilitas pelayanan kasir & inventory.'
+    },
+    {
+      role: 'Junior Sales Associate (SPG/SPB & Kasir Baru)',
+      level: 'Frontline Associate',
+      headcount: 8628,
+      avgTenureYears: 0.8,
+      tenureSpread: {
+        lessThan1Year: 71,
+        oneToThreeYears: 25,
+        moreThan3Years: 4
+      },
+      conflictRisk: 'High Friction Vulnerability',
+      culturalTrait: 'Didominasi Gen-Z usia 18-22 tahun (first jobbers); membutuhkan bimbingan empatik.'
+    }
+  ],
+  frictionAnalysis: {
+    gapSizeHighStores: {
+      gapThreshold: '> 4.5 Tahun Kesenjangan',
+      storeCount: 186,
+      earlyAttritionRate: 21.8, // % turnover < 90 hari
+      internalGrievancesReported: 34, // kasus komplain/mediasi HR
+      mainConflictTriggers: [
+        'Kesenjangan gaya komunikasi: Instruksi otoritatif satu arah vs ekspektasi mentoring dialogis staf muda',
+        'Tekanan kuota target harian oleh SM senior tanpa pendampingan teknis dan simulasi sales',
+        'Perbedaan persepsi adaptasi tools digital POS & omnichannel ritel modern'
+      ]
+    },
+    gapSizeBalancedStores: {
+      gapThreshold: '< 3.0 Tahun Kesenjangan / With Buddy System',
+      storeCount: 156,
+      earlyAttritionRate: 8.4,
+      internalGrievancesReported: 8,
+      keyMitigationFactors: [
+        'Penerapan "Store Buddy Program" (pendampingan 1-on-1 oleh Senior Associate selama 60 hari)',
+        'Workshop "Empathetic Retail Leadership" khusus Store Manager senior',
+        'Sesi briefing harian dua arah (huddle morning) yang fokus apresiasi & solusi bersama'
+      ]
+    }
+  },
+  executiveFinding: 'Kesenjangan masa kerja 5.0 tahun antara Store Manager (5.8 thn) dan Frontline Associate (0.8 thn) terbukti memicu friksi operasional jika dibiarkan tanpa jembatan budaya (turnover 21.8% di toko ber-gap lebar). Namun friksi dapat ditekan hingga -61% (turnover 8.4%) di 156 toko yang telah menerapkan program Buddy System & Supervisory Coaching.'
+};

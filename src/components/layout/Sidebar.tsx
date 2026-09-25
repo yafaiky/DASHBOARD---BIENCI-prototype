@@ -213,7 +213,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, o
                       onClick={() => {
                         if (window.innerWidth < 1024 && onClose) onClose();
                       }}
-                      className={`relative flex items-center rounded-xl font-medium transition-all ${
+                      className={`relative flex items-center font-medium transition-all ${
                         isCollapsed
                           ? 'justify-center p-2.5 my-0.5'
                           : 'justify-between px-3 py-2.5'

@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 import {
   TrendingDown,
   UserMinus,
@@ -112,55 +113,73 @@ export const TurnoverPage: React.FC = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Monthly Turnover Rate
-          </span>
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              Monthly Turnover
+            </span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-slate-100 text-slate-700 border border-slate-200">
+               Quest #5
+            </span>
+          </div>
           <div className="text-2xl font-black text-slate-900 mt-1">0.77%</div>
-          <span className="text-[11px] text-emerald-600 font-semibold">
+          <span className="text-xs text-emerald-600 font-semibold">
             ↓ -12.0% dropped vs Sep
           </span>
         </div>
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
             Total Departures
           </span>
           <div className="text-2xl font-black text-slate-900 mt-1">
             96 staff
           </div>
-          <span className="text-[11px] text-slate-500 font-medium">
+          <span className="text-xs text-slate-500 font-medium">
             October 2026 total
           </span>
         </div>
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Voluntary Resignation
-          </span>
+
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              Voluntary Resign
+            </span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-red-50 text-[#c8102e] border border-red-200">
+               Quest #4 & #25
+            </span>
+          </div>
           <div className="text-2xl font-black text-amber-600 mt-1">
             62 staff
           </div>
-          <span className="text-[11px] text-slate-500 font-medium">
+          <span className="text-xs text-slate-500 font-medium">
             64.5% of total attrition
           </span>
         </div>
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
             Annualized Turnover
           </span>
           <div className="text-2xl font-black text-slate-900 mt-1">9.2%</div>
-          <span className="text-[11px] text-emerald-600 font-semibold">
-            Benchmark Indonesia Retail: 18%
+          <span className="text-xs text-emerald-600 font-semibold">
+            Benchmark Indonesia: 18%
           </span>
         </div>
       </div>
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-bold text-slate-900">
-              Monthly Turnover Breakdown (2026)
-            </h3>
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
+          <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="text-sm font-bold text-slate-900 font-heading">
+                Monthly Turnover Breakdown (2026)
+              </h3>
+              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                 Quest #4 & #5
+              </span>
+            </div>
             <span className="text-xs text-slate-400">Headcount</span>
           </div>
           <Chart
@@ -171,11 +190,16 @@ export const TurnoverPage: React.FC = () => {
           />
         </div>
 
-        <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-bold text-slate-900">
-              Turnover Velocity by Retail Position
-            </h3>
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
+          <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="text-sm font-bold text-slate-900 font-heading">
+                Turnover Velocity by Retail Position
+              </h3>
+              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-red-50 text-[#c8102e] border border-red-200">
+                 Quest #4 (High): ASM, VM & Leaders
+              </span>
+            </div>
             <span className="text-xs text-slate-400">Store Roles</span>
           </div>
           <Chart
@@ -239,12 +263,12 @@ export const TurnoverPage: React.FC = () => {
             ))}
           </div>
 
-          <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-200/80 text-xs text-amber-900 flex items-start gap-2.5">
+          {/* <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-200/80 text-xs text-amber-900 flex items-start gap-2.5">
             <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
             <div>
               <strong>Format Insight:</strong> Counter turnover (3.9%) exceeds target threshold due to long single-brand shifts in department stores. Family Stores maintain lowest turnover (1.8%) supported by larger teams and structured shift rotations.
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Q14: Early Attrition Velocity (30 Days / 90 Days / 1 Year) */}
@@ -291,15 +315,24 @@ export const TurnoverPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center gap-2 text-[11px] text-emerald-900">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-            <span>Buddy mentoring program at stores reduced initial 30-day drop-off by 34%.</span>
+          <div className="p-3 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px]">
+            {/* <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Buddy mentoring program at stores reduced initial 30-day drop-off by 34%.</span>
+            </div> */}
+            <Link
+              to="/store-performance#quest-16"
+              className="text-[#c8102e] font-bold hover:underline inline-flex items-center gap-1 shrink-0"
+            >
+              <span>Lihat Analisis Gap Masa Kerja</span>
+              <ArrowRight className="w-3 h-3" />
+            </Link>
           </div>
         </div>
       </div>
 
       {/* Exit Interviews & Offboarding Roster */}
-      <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs space-y-4">
+      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-sm font-bold text-slate-900">

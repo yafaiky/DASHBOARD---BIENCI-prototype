@@ -94,58 +94,81 @@ export const LabourCostPage: React.FC = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Total Monthly Labour Cost
-          </span>
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              Total Labour Cost
+            </span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-red-50 text-[#c8102e] border border-red-200">
+               Quest #15
+            </span>
+          </div>
           <div className="text-2xl font-black text-slate-900 mt-1">
             Rp 74.2 Miliar
           </div>
-          <span className="text-[11px] text-emerald-600 font-semibold">
+          <span className="text-xs text-emerald-600 font-semibold">
             Within -1.4% budget limit
           </span>
         </div>
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
             Avg Cost / FTE
           </span>
           <div className="text-2xl font-black text-slate-900 mt-1">
             Rp 5.95 Juta
           </div>
-          <span className="text-[11px] text-slate-500 font-medium">
-            Includes basic + allowances + BPJS
+          <span className="text-xs text-slate-500 font-medium">
+            Basic + allowances + BPJS
           </span>
         </div>
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Revenue per FTE
-          </span>
+
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              Revenue per FTE
+            </span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-emerald-50 text-emerald-700 border border-emerald-200">
+               Quest #21
+            </span>
+          </div>
           <div className="text-2xl font-black text-emerald-600 mt-1">
             Rp 68.4 Juta
           </div>
-          <span className="text-[11px] text-emerald-600 font-semibold">
+          <span className="text-xs text-emerald-600 font-semibold">
             ↑ +4.8% vs Q2 benchmark
           </span>
         </div>
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Labour Cost Ratio
-          </span>
+
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              Labour Cost Ratio
+            </span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-blue-50 text-blue-700 border border-blue-200">
+               Quest #2
+            </span>
+          </div>
           <div className="text-2xl font-black text-slate-900 mt-1">7.92%</div>
-          <span className="text-[11px] text-blue-600 font-semibold">
+          <span className="text-xs text-blue-600 font-semibold">
             Retail Healthy Band (&lt;10%)
           </span>
         </div>
       </div>
 
       {/* Chart Section */}
-      <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
           <div>
-            <h3 className="text-sm font-bold text-slate-900">
-              Revenue vs Labour Cost Efficiency
-            </h3>
-            <p className="text-xs text-slate-500">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="text-sm font-bold text-slate-900 font-heading">
+                Revenue vs Labour Cost Efficiency
+              </h3>
+              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-red-50 text-[#c8102e] border border-red-200">
+                 Quest #2 & #15 (High): Cost Ratio & Over-Budget Check
+              </span>
+            </div>
+            <p className="text-xs text-slate-500 mt-0.5 font-inter">
               Tracking whether headcount and payroll growth stays aligned with
               gross sales
             </p>

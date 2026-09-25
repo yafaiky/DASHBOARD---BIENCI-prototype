@@ -1,17 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: 'Instrument Sans', sans-serif;
+  --font-inter: 'Inter', sans-serif;
 }
 
 :root {
   --font-sans: 'Instrument Sans', sans-serif;
+  --font-inter: 'Inter', sans-serif;
   font-family: 'Instrument Sans', sans-serif;
-}
-
-html, body, #root, button, input, select, textarea, table, * {
-  font-family: 'Instrument Sans', sans-serif !important;
 }
 
 body {
@@ -21,25 +19,49 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.01em;
+  font-family: 'Instrument Sans', sans-serif;
 }
 
-/* Custom scrollbars */
+/* Headings and major titles retain bold Instrument Sans branding */
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Instrument Sans', sans-serif;
+}
+
+/* Small text, explanations, descriptions, table cells, and captions use Inter */
+p, label, td, th, .text-xs, .text-sm, .text-caption, .font-inter, span:not(.font-heading) {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Enhanced readability for small text and explanations */
+.text-xs {
+  font-size: 0.8125rem; /* 13px instead of 12px for high legibility */
+  line-height: 1.25rem;
+}
+
+.text-\[10px\], .text-\[11px\] {
+  font-size: 0.75rem !important; /* Bumps 10px and 11px up to comfortable 12px */
+  line-height: 1.15rem;
+}
+
+/* Disable scrollbars on the window and demographic views */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 0px;
+  height: 0px;
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 9999px;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Dark sidebar scrollbar */
@@ -49,7 +71,8 @@ body {
 }
 
 .sidebar-scroll::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
+  display: block;
 }
 
 .sidebar-scroll::-webkit-scrollbar-track {
@@ -59,8 +82,4 @@ body {
 .sidebar-scroll::-webkit-scrollbar-thumb {
   background: #262b40;
   border-radius: 9999px;
-}
-
-.sidebar-scroll::-webkit-scrollbar-thumb:hover {
-  background: #373e5c;
 }

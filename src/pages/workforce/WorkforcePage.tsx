@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 import {
   Users,
   Building,
@@ -13,6 +14,7 @@ import {
   Clock,
   CheckCircle2,
   TrendingUp,
+  ArrowRight,
 } from "lucide-react"
 import Chart from "react-apexcharts"
 import {
@@ -83,7 +85,7 @@ export const WorkforcePage: React.FC = () => {
   ]
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 no-scrollbar">
       {/* Page Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -96,13 +98,13 @@ export const WorkforcePage: React.FC = () => {
           </p>
         </div>
 
-        {/* Tab switch */}
+        {/* Tab switch with quest tags */}
         <div className="inline-flex flex-wrap p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-semibold gap-1">
           {[
             { id: "headcount", label: "Headcount" },
             { id: "demographics", label: "Demographics & Gender" },
-            { id: "rnd-design", label: "R&D & Design (Q9, Q24)" },
-            { id: "recruitment", label: "Recruitment & Intern (Q20, Q27)" },
+            { id: "rnd-design", label: "R&D & Design" },
+            { id: "recruitment", label: "Recruitment & Intern" },
             { id: "organization", label: "Organization" },
             { id: "employment", label: "Employment (PKWT)" },
           ].map((tab) => (
@@ -123,41 +125,64 @@ export const WorkforcePage: React.FC = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Total Workforce
-          </span>
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              Total Workforce
+            </span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-red-50 text-[#c8102e] border border-red-200">
+               Quest #1
+            </span>
+          </div>
           <div className="text-2xl font-black text-slate-900 mt-1">12,480</div>
-          <span className="text-[11px] text-emerald-600 font-semibold">
+          <span className="text-xs text-emerald-600 font-semibold">
             ↑ +3.2% MoM
           </span>
         </div>
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            HQ Roster
-          </span>
+
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              HQ Roster
+            </span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-amber-50 text-amber-700 border border-amber-200">
+               Quest #18
+            </span>
+          </div>
           <div className="text-2xl font-black text-slate-900 mt-1">1,240</div>
-          <span className="text-[11px] text-slate-500 font-medium">
+          <span className="text-xs text-slate-500 font-medium">
             9.9% of workforce
           </span>
         </div>
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Store Network
-          </span>
+
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              Store Network
+            </span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-blue-50 text-blue-700 border border-blue-200">
+               Quest #1
+            </span>
+          </div>
           <div className="text-2xl font-black text-slate-900 mt-1">11,240</div>
-          <span className="text-[11px] text-blue-600 font-medium">
+          <span className="text-xs text-blue-600 font-medium">
             342 active retail stores
           </span>
         </div>
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Avg Employee Age
-          </span>
+
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              Avg Employee Age
+            </span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-purple-50 text-purple-700 border border-purple-200">
+               Quest #8 & #10
+            </span>
+          </div>
           <div className="text-2xl font-black text-slate-900 mt-1">
             26.8 yrs
           </div>
-          <span className="text-[11px] text-purple-600 font-medium">
+          <span className="text-xs text-purple-600 font-medium">
             Gen Z & Millennial Core
           </span>
         </div>
@@ -165,10 +190,15 @@ export const WorkforcePage: React.FC = () => {
 
       {activeTab === "headcount" && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs">
-            <h3 className="text-sm font-bold text-slate-900 mb-3">
-              Headcount by Division
-            </h3>
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
+            <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+              <h3 className="text-sm font-bold text-slate-900 font-heading">
+                Headcount by Division
+              </h3>
+              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                 Quest #26 (Med): Commercial vs Marketing
+              </span>
+            </div>
             <Chart
               options={divisionOptions}
               series={divisionSeries}
@@ -177,10 +207,15 @@ export const WorkforcePage: React.FC = () => {
             />
           </div>
 
-          <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs">
-            <h3 className="text-sm font-bold text-slate-900 mb-3">
-              Department Headcount & Budget Variance
-            </h3>
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
+            <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+              <h3 className="text-sm font-bold text-slate-900 font-heading">
+                Department Headcount & Budget Variance
+              </h3>
+              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-red-50 text-red-700 border border-red-200">
+                 Quest #23 (Med): Target & Bottleneck
+              </span>
+            </div>
             <div className="overflow-x-auto">
               <table className="w-full text-xs text-left">
                 <thead className="bg-slate-50 text-slate-500 font-bold uppercase text-[10px]">
@@ -265,101 +300,129 @@ export const WorkforcePage: React.FC = () => {
         </div>
       )}
 
+      {/* Demographics & Gender (Non-scrollable, balanced 3-column layout) */}
       {activeTab === "demographics" && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs">
-            <h3 className="text-sm font-bold text-slate-900 mb-3">
-              Workforce Age Distribution
-            </h3>
-            <Chart
-              options={ageOptions}
-              series={ageSeries}
-              type="bar"
-              height={260}
-            />
-          </div>
-
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 no-scrollbar">
+          {/* Card 1: Age Distribution */}
           <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
             <div>
-              <h3 className="text-sm font-bold text-slate-900 mb-3">
-                Gender Diversity Roster (Company-Wide)
-              </h3>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-sm font-bold text-slate-900 font-heading">
+                  Workforce Age Distribution
+                </h3>
+                <span className="text-xs font-semibold text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full">
+                  Avg 26.8 yrs
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mb-3">
+                Generational workforce demographic breakdown
+              </p>
+              <Chart
+                options={ageOptions}
+                series={ageSeries}
+                type="bar"
+                height={220}
+              />
+            </div>
+            <div className="p-3 bg-slate-50 rounded-xl text-xs text-slate-600 mt-2 border border-slate-100">
+              <strong className="text-slate-900">Demographic Profile:</strong> Core retail workforce is concentrated in the 20–29 age bracket (72.6% Gen Z & Early Millennials).
+            </div>
+          </div>
+
+          {/* Card 2: Company-Wide Gender Diversity */}
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-sm font-bold text-slate-900 font-heading">
+                  Gender Diversity (Company-Wide)
+                </h3>
+                <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full">
+                  12,480 Total
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mb-3">
+                Male & female headcount balance across all divisions
+              </p>
               <Chart
                 options={genderOptions}
                 series={genderSeries}
                 type="donut"
-                height={260}
+                height={220}
               />
             </div>
-            <div className="p-3 bg-slate-50 rounded-xl text-xs text-slate-600 mt-4">
-              <strong>Diversity Index:</strong> Highly balanced male/female
-              ratio across retail stores (52% M / 48% F) and Bandung corporate HQ.
+            <div className="p-3 bg-slate-50 rounded-xl text-xs text-slate-600 mt-2 border border-slate-100">
+              <strong className="text-slate-900">Diversity Index:</strong> Highly balanced male/female ratio across store network (52% M / 48% F) and HQ divisions.
             </div>
           </div>
 
-          {/* Q29: Managerial Level Gender Representation */}
-          <div className="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
-            <div className="flex items-start justify-between">
-              <div>
-                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-pink-50 text-pink-700 mb-1.5">
-                  <Award className="w-3 h-3 text-pink-600" />
-                  <span>Critical Question #29 • Low / Strategic Priority</span>
+          {/* Card 3: Q29 Managerial Gender Representation */}
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between space-y-3">
+            <div>
+              <div className="flex items-start justify-between mb-1">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-bold bg-pink-50 text-pink-700 mb-1">
+                    <Award className="w-3.5 h-3.5 text-pink-600" />
+                    <span>Critical Question #29</span>
+                  </div>
+                  <h3 className="text-sm font-bold text-slate-900 font-heading">
+                    Managerial Gender Diversity
+                  </h3>
                 </div>
-                <h3 className="text-sm font-bold text-slate-900">
-                  Managerial Gender Representation (Store Manager to Executive Level)
-                </h3>
-                <p className="text-xs text-slate-500">
-                  Gender distribution across store leadership and corporate department heads
-                </p>
+                <span className="text-xs font-bold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg">
+                  {managerialGenderData.totalManagerialPositions} Roles
+                </span>
               </div>
-              <span className="text-xs font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">
-                {managerialGenderData.totalManagerialPositions} Total Leadership Roles
-              </span>
+              <p className="text-xs text-slate-500 mb-3">
+                Store Manager up to Corporate Director leadership
+              </p>
+
+              <div className="grid grid-cols-2 gap-3 mb-3">
+                <div className="p-3 rounded-xl border border-blue-200 bg-blue-50/40">
+                  <div className="flex items-center justify-between text-xs font-bold text-blue-900">
+                    <span>Male</span>
+                    <span className="text-sm font-black">{managerialGenderData.malePct}%</span>
+                  </div>
+                  <div className="text-lg font-black text-slate-900 mt-0.5">
+                    {managerialGenderData.maleLeaders} Leaders
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Area Store Managers & Logistics
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-xl border border-pink-200 bg-pink-50/40">
+                  <div className="flex items-center justify-between text-xs font-bold text-pink-900">
+                    <span>Female</span>
+                    <span className="text-sm font-black">{managerialGenderData.femalePct}%</span>
+                  </div>
+                  <div className="text-lg font-black text-slate-900 mt-0.5">
+                    {managerialGenderData.femaleLeaders} Leaders
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Design, VM & Flagship Managers
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <div className="flex justify-between text-xs font-semibold text-slate-700">
+                  <span>Male ({managerialGenderData.malePct}%)</span>
+                  <span>Female ({managerialGenderData.femalePct}%)</span>
+                </div>
+                <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden flex">
+                  <div className="h-full bg-blue-600 rounded-l-full" style={{ width: `${managerialGenderData.malePct}%` }} />
+                  <div className="h-full bg-pink-500 rounded-r-full" style={{ width: `${managerialGenderData.femalePct}%` }} />
+                </div>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl border border-blue-200 bg-blue-50/40 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-blue-900">Male Leaders</span>
-                  <span className="text-sm font-black text-blue-900">{managerialGenderData.malePct}%</span>
-                </div>
-                <div className="text-xl font-black text-slate-900">
-                  {managerialGenderData.maleLeaders} Leaders
-                </div>
-                <p className="text-[11px] text-slate-500">
-                  Concentrated in Area Store Management & Logistics Operations
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl border border-pink-200 bg-pink-50/40 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-pink-900">Female Leaders</span>
-                  <span className="text-sm font-black text-pink-900">{managerialGenderData.femalePct}%</span>
-                </div>
-                <div className="text-xl font-black text-slate-900">
-                  {managerialGenderData.femaleLeaders} Leaders
-                </div>
-                <p className="text-[11px] text-slate-500">
-                  Concentrated in Fashion Design, VM Leadership & Flagship Store Managers
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <div className="flex justify-between text-xs font-semibold text-slate-700">
-                <span>Male ({managerialGenderData.malePct}%)</span>
-                <span>Female ({managerialGenderData.femalePct}%)</span>
-              </div>
-              <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden flex">
-                <div className="h-full bg-blue-600 rounded-l-full" style={{ width: `${managerialGenderData.malePct}%` }} />
-                <div className="h-full bg-pink-500 rounded-r-full" style={{ width: `${managerialGenderData.femalePct}%` }} />
-              </div>
-              <div className="text-[11px] text-slate-500 pt-1">
-                Gender parity is balanced within 46%–54%, surpassing the retail national benchmark of 35% female store managers.
-              </div>
+            <div className="p-3 bg-pink-50/50 rounded-xl text-xs text-pink-950 border border-pink-100">
+              <strong className="text-pink-900">Parity Benchmark:</strong> Balanced within 46%–54%, surpassing the retail national benchmark of 35% female store managers.
             </div>
           </div>
         </div>
+      </div>
       )}
 
       {/* Q9 & Q24: R&D, Design & Product Development Demographics */}
@@ -575,30 +638,42 @@ export const WorkforcePage: React.FC = () => {
                   />
                 </div>
               </div>
-
-              <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center gap-2 text-xs text-emerald-900">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>
-                  <strong>Talent Pipeline ROI:</strong> Sourcing from SMK/Vokasi partner schools yields associates with 45% faster store POS ramp-up time.
-                </span>
-              </div>
             </div>
           </div>
         </div>
       )}
 
       {activeTab === "organization" && (
-        <div className="bg-white p-6 -2xl border border-slate-200 shadow-2xs space-y-4">
-          <h3 className="text-sm font-bold text-slate-900">
-            Organizational Hierarchy (3SECOND / BIENSI)
-          </h3>
-          <div className="p-4 bg-slate-50 -xl border border-slate-200 text-xs font-mono space-y-3">
-            <div className="p-2  bg-slate-900 text-white font-bold inline-block">
+        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-sm font-bold text-slate-900 font-heading">
+                  Organizational Hierarchy (3SECOND / BIENSI)
+                </h3>
+                <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-rose-50 text-[#C8102E] border border-rose-200">
+                   Quest #12 & #18
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Corporate HQ vs Field Operations structure & Distribution Center staffing breakdown
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-slate-700 bg-slate-100 px-3 py-1 rounded-lg">
+                HQ to Store Ratio: 1 : 5.8 (Lean Enterprise)
+              </span>
+            </div>
+          </div>
+
+          <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs font-mono space-y-3">
+            <div className="p-2 rounded-lg bg-slate-900 text-white font-bold inline-block shadow-xs">
               Board of Directors (PT BIENSI FESYENINDO)
             </div>
             <div className="pl-6 border-l-2 border-red-500 space-y-3">
-              <div className="p-2  bg-white border border-slate-300 font-bold">
-                ├── Commercial Business Directorate (Headcount: 7,450)
+              <div className="p-2 rounded-lg bg-white border border-slate-300 font-bold flex items-center justify-between">
+                <span>├── Commercial Business Directorate (Headcount: 7,450)</span>
+                <span className="text-[11px] font-sans font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Field Network (Quest #18)</span>
               </div>
               <div className="pl-6 border-l-2 border-slate-300 space-y-2">
                 <div className="text-slate-700">
@@ -612,19 +687,20 @@ export const WorkforcePage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-2  bg-white border border-slate-300 font-bold">
-                ├── Supply Chain & Manufacturing Logistics (Headcount: 2,140)
+              <div className="p-2 rounded-lg bg-white border border-slate-300 font-bold flex items-center justify-between">
+                <span>├── Supply Chain & Manufacturing Logistics (Headcount: 2,140)</span>
+                <span className="text-[11px] font-sans font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">Warehouse Ratio (Quest #12)</span>
               </div>
               <div className="pl-6 border-l-2 border-slate-300 space-y-2">
                 <div className="text-slate-700">
-                  ├── Central Distribution Centers (Bandung, Surabaya, Medan)
+                  ├── Central Distribution Centers (Bandung, Surabaya, Medan — 68% Full-Time / 32% Seasonal PKWT)
                 </div>
                 <div className="text-slate-700">
                   └── Quality Assurance & Inventory Audit
                 </div>
               </div>
 
-              <div className="p-2  bg-white border border-slate-300 font-bold">
+              <div className="p-2 rounded-lg bg-white border border-slate-300 font-bold">
                 ├── Brand Creative, Fashion & Marketing (Headcount: 1,420)
               </div>
               <div className="pl-6 border-l-2 border-slate-300 space-y-2">
@@ -636,9 +712,9 @@ export const WorkforcePage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-2  bg-white border border-slate-300 font-bold">
-                └── Human Capital, Finance & Digital Technology (Headcount:
-                1,470)
+              <div className="p-2 rounded-lg bg-white border border-slate-300 font-bold flex items-center justify-between">
+                <span>└── Human Capital, Finance & Digital Technology (Headcount: 1,470)</span>
+                <span className="text-[11px] font-sans font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">HQ Corporate (Quest #18)</span>
               </div>
             </div>
           </div>
@@ -646,24 +722,29 @@ export const WorkforcePage: React.FC = () => {
       )}
 
       {activeTab === "employment" && (
-        <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs space-y-4">
-          <div className="flex items-center justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
             <div>
-              <h3 className="text-sm font-bold text-slate-900">
-                Contract (PKWT) Expiry Monitoring & Operational Actions
-              </h3>
-              <p className="text-xs text-slate-500">
-                Track contracts ending in next 7, 14, and 30 days
+              <div className="flex items-center gap-2">
+                <h3 className="text-sm font-bold text-slate-900 font-heading">
+                  Contract (PKWT) Expiry Monitoring & Operational Actions
+                </h3>
+                <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-rose-50 text-[#C8102E] border border-rose-200">
+                   Quest #13
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Track contracts ending in next 7, 14, and 30 days for proactive renewal or offboarding
               </p>
             </div>
-            <span className="px-2.5 py-1 text-xs font-bold -lg bg-red-100 text-red-700">
+            <span className="px-2.5 py-1 text-xs font-bold rounded-lg bg-red-100 text-red-700">
               9 Contracts Expiring in 30 Days
             </span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-xs text-left">
-              <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider border-y border-slate-100">
+              <thead className="bg-slate-50 text-slate-500 uppercase text-[11px] tracking-wider border-y border-slate-100">
                 <tr>
                   <th className="p-3">Associate</th>
                   <th className="p-3">Department / Store</th>
@@ -690,15 +771,15 @@ export const WorkforcePage: React.FC = () => {
                     <span className="text-red-600 font-bold">6 days</span>
                   </td>
                   <td className="p-3">
-                    <span className="px-2 py-0.5 -full text-[10px] font-bold bg-red-50 text-red-700">
+                    <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-red-50 text-red-700">
                       Critical
                     </span>
                   </td>
                   <td className="p-3 text-right space-x-1">
-                    <button className="px-2 py-1 text-[11px] font-bold  bg-slate-900 text-white hover:bg-slate-800">
+                    <button className="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors">
                       Renew
                     </button>
-                    <button className="px-2 py-1 text-[11px] font-bold  border border-slate-200 text-slate-600 hover:bg-slate-50">
+                    <button className="px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">
                       Extend
                     </button>
                   </td>
@@ -718,15 +799,15 @@ export const WorkforcePage: React.FC = () => {
                     <span className="text-amber-600 font-bold">12 days</span>
                   </td>
                   <td className="p-3">
-                    <span className="px-2 py-0.5 -full text-[10px] font-bold bg-amber-50 text-amber-700">
+                    <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700">
                       Warning
                     </span>
                   </td>
                   <td className="p-3 text-right space-x-1">
-                    <button className="px-2 py-1 text-[11px] font-bold  bg-slate-900 text-white hover:bg-slate-800">
+                    <button className="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors">
                       Renew
                     </button>
-                    <button className="px-2 py-1 text-[11px] font-bold  border border-slate-200 text-slate-600 hover:bg-slate-50">
+                    <button className="px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">
                       Extend
                     </button>
                   </td>
@@ -746,15 +827,15 @@ export const WorkforcePage: React.FC = () => {
                     <span className="text-slate-600 font-bold">25 days</span>
                   </td>
                   <td className="p-3">
-                    <span className="px-2 py-0.5 -full text-[10px] font-bold bg-slate-100 text-slate-700">
+                    <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">
                       Normal
                     </span>
                   </td>
                   <td className="p-3 text-right space-x-1">
-                    <button className="px-2 py-1 text-[11px] font-bold  bg-slate-900 text-white hover:bg-slate-800">
+                    <button className="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors">
                       Renew
                     </button>
-                    <button className="px-2 py-1 text-[11px] font-bold  border border-slate-200 text-slate-600 hover:bg-slate-50">
+                    <button className="px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">
                       Extend
                     </button>
                   </td>

@@ -39,7 +39,7 @@ export const AppLayout: React.FC = () => {
         />
 
         {/* Dynamic Route Content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-400 w-full mx-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-400 w-full mx-auto no-scrollbar">
           <Outlet />
         </main>
       </div>
