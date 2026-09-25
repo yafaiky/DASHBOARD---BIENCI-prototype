@@ -306,16 +306,6 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
         {activeTab === "menu" && (
           <div className="px-6 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
             <span>Masuk sebagai Budi Santoso</span>
-            <button
-              onClick={() => {
-                alert(
-                  "Mengekspor Dataset Lengkap BIENSI Executive HR sebagai XLSX...",
-                )
-              }}
-              className="flex items-center gap-1.5 font-semibold text-red-600 hover:text-red-700"
-            >
-              <Download className="w-4 h-4" /> Unduh Berkas Lengkap HR
-            </button>
           </div>
         )}
       </div>

@@ -5,7 +5,6 @@ import {
   Building,
   DollarSign,
   Calendar,
-  CheckCircle2,
   AlertTriangle,
   FileSpreadsheet,
   Plus,
@@ -301,17 +300,11 @@ export const EmployeeInputStudioModal: React.FC<EmployeeInputStudioModalProps> =
         {/* Top Header */}
         <div className="p-4 sm:p-5 border-b border-slate-200 bg-slate-50/80 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#c8102e] text-white flex items-center justify-center shadow-md shadow-red-500/20">
-              <Sparkles className="w-5 h-5" />
-            </div>
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-base font-black text-slate-900 font-heading">
                   Studio Simulasi Input Data HR & Ritel Toko
                 </h2>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-red-100 text-[#c8102e]">
-                  Solusi Data Skala Besar
-                </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">
                 Pilih metode input yang paling efisien: Formulir Terpandu (Single), Grid Spreadsheet Massal (Batch), atau Panduan Template Excel.
@@ -332,11 +325,10 @@ export const EmployeeInputStudioModal: React.FC<EmployeeInputStudioModalProps> =
           <div className="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-semibold">
             <button
               onClick={() => setActiveMode("single")}
-              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-2 ${
-                activeMode === "single"
-                  ? "bg-white text-slate-900 shadow-xs font-bold"
-                  : "text-slate-500 hover:text-slate-800"
-              }`}
+              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-2 ${activeMode === "single"
+                ? "bg-white text-slate-900 shadow-xs font-bold"
+                : "text-slate-500 hover:text-slate-800"
+                }`}
             >
               <User className="w-3.5 h-3.5 text-red-600" />
               <span>Input Cepat Terpandu (1 Karyawan)</span>
@@ -344,42 +336,26 @@ export const EmployeeInputStudioModal: React.FC<EmployeeInputStudioModalProps> =
 
             <button
               onClick={() => setActiveMode("batch")}
-              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-2 ${
-                activeMode === "batch"
-                  ? "bg-white text-slate-900 shadow-xs font-bold"
-                  : "text-slate-500 hover:text-slate-800"
-              }`}
+              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-2 ${activeMode === "batch"
+                ? "bg-white text-slate-900 shadow-xs font-bold"
+                : "text-slate-500 hover:text-slate-800"
+                }`}
             >
               <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600" />
               <span>Simulasi Input Massal (Grid Spreadsheet)</span>
-              <span className="px-1.5 py-0.2 rounded text-[10px] bg-emerald-100 text-emerald-800 font-bold">
-                Solusi Cepat
-              </span>
             </button>
 
             <button
               onClick={() => setActiveMode("guide")}
-              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-2 ${
-                activeMode === "guide"
-                  ? "bg-white text-slate-900 shadow-xs font-bold"
-                  : "text-slate-500 hover:text-slate-800"
-              }`}
+              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-2 ${activeMode === "guide"
+                ? "bg-white text-slate-900 shadow-xs font-bold"
+                : "text-slate-500 hover:text-slate-800"
+                }`}
             >
               <Download className="w-3.5 h-3.5 text-blue-600" />
               <span>Panduan Format & Templat Excel</span>
             </button>
           </div>
-
-          {activeMode === "single" && (
-            <button
-              type="button"
-              onClick={handleAutoFillDemoSingle}
-              className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-              <span>Isi Contoh Otomatis</span>
-            </button>
-          )}
 
           {activeMode === "batch" && (
             <div className="flex items-center gap-2">
@@ -389,7 +365,7 @@ export const EmployeeInputStudioModal: React.FC<EmployeeInputStudioModalProps> =
                 className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <RefreshCw className="w-3 h-3" />
-                <span>Reset 5 Contoh Data</span>
+                <span>Reset</span>
               </button>
               <button
                 type="button"
@@ -397,7 +373,7 @@ export const EmployeeInputStudioModal: React.FC<EmployeeInputStudioModalProps> =
                 className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-lg text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
               >
                 <Plus className="w-3.5 h-3.5" />
-                <span>Tambah Baris (+1)</span>
+                <span>Tambah Baris</span>
               </button>
             </div>
           )}
@@ -415,16 +391,14 @@ export const EmployeeInputStudioModal: React.FC<EmployeeInputStudioModalProps> =
                 <button
                   type="button"
                   onClick={() => setWizardStep(1)}
-                  className={`flex items-center gap-2 cursor-pointer ${
-                    wizardStep === 1 ? "text-[#c8102e]" : "text-slate-500 hover:text-slate-800"
-                  }`}
+                  className={`flex items-center gap-2 cursor-pointer ${wizardStep === 1 ? "text-[#c8102e]" : "text-slate-500 hover:text-slate-800"
+                    }`}
                 >
                   <span
-                    className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                      wizardStep === 1
-                        ? "bg-[#c8102e] text-white"
-                        : "bg-slate-100 text-slate-600"
-                    }`}
+                    className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${wizardStep === 1
+                      ? "bg-[#c8102e] text-white"
+                      : "bg-slate-100 text-slate-600"
+                      }`}
                   >
                     1
                   </span>
@@ -436,16 +410,14 @@ export const EmployeeInputStudioModal: React.FC<EmployeeInputStudioModalProps> =
                 <button
                   type="button"
                   onClick={() => setWizardStep(2)}
-                  className={`flex items-center gap-2 cursor-pointer ${
-                    wizardStep === 2 ? "text-[#c8102e]" : "text-slate-500 hover:text-slate-800"
-                  }`}
+                  className={`flex items-center gap-2 cursor-pointer ${wizardStep === 2 ? "text-[#c8102e]" : "text-slate-500 hover:text-slate-800"
+                    }`}
                 >
                   <span
-                    className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                      wizardStep === 2
-                        ? "bg-[#c8102e] text-white"
-                        : "bg-slate-100 text-slate-600"
-                    }`}
+                    className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${wizardStep === 2
+                      ? "bg-[#c8102e] text-white"
+                      : "bg-slate-100 text-slate-600"
+                      }`}
                   >
                     2
                   </span>
@@ -457,16 +429,14 @@ export const EmployeeInputStudioModal: React.FC<EmployeeInputStudioModalProps> =
                 <button
                   type="button"
                   onClick={() => setWizardStep(3)}
-                  className={`flex items-center gap-2 cursor-pointer ${
-                    wizardStep === 3 ? "text-[#c8102e]" : "text-slate-500 hover:text-slate-800"
-                  }`}
+                  className={`flex items-center gap-2 cursor-pointer ${wizardStep === 3 ? "text-[#c8102e]" : "text-slate-500 hover:text-slate-800"
+                    }`}
                 >
                   <span
-                    className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                      wizardStep === 3
-                        ? "bg-[#c8102e] text-white"
-                        : "bg-slate-100 text-slate-600"
-                    }`}
+                    className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${wizardStep === 3
+                      ? "bg-[#c8102e] text-white"
+                      : "bg-slate-100 text-slate-600"
+                      }`}
                   >
                     3
                   </span>
@@ -474,416 +444,332 @@ export const EmployeeInputStudioModal: React.FC<EmployeeInputStudioModalProps> =
                 </button>
               </div>
 
-              {/* Form & Live Digital ID Card Preview */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                {/* Left (8 cols): Form Content */}
-                <form
-                  onSubmit={handleSingleSubmit}
-                  className="lg:col-span-7 bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4"
-                >
-                  {/* Step 1: Identitas */}
-                  {wizardStep === 1 && (
-                    <div className="space-y-4 animate-in fade-in duration-150">
-                      <div className="border-b border-slate-100 pb-2">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                          Langkah 1: Identitas Pribadi Karyawan
-                        </h3>
-                        <p className="text-[11px] text-slate-400">
-                          Data dasar untuk profil sistem dan registrasi sidik jari / absensi biometrik
-                        </p>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 text-xs">
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Nomor Induk Karyawan (NIK) *
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            value={singleForm.id}
-                            onChange={(e) => setSingleForm({ ...singleForm, id: e.target.value })}
-                            className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold text-slate-800 focus:outline-hidden focus:ring-1 focus:ring-red-500"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Nama Lengkap Karyawan *
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="cth: Rian Hendrawan"
-                            value={singleForm.name}
-                            onChange={(e) => setSingleForm({ ...singleForm, name: e.target.value })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 focus:outline-hidden focus:ring-1 focus:ring-red-500"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Jenis Kelamin
-                          </label>
-                          <select
-                            value={singleForm.gender}
-                            onChange={(e) => setSingleForm({ ...singleForm, gender: e.target.value as any })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-700"
-                          >
-                            <option value="Male">Laki-laki</option>
-                            <option value="Female">Perempuan</option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Usia (Tahun)
-                          </label>
-                          <input
-                            type="number"
-                            min="18"
-                            max="60"
-                            value={singleForm.age}
-                            onChange={(e) => setSingleForm({ ...singleForm, age: Number(e.target.value) })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Nomor WhatsApp / HP
-                          </label>
-                          <input
-                            type="text"
-                            placeholder="0812-xxxx-xxxx"
-                            value={singleForm.phone}
-                            onChange={(e) => setSingleForm({ ...singleForm, phone: e.target.value })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Email Korporat
-                          </label>
-                          <input
-                            type="email"
-                            placeholder="nama@biensi.co.id"
-                            value={singleForm.email}
-                            onChange={(e) => setSingleForm({ ...singleForm, email: e.target.value })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="pt-3 border-t border-slate-100 flex justify-end">
-                        <button
-                          type="button"
-                          onClick={() => setWizardStep(2)}
-                          className="px-5 py-2 bg-slate-900 hover:bg-[#c8102e] text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
-                        >
-                          <span>Lanjut ke Penempatan Toko</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Step 2: Penempatan Organisasi */}
-                  {wizardStep === 2 && (
-                    <div className="space-y-4 animate-in fade-in duration-150">
-                      <div className="border-b border-slate-100 pb-2">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                          Langkah 2: Penempatan Kerja & Toko Ritel
-                        </h3>
-                        <p className="text-[11px] text-slate-400">
-                          Alokasi brand, departemen toko, dan jabatan operasional
-                        </p>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 text-xs">
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Portofolio Brand
-                          </label>
-                          <select
-                            value={singleForm.brand}
-                            onChange={(e) => setSingleForm({ ...singleForm, brand: e.target.value })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-bold text-slate-800"
-                          >
-                            <option>3SECOND</option>
-                            <option>GREENLIGHT</option>
-                            <option>FAMO</option>
-                            <option>MOUTLEY</option>
-                            <option>FMC SPEED SUPPLY</option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Jabatan (Posisi)
-                          </label>
-                          <select
-                            value={singleForm.position}
-                            onChange={(e) => setSingleForm({ ...singleForm, position: e.target.value })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-bold text-slate-800"
-                          >
-                            <option>Sales Advisor (SPG/B)</option>
-                            <option>Kasir Toko</option>
-                            <option>Visual Merchandiser</option>
-                            <option>Store Leader</option>
-                            <option>Area Store Manager</option>
-                            <option>Staf Gudang / Logistik</option>
-                          </select>
-                        </div>
-
-                        <div className="col-span-2">
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Unit Toko / Gerai Ritel
-                          </label>
-                          <select
-                            value={singleForm.department}
-                            onChange={(e) => setSingleForm({ ...singleForm, department: e.target.value })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
-                          >
-                            <option>Store Ops – Bandung Martadinata (Family Store)</option>
-                            <option>Store Ops – Tasikmalaya Standalone</option>
-                            <option>Store Ops – Garut Pemuda</option>
-                            <option>Store Ops – Cirebon Superblock</option>
-                            <option>Store Ops – Showroom Summarecon Serpong</option>
-                            <option>Store Ops – Tangcity Mall</option>
-                            <option>Store Ops – Solo Paragon Mall</option>
-                            <option>Store Ops – Tegal Pacific Mall</option>
-                            <option>Store Ops – Surabaya Tunjungan Plaza</option>
-                            <option>Store Ops – Perintis Kemerdekaan Makassar</option>
-                            <option>Kantor Pusat – Kreatif Brand & Desain</option>
-                            <option>Kantor Pusat – Supply Chain Logistik</option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Format Toko
-                          </label>
-                          <select
-                            value={singleForm.storeCluster}
-                            onChange={(e) => setSingleForm({ ...singleForm, storeCluster: e.target.value })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-700"
-                          >
-                            <option>Flagship Standalone</option>
-                            <option>Family Store</option>
-                            <option>Showroom Mall</option>
-                            <option>Counter Dept Store</option>
-                            <option>Hub Logistik</option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Lokasi Kota / Region
-                          </label>
-                          <input
-                            type="text"
-                            value={singleForm.location}
-                            onChange={(e) => setSingleForm({ ...singleForm, location: e.target.value })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="pt-3 border-t border-slate-100 flex justify-between">
-                        <button
-                          type="button"
-                          onClick={() => setWizardStep(1)}
-                          className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition-colors cursor-pointer"
-                        >
-                          ← Kembali
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setWizardStep(3)}
-                          className="px-5 py-2 bg-slate-900 hover:bg-[#c8102e] text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
-                        >
-                          <span>Lanjut ke Kontrak & Remunerasi</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Step 3: Kontrak & Gaji */}
-                  {wizardStep === 3 && (
-                    <div className="space-y-4 animate-in fade-in duration-150">
-                      <div className="border-b border-slate-100 pb-2">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                          Langkah 3: Remunerasi & Legalitas Kontrak
-                        </h3>
-                        <p className="text-[11px] text-slate-400">
-                          Tipe perjanjian kerja, masa berlaku PKWT, dan standar penggajian
-                        </p>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 text-xs">
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Status Perjanjian Kerja
-                          </label>
-                          <select
-                            value={singleForm.employmentType}
-                            onChange={(e) => setSingleForm({ ...singleForm, employmentType: e.target.value as any })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-bold text-slate-800"
-                          >
-                            <option value="PKWT">Kontrak Waktu Tertentu (PKWT)</option>
-                            <option value="PKWTT">Karyawan Tetap (PKWTT)</option>
-                            <option value="Probation">Masa Percobaan (3 Bulan)</option>
-                            <option value="Internship">Magang / Musiman</option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Gaji Pokok Bulanan (Rp)
-                          </label>
-                          <input
-                            type="number"
-                            step="50000"
-                            value={singleForm.salary}
-                            onChange={(e) => setSingleForm({ ...singleForm, salary: Number(e.target.value) })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono font-bold text-slate-800"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Tanggal Bergabung (Join Date)
-                          </label>
-                          <input
-                            type="date"
-                            value={singleForm.joinDate}
-                            onChange={(e) => setSingleForm({ ...singleForm, joinDate: e.target.value })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block font-bold text-slate-700 mb-1">
-                            Akhir Kontrak (PKWT)
-                          </label>
-                          <input
-                            type="date"
-                            value={singleForm.contractEndDate}
-                            onChange={(e) => setSingleForm({ ...singleForm, contractEndDate: e.target.value })}
-                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-800 flex items-center justify-between">
-                        <span>✓ Otomatis terdaftar ke BPJS Ketenagakerjaan & BPJS Kesehatan</span>
-                        <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                      </div>
-
-                      <div className="pt-3 border-t border-slate-100 flex justify-between">
-                        <button
-                          type="button"
-                          onClick={() => setWizardStep(2)}
-                          className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition-colors cursor-pointer"
-                        >
-                          ← Kembali
-                        </button>
-                        <button
-                          type="submit"
-                          className="px-6 py-2 bg-[#c8102e] hover:bg-red-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm shadow-red-900/20"
-                        >
-                          <Check className="w-4 h-4" />
-                          <span>Simpan & Daftarkan Karyawan</span>
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </form>
-
-                {/* Right (5 cols): Live Digital ID Card Preview */}
-                <div className="lg:col-span-5 bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
-                  <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                    <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                      Pratinjau Kartu ID Digital Karyawan
-                    </span>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
-                      Waktu Nyata
-                    </span>
-                  </div>
-
-                  {/* ID Card Graphic */}
-                  <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-5 rounded-2xl border border-slate-700 shadow-lg space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-md bg-[#c8102e] flex items-center justify-center font-black text-xs">
-                          3S
-                        </div>
-                        <span className="font-extrabold tracking-wider text-xs">
-                          {singleForm.brand} • BIENSI
-                        </span>
-                      </div>
-                      <span className="font-mono text-[10px] text-slate-400 font-bold">
-                        {singleForm.id}
-                      </span>
+              {/* Form Content */}
+              <form
+                onSubmit={handleSingleSubmit}
+                className="max-w-2xl mx-auto bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs space-y-4"
+              >
+                {/* Step 1: Identitas */}
+                {wizardStep === 1 && (
+                  <div className="space-y-4 animate-in fade-in duration-150">
+                    <div className="border-b border-slate-100 pb-2">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                        Langkah 1: Identitas Pribadi Karyawan
+                      </h3>
+                      <p className="text-[11px] text-slate-400">
+                        Data dasar untuk profil sistem dan registrasi sidik jari / absensi biometrik
+                      </p>
                     </div>
 
-                    <div className="flex items-center gap-3 pt-2">
-                      <img
-                        src={
-                          singleForm.gender === "Female"
-                            ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
-                            : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
-                        }
-                        alt="Avatar"
-                        className="w-14 h-14 rounded-xl object-cover ring-2 ring-red-500/40"
-                      />
+                    <div className="grid grid-cols-2 gap-3 text-xs">
                       <div>
-                        <div className="text-base font-black text-white leading-tight">
-                          {singleForm.name || "Nama Karyawan"}
-                        </div>
-                        <div className="text-xs text-amber-400 font-bold mt-0.5">
-                          {singleForm.position}
-                        </div>
-                        <div className="text-[11px] text-slate-300">
-                          {singleForm.department}
-                        </div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Nomor Induk Karyawan (NIK) *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={singleForm.id}
+                          onChange={(e) => setSingleForm({ ...singleForm, id: e.target.value })}
+                          className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-mono font-bold text-slate-800 focus:outline-hidden focus:ring-1 focus:ring-red-500"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Nama Lengkap Karyawan *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="cth: Rian Hendrawan"
+                          value={singleForm.name}
+                          onChange={(e) => setSingleForm({ ...singleForm, name: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 focus:outline-hidden focus:ring-1 focus:ring-red-500"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Jenis Kelamin
+                        </label>
+                        <select
+                          value={singleForm.gender}
+                          onChange={(e) => setSingleForm({ ...singleForm, gender: e.target.value as any })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-700"
+                        >
+                          <option value="Male">Laki-laki</option>
+                          <option value="Female">Perempuan</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Usia (Tahun)
+                        </label>
+                        <input
+                          type="number"
+                          min="18"
+                          max="60"
+                          value={singleForm.age}
+                          onChange={(e) => setSingleForm({ ...singleForm, age: Number(e.target.value) })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Nomor WhatsApp / HP
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="0812-xxxx-xxxx"
+                          value={singleForm.phone}
+                          onChange={(e) => setSingleForm({ ...singleForm, phone: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Email Korporat
+                        </label>
+                        <input
+                          type="email"
+                          placeholder="nama@biensi.co.id"
+                          value={singleForm.email}
+                          onChange={(e) => setSingleForm({ ...singleForm, email: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
+                        />
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t border-slate-700/80 grid grid-cols-2 gap-2 text-[11px]">
-                      <div>
-                        <span className="text-slate-400 block text-[10px]">Tipe Kontrak:</span>
-                        <span className="font-bold text-white">{singleForm.employmentType}</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-400 block text-[10px]">Gaji Pokok:</span>
-                        <span className="font-mono font-bold text-emerald-400">
-                          Rp {singleForm.salary.toLocaleString("id-ID")}
-                        </span>
-                      </div>
+                    <div className="pt-3 border-t border-slate-100 flex justify-end">
+                      <button
+                        type="button"
+                        onClick={() => setWizardStep(2)}
+                        className="px-5 py-2 bg-slate-900 hover:bg-[#c8102e] text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                      >
+                        <span>Lanjut ke Penempatan Toko</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
                     </div>
                   </div>
+                )}
 
-                  {/* Summary Checklist */}
-                  <div className="space-y-2 text-xs">
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                      <span>Validasi struktur NIK unik</span>
+                {/* Step 2: Penempatan Organisasi */}
+                {wizardStep === 2 && (
+                  <div className="space-y-4 animate-in fade-in duration-150">
+                    <div className="border-b border-slate-100 pb-2">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                        Langkah 2: Penempatan Kerja & Toko Ritel
+                      </h3>
+                      <p className="text-[11px] text-slate-400">
+                        Alokasi brand, departemen toko, dan jabatan operasional
+                      </p>
                     </div>
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                      <span>Alokasi kuota headcount divisi toko aktif</span>
+
+                    <div className="grid grid-cols-2 gap-3 text-xs">
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Portofolio Brand
+                        </label>
+                        <select
+                          value={singleForm.brand}
+                          onChange={(e) => setSingleForm({ ...singleForm, brand: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-bold text-slate-800"
+                        >
+                          <option>3SECOND</option>
+                          <option>GREENLIGHT</option>
+                          <option>FAMO</option>
+                          <option>MOUTLEY</option>
+                          <option>FMC SPEED SUPPLY</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Jabatan (Posisi)
+                        </label>
+                        <select
+                          value={singleForm.position}
+                          onChange={(e) => setSingleForm({ ...singleForm, position: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-bold text-slate-800"
+                        >
+                          <option>Sales Advisor (SPG/B)</option>
+                          <option>Kasir Toko</option>
+                          <option>Visual Merchandiser</option>
+                          <option>Store Leader</option>
+                          <option>Area Store Manager</option>
+                          <option>Staf Gudang / Logistik</option>
+                        </select>
+                      </div>
+
+                      <div className="col-span-2">
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Unit Toko / Gerai Ritel
+                        </label>
+                        <select
+                          value={singleForm.department}
+                          onChange={(e) => setSingleForm({ ...singleForm, department: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
+                        >
+                          <option>Store Ops – Bandung Martadinata (Family Store)</option>
+                          <option>Store Ops – Tasikmalaya Standalone</option>
+                          <option>Store Ops – Garut Pemuda</option>
+                          <option>Store Ops – Cirebon Superblock</option>
+                          <option>Store Ops – Showroom Summarecon Serpong</option>
+                          <option>Store Ops – Tangcity Mall</option>
+                          <option>Store Ops – Solo Paragon Mall</option>
+                          <option>Store Ops – Tegal Pacific Mall</option>
+                          <option>Store Ops – Surabaya Tunjungan Plaza</option>
+                          <option>Store Ops – Perintis Kemerdekaan Makassar</option>
+                          <option>Kantor Pusat – Kreatif Brand & Desain</option>
+                          <option>Kantor Pusat – Supply Chain Logistik</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Format Toko
+                        </label>
+                        <select
+                          value={singleForm.storeCluster}
+                          onChange={(e) => setSingleForm({ ...singleForm, storeCluster: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-700"
+                        >
+                          <option>Flagship Standalone</option>
+                          <option>Family Store</option>
+                          <option>Showroom Mall</option>
+                          <option>Counter Dept Store</option>
+                          <option>Hub Logistik</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Lokasi Kota / Region
+                        </label>
+                        <input
+                          type="text"
+                          value={singleForm.location}
+                          onChange={(e) => setSingleForm({ ...singleForm, location: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
+                        />
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                      <span>Penjadwalan peringatan kontrak habis (H-30)</span>
+
+                    <div className="pt-3 border-t border-slate-100 flex justify-between">
+                      <button
+                        type="button"
+                        onClick={() => setWizardStep(1)}
+                        className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+                      >
+                        ← Kembali
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setWizardStep(3)}
+                        className="px-5 py-2 bg-slate-900 hover:bg-[#c8102e] text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                      >
+                        <span>Lanjut ke Kontrak & Remunerasi</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
                     </div>
                   </div>
-                </div>
-              </div>
+                )}
+
+                {/* Step 3: Kontrak & Gaji */}
+                {wizardStep === 3 && (
+                  <div className="space-y-4 animate-in fade-in duration-150">
+                    <div className="border-b border-slate-100 pb-2">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                        Langkah 3: Remunerasi & Legalitas Kontrak
+                      </h3>
+                      <p className="text-[11px] text-slate-400">
+                        Tipe perjanjian kerja, masa berlaku PKWT, dan standar penggajian
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 text-xs">
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Status Perjanjian Kerja
+                        </label>
+                        <select
+                          value={singleForm.employmentType}
+                          onChange={(e) => setSingleForm({ ...singleForm, employmentType: e.target.value as any })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-bold text-slate-800"
+                        >
+                          <option value="PKWT">Kontrak Waktu Tertentu (PKWT)</option>
+                          <option value="PKWTT">Karyawan Tetap (PKWTT)</option>
+                          <option value="Probation">Masa Percobaan (3 Bulan)</option>
+                          <option value="Internship">Magang / Musiman</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Gaji Pokok Bulanan (Rp)
+                        </label>
+                        <input
+                          type="number"
+                          step="50000"
+                          value={singleForm.salary}
+                          onChange={(e) => setSingleForm({ ...singleForm, salary: Number(e.target.value) })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl font-mono font-bold text-slate-800"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Tanggal Bergabung (Join Date)
+                        </label>
+                        <input
+                          type="date"
+                          value={singleForm.joinDate}
+                          onChange={(e) => setSingleForm({ ...singleForm, joinDate: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-slate-700 mb-1">
+                          Akhir Kontrak (PKWT)
+                        </label>
+                        <input
+                          type="date"
+                          value={singleForm.contractEndDate}
+                          onChange={(e) => setSingleForm({ ...singleForm, contractEndDate: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-800 flex items-center justify-between">
+                      <span>✓ Otomatis terdaftar ke BPJS Ketenagakerjaan & BPJS Kesehatan</span>
+                      <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                    </div>
+
+                    <div className="pt-3 border-t border-slate-100 flex justify-between">
+                      <button
+                        type="button"
+                        onClick={() => setWizardStep(2)}
+                        className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+                      >
+                        ← Kembali
+                      </button>
+                      <button
+                        type="submit"
+                        className="px-6 py-2 bg-[#c8102e] hover:bg-red-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm shadow-red-900/20"
+                      >
+                        <Check className="w-4 h-4" />
+                        <span>Simpan & Daftarkan Karyawan</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </form>
             </div>
           )}
 
@@ -1029,11 +915,10 @@ export const EmployeeInputStudioModal: React.FC<EmployeeInputStudioModalProps> =
                           </td>
                           <td className="p-2.5">
                             <span
-                              className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold ${
-                                row.isValid
-                                  ? "bg-emerald-50 text-emerald-700"
-                                  : "bg-red-50 text-red-700"
-                              }`}
+                              className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold ${row.isValid
+                                ? "bg-emerald-50 text-emerald-700"
+                                : "bg-red-50 text-red-700"
+                                }`}
                             >
                               {row.validationMessage || "Siap"}
                             </span>
@@ -1061,17 +946,12 @@ export const EmployeeInputStudioModal: React.FC<EmployeeInputStudioModalProps> =
                       {batchRows.filter((r) => r.isValid).length}
                     </strong>
                   </span>
-                  <span className="text-[11px]">
-                    Tip: Anda dapat menambahkan baris baru dengan cepat menggunakan tombol <strong>Tambah Baris (+1)</strong>.
-                  </span>
                 </div>
               </div>
             </div>
           )}
 
-          {/* ========================================================================= */}
           {/* MODE 3: PANDUAN FORMAT & TEMPLATE EXCEL (ENTERPRISE BULK WORKFLOW) */}
-          {/* ========================================================================= */}
           {activeMode === "guide" && (
             <div className="space-y-6">
               {/* Infografis 4 Langkah Input Data Skala Besar */}
@@ -1195,8 +1075,6 @@ export const EmployeeInputStudioModal: React.FC<EmployeeInputStudioModalProps> =
         {/* Footer */}
         <div className="p-3.5 border-t border-slate-200 bg-white flex items-center justify-between text-xs text-slate-500">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span>Terhubung langsung dengan Mesin Sinkronisasi Data HR BIENSI</span>
           </div>
           <button
             onClick={onClose}

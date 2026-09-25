@@ -1,12 +1,10 @@
 import React, { useState } from "react"
 import {
   Search,
-  Filter,
   Download,
   UserPlus,
-  MoreVertical,
   Eye,
-  Sparkles,
+  User,
   CheckCircle2,
 } from "lucide-react"
 import { useNavigate } from "react-router-dom"
@@ -68,10 +66,10 @@ export const EmployeesPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setInputStudioOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-700 hover:to-rose-800 text-white rounded-xl text-xs font-bold shadow-md shadow-red-900/20 cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98]"
+            className="flex items-center gap-2 px-4 py-2 bg-black text-white text-xs font-semibold cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98]"
           >
-            <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
-            <span>Simulasi Input Studio</span>
+            <User className="w-4 h-4 text-slate-500" />
+            <span>Input Karyawan</span>
           </button>
           <button
             type="button"
@@ -227,30 +225,28 @@ export const EmployeesPage: React.FC = () => {
                   </td>
                   <td className="p-3">
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                        emp.status === "Active"
-                          ? "bg-emerald-50 text-emerald-700"
-                          : emp.status === "Probation"
-                            ? "bg-amber-50 text-amber-700"
-                            : "bg-blue-50 text-blue-700"
-                      }`}
+                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${emp.status === "Active"
+                        ? "bg-emerald-50 text-emerald-700"
+                        : emp.status === "Probation"
+                          ? "bg-amber-50 text-amber-700"
+                          : "bg-blue-50 text-blue-700"
+                        }`}
                     >
                       <span
-                        className={`w-1.5 h-1.5 rounded-full ${
-                          emp.status === "Active"
-                            ? "bg-emerald-500"
-                            : emp.status === "Probation"
-                              ? "bg-amber-500"
-                              : "bg-blue-500"
-                        }`}
+                        className={`w-1.5 h-1.5 rounded-full ${emp.status === "Active"
+                          ? "bg-emerald-500"
+                          : emp.status === "Probation"
+                            ? "bg-amber-500"
+                            : "bg-blue-500"
+                          }`}
                       />
                       {emp.status === "Active"
                         ? "Aktif"
                         : emp.status === "Probation"
-                        ? "Percobaan"
-                        : emp.status === "Promotion"
-                        ? "Promosi"
-                        : emp.status}
+                          ? "Percobaan"
+                          : emp.status === "Promotion"
+                            ? "Promosi"
+                            : emp.status}
                     </span>
                   </td>
                   <td className="p-3 font-mono text-slate-600">
