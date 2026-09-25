@@ -5,8 +5,16 @@ import {
   AlertTriangle,
   ArrowRight,
   ShieldAlert,
+  Store,
+  Clock,
+  Sparkles,
+  CheckCircle2,
 } from "lucide-react"
 import Chart from "react-apexcharts"
+import {
+  storeFormatTurnoverData,
+  recruitmentKpiData,
+} from "../../data/mockData"
 
 export const TurnoverPage: React.FC = () => {
   const [subTab, setSubTab] = useState<
@@ -176,6 +184,117 @@ export const TurnoverPage: React.FC = () => {
             type="bar"
             height={280}
           />
+        </div>
+      </div>
+
+      {/* Q6 & Q14: Store Format Turnover & Early Attrition Velocity */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Q6: Turnover by Store Format (Family Store vs Showroom vs Counter) */}
+        <div className="lg:col-span-2 bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+          <div className="flex items-start justify-between">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 mb-1.5">
+                <Store className="w-3 h-3 text-amber-600" />
+                <span>Critical Question #6 • High Priority</span>
+              </div>
+              <h3 className="text-sm font-bold text-slate-900">
+                Turnover by Store Format & Root Causes
+              </h3>
+              <p className="text-xs text-slate-500">
+                Evaluating turnover disparity between Family Store, Mall Showroom, and Dept Store Counter
+              </p>
+            </div>
+            <span className="text-xs font-semibold text-slate-500">Benchmark: &lt; 3.0%</span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {storeFormatTurnoverData.map((fmt) => (
+              <div
+                key={fmt.format}
+                className="p-3.5 rounded-xl border border-slate-200/90 bg-slate-50/50 flex flex-col justify-between space-y-3"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-800">{fmt.format}</span>
+                    <span className="text-[10px] font-semibold">{fmt.status}</span>
+                  </div>
+                  <div className="mt-2 flex items-baseline gap-1.5">
+                    <span className="text-2xl font-black text-slate-900">{fmt.turnoverRate}%</span>
+                    <span className="text-[11px] text-slate-500">/ mo</span>
+                  </div>
+                  <div className="text-[11px] text-slate-600 mt-0.5">
+                    {fmt.headcount.toLocaleString()} HC • {fmt.departuresYtd} exits YTD
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-slate-200/80">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                    Dominant Exit Reasons
+                  </span>
+                  <p className="text-[11px] text-slate-600 leading-snug">
+                    {fmt.primaryReasons}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-200/80 text-xs text-amber-900 flex items-start gap-2.5">
+            <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+            <div>
+              <strong>Format Insight:</strong> Counter turnover (3.9%) exceeds target threshold due to long single-brand shifts in department stores. Family Stores maintain lowest turnover (1.8%) supported by larger teams and structured shift rotations.
+            </div>
+          </div>
+        </div>
+
+        {/* Q14: Early Attrition Velocity (30 Days / 90 Days / 1 Year) */}
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4 flex flex-col justify-between">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-50 text-red-700 mb-1.5">
+              <Clock className="w-3 h-3 text-red-600" />
+              <span>Critical Question #14 • Medium Priority</span>
+            </div>
+            <h3 className="text-sm font-bold text-slate-900">
+              Early Tenure Attrition (&lt; 30 Days)
+            </h3>
+            <p className="text-xs text-slate-500">
+              Turnover velocity in the first 30 days of contract onboarding
+            </p>
+
+            <div className="mt-4 p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-600">30-Day Contract Attrition</span>
+                <span className="text-base font-black text-emerald-600">1.8%</span>
+              </div>
+              <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                <div className="bg-emerald-500 h-full rounded-full" style={{ width: '18%' }} />
+              </div>
+              <div className="flex justify-between text-[10px] text-slate-400">
+                <span>Current: 1.8%</span>
+                <span>Max Target: 2.5%</span>
+              </div>
+
+              <div className="pt-2 border-t border-slate-200 space-y-1.5 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-slate-600">90-Day Probation Success:</span>
+                  <span className="font-bold text-slate-900">95.2%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-600">&lt; 1 Year Turnover (Annual):</span>
+                  <span className="font-bold text-slate-900">{recruitmentKpiData.turnoverUnderOneYear}%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-600">Avg Cost per Hire Saved:</span>
+                  <span className="font-bold text-emerald-600">Rp {(recruitmentKpiData.costPerHire / 1000000).toFixed(2)}M</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center gap-2 text-[11px] text-emerald-900">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span>Buddy mentoring program at stores reduced initial 30-day drop-off by 34%.</span>
+          </div>
         </div>
       </div>
 

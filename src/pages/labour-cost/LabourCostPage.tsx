@@ -5,9 +5,17 @@ import {
   TrendingDown,
   Percent,
   BarChart2,
+  Clock,
+  Sparkles,
+  CheckCircle2,
+  Zap,
 } from "lucide-react"
 import Chart from "react-apexcharts"
-import { mockStorePerformances } from "../../data/mockData"
+import {
+  mockStorePerformances,
+  peakSeasonSavingsData,
+  salesPerHourData,
+} from "../../data/mockData"
 
 export const LabourCostPage: React.FC = () => {
   const [selectedRegion, setSelectedRegion] = useState("All")
@@ -158,6 +166,168 @@ export const LabourCostPage: React.FC = () => {
             type="line"
             height={320}
           />
+        </div>
+      </div>
+
+      {/* Q11 & Q22: Seasonal Staffing & Hourly Productivity Intelligence */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Q11: Peak Season Cost Optimization */}
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+          <div className="flex items-start justify-between">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 mb-1.5">
+                <Sparkles className="w-3 h-3 text-emerald-600" />
+                <span>Critical Question #11 • High Priority</span>
+              </div>
+              <h3 className="text-sm font-bold text-slate-900">
+                Peak Season Staffing Cost Savings
+              </h3>
+              <p className="text-xs text-slate-500">
+                Part-time & Internship deployment vs Full-time equivalent (Lebaran & Year-End)
+              </p>
+            </div>
+            <div className="text-right">
+              <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-lg">
+                +{peakSeasonSavingsData.savingsPercentage}% Saved
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-100">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                Seasonal Deployment
+              </span>
+              <div className="text-xl font-black text-slate-900 mt-0.5">
+                {peakSeasonSavingsData.seasonalHeadcount} Staff
+              </div>
+              <div className="text-[11px] text-slate-600 font-medium mt-0.5">
+                {peakSeasonSavingsData.partTimeDeployed} Part-time • {peakSeasonSavingsData.internsDeployed} Interns
+              </div>
+            </div>
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                Net Payroll Savings
+              </span>
+              <div className="text-xl font-black text-emerald-600 mt-0.5">
+                Rp {(peakSeasonSavingsData.netCostSavings / 1000000000).toFixed(2)} M
+              </div>
+              <div className="text-[11px] text-emerald-700 font-semibold mt-0.5">
+                Actual: Rp {(peakSeasonSavingsData.actualSeasonalCost / 1000000000).toFixed(2)}M vs FTE: Rp {(peakSeasonSavingsData.fulltimeBenchmarkCost / 1000000000).toFixed(2)}M
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-slate-600 font-medium">Cost Comparison</span>
+              <span className="font-bold text-slate-900">
+                Rp 1.58M (Seasonal) vs Rp 3.42M (FTE)
+              </span>
+            </div>
+            <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden flex">
+              <div
+                className="bg-emerald-500 h-full rounded-l-full"
+                style={{ width: `${(peakSeasonSavingsData.actualSeasonalCost / peakSeasonSavingsData.fulltimeBenchmarkCost) * 100}%` }}
+                title="Actual Seasonal Cost"
+              />
+              <div
+                className="bg-slate-300 h-full rounded-r-full"
+                style={{ width: `${(peakSeasonSavingsData.netCostSavings / peakSeasonSavingsData.fulltimeBenchmarkCost) * 100}%` }}
+                title="Saved Payroll Budget"
+              />
+            </div>
+            <div className="flex items-center justify-between text-[11px] text-slate-500">
+              <span className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" /> Actual Seasonal Outlay (46.2%)
+              </span>
+              <span className="flex items-center gap-1 font-semibold text-emerald-700">
+                <span className="w-2 h-2 rounded-full bg-slate-300" /> Net Saved Budget (53.8%)
+              </span>
+            </div>
+          </div>
+
+          <div className="p-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100 flex items-center gap-2 text-xs text-emerald-900">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span>
+              <strong>Budget Impact:</strong> Reduced seasonal overhang without permanent severance or BPJS overhead.
+            </span>
+          </div>
+        </div>
+
+        {/* Q22: Sales per Hour Productivity */}
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
+          <div className="flex items-start justify-between">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 mb-1.5">
+                <Zap className="w-3 h-3 text-blue-600" />
+                <span>Critical Question #22 • High Priority</span>
+              </div>
+              <h3 className="text-sm font-bold text-slate-900">
+                Hourly Productivity: Part-Time vs Full-Time
+              </h3>
+              <p className="text-xs text-slate-500">
+                Comparing sales yield per hour during peak traffic window ({salesPerHourData.peakHoursRange})
+              </p>
+            </div>
+            <div className="text-right">
+              <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-1 rounded-lg">
+                {salesPerHourData.productivityOutputPercentage}% Yield Equivalence
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            {/* Full-time Box */}
+            <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 space-y-1.5">
+              <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+                <span>Full-Time Staff</span>
+                <span className="text-[10px] text-slate-500 font-normal">Core Team</span>
+              </div>
+              <div className="text-lg font-black text-slate-900">
+                Rp {(salesPerHourData.fullTime.salesPerHour / 1000).toFixed(0)}k <span className="text-xs font-normal text-slate-500">/hr</span>
+              </div>
+              <div className="text-[11px] text-slate-600">
+                Hourly Cost: <strong>Rp {(salesPerHourData.fullTime.costPerHour / 1000).toFixed(0)}k</strong>
+              </div>
+              <div className="text-[11px] font-bold text-slate-800 pt-1 border-t border-slate-200">
+                Efficiency: {salesPerHourData.fullTime.efficiencyRatio}x Sales/Cost
+              </div>
+            </div>
+
+            {/* Part-time Box */}
+            <div className="p-3.5 rounded-xl border border-blue-200 bg-blue-50/40 space-y-1.5">
+              <div className="flex items-center justify-between text-xs font-bold text-blue-900">
+                <span>Part-Time Staff</span>
+                <span className="text-[10px] font-bold text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded">High ROI</span>
+              </div>
+              <div className="text-lg font-black text-blue-950">
+                Rp {(salesPerHourData.partTime.salesPerHour / 1000).toFixed(0)}k <span className="text-xs font-normal text-slate-500">/hr</span>
+              </div>
+              <div className="text-[11px] text-slate-600">
+                Hourly Cost: <strong>Rp {(salesPerHourData.partTime.costPerHour / 1000).toFixed(0)}k</strong> (-42%)
+              </div>
+              <div className="text-[11px] font-bold text-blue-700 pt-1 border-t border-blue-200">
+                Efficiency: {salesPerHourData.partTime.efficiencyRatio}x Sales/Cost (+58%)
+              </div>
+            </div>
+          </div>
+
+          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="font-semibold text-slate-800">Part-Time Sales Output</span>
+              <span className="font-bold text-slate-900">{salesPerHourData.productivityOutputPercentage}% of Full-Time</span>
+            </div>
+            <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-blue-600 rounded-full"
+                style={{ width: `${salesPerHourData.productivityOutputPercentage}%` }}
+              />
+            </div>
+            <p className="text-[11px] text-slate-500 mt-1">
+              Part-time retail staff deliver 91.9% of full-time sales output during busy hours while saving 42.1% in hourly wages.
+            </p>
+          </div>
         </div>
       </div>
 

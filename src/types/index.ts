@@ -37,7 +37,10 @@ export interface StorePerformance {
   cluster: string;
   region: 'Barat' | 'Tengah' | 'Timur';
   brand: string;
+  format?: 'Family Store' | 'Showroom' | 'Counter';
   headcount: number;
+  leaderTenure?: string;
+  staffRatio?: string;
   sales: number;
   targetSales: number;
   labourCost: number;

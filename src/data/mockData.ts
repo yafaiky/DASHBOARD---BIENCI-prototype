@@ -289,92 +289,247 @@ export const contractTypesData = {
   permanentPercentage: 78
 };
 
+// Store Performance Leaderboard with Excel Store Types & Regions
 export const mockStorePerformances: StorePerformance[] = [
   {
     storeId: 'STR-BDO-01',
-    storeName: '3Second Grand Bandung Mall',
+    storeName: 'FS MARTADINATA BANDUNG',
     cluster: 'Bandung HQ & Stores (Primary)',
     region: 'Barat',
     brand: '3SECOND',
-    headcount: 22,
-    sales: 1450000000,
-    targetSales: 1350000000,
-    labourCost: 118000000,
-    achievementRate: 107.4,
-    revenuePerFte: 65909090,
-    labourCostRatio: 8.14
+    format: 'Family Store',
+    headcount: 25,
+    leaderTenure: '6.2 Years',
+    staffRatio: '1 : 11.5',
+    sales: 1980000000,
+    targetSales: 1850000000,
+    labourCost: 148000000,
+    achievementRate: 107.0,
+    revenuePerFte: 79200000,
+    labourCostRatio: 7.47
   },
   {
     storeId: 'STR-JKT-04',
-    storeName: 'Greenlight Flagship Pondok Indah',
+    storeName: 'SHOWROOM SUMMARECON MAL BKSI',
     cluster: 'Jabodetabek Flagship Hub',
     region: 'Barat',
     brand: 'GREENLIGHT',
-    headcount: 28,
-    sales: 1980000000,
-    targetSales: 1800000000,
-    labourCost: 162000000,
-    achievementRate: 110.0,
-    revenuePerFte: 70714285,
-    labourCostRatio: 8.18
+    format: 'Showroom',
+    headcount: 7,
+    leaderTenure: '3.8 Years',
+    staffRatio: '1 : 6.0',
+    sales: 1420000000,
+    targetSales: 1300000000,
+    labourCost: 98000000,
+    achievementRate: 109.2,
+    revenuePerFte: 202857142,
+    labourCostRatio: 6.90
+  },
+  {
+    storeId: 'STR-GRT-01',
+    storeName: 'FS GARUT',
+    cluster: 'Priangan Timur',
+    region: 'Barat',
+    brand: '3SECOND',
+    format: 'Family Store',
+    headcount: 21,
+    leaderTenure: '5.1 Years',
+    staffRatio: '1 : 10.0',
+    sales: 2786000000,
+    targetSales: 2600000000,
+    labourCost: 182000000,
+    achievementRate: 107.1,
+    revenuePerFte: 132666666,
+    labourCostRatio: 6.53
+  },
+  {
+    storeId: 'STR-KPT-01',
+    storeName: 'FS KEPATIHAN',
+    cluster: 'Bandung Central',
+    region: 'Barat',
+    brand: '3SECOND',
+    format: 'Family Store',
+    headcount: 10,
+    leaderTenure: '2.5 Years',
+    staffRatio: '1 : 9.0',
+    sales: 1987000000,
+    targetSales: 1900000000,
+    labourCost: 112000000,
+    achievementRate: 104.5,
+    revenuePerFte: 198700000,
+    labourCostRatio: 5.63
   },
   {
     storeId: 'STR-SBY-02',
-    storeName: 'Famo & 3Second Tunjungan Plaza',
+    storeName: 'SHOWROOM TUNJUNGAN PLAZA',
     cluster: 'East Java Region',
-    region: 'Tengah',
+    region: 'Timur',
     brand: 'FAMO',
-    headcount: 19,
+    format: 'Showroom',
+    headcount: 8,
+    leaderTenure: '0.9 Years',
+    staffRatio: '1 : 7.0',
     sales: 1220000000,
     targetSales: 1250000000,
-    labourCost: 98000000,
-    achievementRate: 97.6,
-    revenuePerFte: 64210526,
-    labourCostRatio: 8.03
-  },
-  {
-    storeId: 'STR-DPS-01',
-    storeName: '3Second Sunset Road Bali',
-    cluster: 'Bali & Nusa Tenggara',
-    region: 'Tengah',
-    brand: '3SECOND',
-    headcount: 16,
-    sales: 1120000000,
-    targetSales: 950000000,
     labourCost: 88000000,
-    achievementRate: 117.9,
-    revenuePerFte: 70000000,
-    labourCostRatio: 7.85
-  },
-  {
-    storeId: 'STR-MDN-03',
-    storeName: 'Moutley & 3Second Sun Plaza Medan',
-    cluster: 'Sumatera Regional Hub',
-    region: 'Barat',
-    brand: 'MOUTLEY',
-    headcount: 15,
-    sales: 890000000,
-    targetSales: 920000000,
-    labourCost: 79000000,
-    achievementRate: 96.7,
-    revenuePerFte: 59333333,
-    labourCostRatio: 8.87
+    achievementRate: 97.6,
+    revenuePerFte: 152500000,
+    labourCostRatio: 7.21
   },
   {
     storeId: 'STR-MKS-01',
-    storeName: '3Second Trans Studio Makassar',
+    storeName: 'FS PERINTIS MKS',
     cluster: 'Sulawesi & Eastern Hub',
     region: 'Timur',
     brand: '3SECOND',
+    format: 'Family Store',
     headcount: 14,
-    sales: 830000000,
-    targetSales: 800000000,
-    labourCost: 72000000,
-    achievementRate: 103.7,
-    revenuePerFte: 59285714,
-    labourCostRatio: 8.67
+    leaderTenure: '4.2 Years',
+    staffRatio: '1 : 13.0',
+    sales: 980000000,
+    targetSales: 950000000,
+    labourCost: 78000000,
+    achievementRate: 103.1,
+    revenuePerFte: 70000000,
+    labourCostRatio: 7.95
+  },
+  {
+    storeId: 'STR-YOG-03',
+    storeName: 'COUNTER MATAHARI MALIOBORO',
+    cluster: 'Central Java & DIY',
+    region: 'Tengah',
+    brand: '3SECOND',
+    format: 'Counter',
+    headcount: 3,
+    leaderTenure: '0.6 Years',
+    staffRatio: '1 : 2.0',
+    sales: 420000000,
+    targetSales: 450000000,
+    labourCost: 32000000,
+    achievementRate: 93.3,
+    revenuePerFte: 140000000,
+    labourCostRatio: 7.62
   }
 ];
+
+// Q11: Peak Season Cost Savings (Part-time & Internship vs Full-Time Equivalent)
+export const peakSeasonSavingsData = {
+  seasonalHeadcount: 450,
+  peakPeriods: ['Ramadhan & Lebaran', 'End-Year Holiday Sale'],
+  actualSeasonalCost: 1580000000, // Rp 1.58 Miliar
+  fulltimeBenchmarkCost: 3420000000, // Rp 3.42 Miliar
+  netCostSavings: 1840000000, // Rp 1.84 Miliar Saved!
+  savingsPercentage: 53.8,
+  internsDeployed: 120,
+  partTimeDeployed: 330
+};
+
+// Q22: Sales per Hour Productivity: Part-Time vs Full-Time during Peak Hours
+export const salesPerHourData = {
+  peakHoursRange: '14:00 – 21:00 (Weekend & Payday)',
+  fullTime: {
+    salesPerHour: 310000, // Rp 310k/hr
+    costPerHour: 38000,
+    efficiencyRatio: 8.15
+  },
+  partTime: {
+    salesPerHour: 285000, // Rp 285k/hr (91.9% output)
+    costPerHour: 22000,
+    efficiencyRatio: 12.95 // 1.58x more cost-efficient!
+  },
+  productivityOutputPercentage: 91.9,
+  hourlyCostSavingsPercentage: 42.1
+};
+
+// Q6: Turnover Breakdown by Store Format (Family Store, Showroom, Counter)
+export const storeFormatTurnoverData = [
+  {
+    format: 'Family Store (FS)',
+    turnoverRate: 1.8,
+    headcount: 6240,
+    departuresYtd: 112,
+    benchmarkMax: 3.0,
+    status: 'Optimal 🟢',
+    primaryReasons: 'Habis Kontrak (52%), Resign SOP (28%), Kelalaian SO (20%)'
+  },
+  {
+    format: 'Showroom (Mall)',
+    turnoverRate: 2.4,
+    headcount: 3180,
+    departuresYtd: 76,
+    benchmarkMax: 3.0,
+    status: 'Normal 🟡',
+    primaryReasons: 'Target Tekanan Mall (45%), Tawaran Karir Lain (35%), Closing Toko (20%)'
+  },
+  {
+    format: 'Counter (Dept Store/YDS)',
+    turnoverRate: 3.9,
+    headcount: 1820,
+    departuresYtd: 71,
+    benchmarkMax: 3.0,
+    status: 'Perlu Evaluasi 🔴',
+    primaryReasons: 'Single-brand fatigue, Jam kerja shift mall panjang, Komisi kompetitor'
+  }
+];
+
+// Q3: Store Staffing Composition (Sales Advisor/Cashier to Store Manager Ratio)
+export const storeStaffingRatioData = {
+  nationalAverageRatio: '1 : 7.4',
+  breakdown: [
+    { format: 'Family Store', ratio: '1 Store Leader : 11.2 Associate', productivityStatus: 'Optimal' },
+    { format: 'Showroom', ratio: '1 Store Leader : 5.8 Associate', productivityStatus: 'Optimal' },
+    { format: 'Counter', ratio: '1 Senior Leader : 2.0 Associate', productivityStatus: 'Lean' }
+  ]
+};
+
+// Q20 & Recruitment KPI Dashboard from Excel
+export const recruitmentKpiData = {
+  totalManpowerRequest2026: 3450,
+  positionsFilled: 3180,
+  fulfillmentRate: 92.2,
+  avgTimeToHireDays: 14.2, // Benchmark < 21 Days
+  costPerHire: 1250000, // Rp 1.25M per hire
+  turnoverUnderOneYear: 4.8 // Target < 10%
+};
+
+// Q28: Store Leader Tenure vs Consistent Target Achievement
+export const storeLeaderTenureImpact = [
+  { tenureGroup: '> 5 Years Experience', countStores: 24, avgAchievement: 108.4, status: 'Top Consistent Performer' },
+  { tenureGroup: '2 – 5 Years Experience', countStores: 85, avgAchievement: 102.1, status: 'Consistent' },
+  { tenureGroup: '1 – 2 Years Experience', countStores: 142, avgAchievement: 98.6, status: 'Moderate' },
+  { tenureGroup: '< 1 Year Experience', countStores: 91, avgAchievement: 93.8, status: 'Coaching Required' }
+];
+
+// Q9 & Q24: R&D, Design & Product Development Demographics
+export const designProductDevData = {
+  avgAge: 26.4,
+  headcount: 185,
+  genderSplit: { female: 62, male: 38 },
+  tenureDistribution: [
+    { range: '< 1 Year (Fresh Perspectives)', pct: 26 },
+    { range: '1 – 3 Years (Growth Core)', pct: 40 },
+    { range: '3 – 5 Years (Experienced)', pct: 22 },
+    { range: '> 5 Years (Design Guardians)', pct: 12 }
+  ]
+};
+
+// Q27: Internship Conversion to Full-time
+export const internshipConversionData = {
+  totalInterns: 190,
+  convertedToFulltimePKWT: 65,
+  conversionRate: 34.2,
+  activeInterns: 85,
+  completedNotConverted: 40
+};
+
+// Q29: Managerial Level Gender Representation
+export const managerialGenderData = {
+  malePct: 54,
+  femalePct: 46,
+  totalManagerialPositions: 142,
+  femaleLeaders: 65,
+  maleLeaders: 77
+};
 
 export const mockIRCases: IRCase[] = [
   {
@@ -383,7 +538,7 @@ export const mockIRCases: IRCase[] = [
     employeeId: 'EMP-08812',
     employeeName: 'Dimas Kurniawan',
     position: 'Cashier Store Bandung 03',
-    store: 'Store Bandung PVJ',
+    store: 'FS KEPATIHAN',
     category: 'Discipline / SP',
     level: 'SP-2',
     financialImpact: 1200000,
