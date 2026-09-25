@@ -1,10 +1,6 @@
 import React from "react"
 import {
-  History,
   FileSpreadsheet,
-  CheckCircle2,
-  AlertTriangle,
-  ArrowRight,
 } from "lucide-react"
 import { Link } from "react-router-dom"
 
@@ -12,36 +8,36 @@ export const ImportHistoryPage: React.FC = () => {
   const historyItems = [
     {
       id: "IMP-2026-104",
-      file: "store_recruitment_oct2026.xlsx",
-      type: "Retail Associates Roster",
+      file: "rekrutmen_toko_okt2026.xlsx",
+      type: "Roster Karyawan Ritel Toko",
       user: "Budi Santoso (Admin)",
-      date: "24 Oct 2026 09:12",
+      date: "24 Okt 2026 09:12",
       rows: 124,
       success: 124,
       failed: 0,
-      status: "Success",
+      status: "Berhasil",
     },
     {
       id: "IMP-2026-103",
-      file: "biensi_logistics_shift_q3.xlsx",
-      type: "Logistics Attendance & Roster",
-      user: "HR Directorate",
-      date: "15 Oct 2026 14:30",
+      file: "biensi_logistik_shift_q3.xlsx",
+      type: "Presensi & Roster Logistik",
+      user: "Direktorat HC",
+      date: "15 Okt 2026 14:30",
       rows: 2140,
       success: 2138,
       failed: 2,
-      status: "Partial",
+      status: "Sebagian",
     },
     {
       id: "IMP-2026-102",
       file: "greenlight_design_intake.csv",
-      type: "Headquarter New Joiners",
+      type: "Karyawan Baru Kantor Pusat",
       user: "Budi Santoso (Admin)",
-      date: "02 Oct 2026 10:05",
+      date: "02 Okt 2026 10:05",
       rows: 18,
       success: 18,
       failed: 0,
-      status: "Success",
+      status: "Berhasil",
     },
   ]
 
@@ -51,34 +47,33 @@ export const ImportHistoryPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">
-            Import History & Audit Trails
+            Riwayat Impor & Jejak Audit Data
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Historical log of all bulk spreadsheets ingested into the live
-            personnel database
+            Log historis seluruh berkas spreadsheet massal yang telah diintegrasikan ke basis data personel
           </p>
         </div>
 
         <Link
           to="/import"
-          className="px-4 py-2 text-xs font-bold text-white bg-[#c8102e] hover:bg-red-700 -xl shadow-xs"
+          className="px-4 py-2 text-xs font-bold text-white bg-[#c8102e] hover:bg-red-700 rounded-xl shadow-xs"
         >
-          New File Import
+          Impor Berkas Baru
         </Link>
       </div>
 
       {/* History Table */}
-      <div className="bg-white -2xl border border-slate-200 shadow-2xs overflow-hidden">
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left">
             <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider border-b border-slate-100 font-bold">
               <tr>
-                <th className="p-3">Import ID & File</th>
-                <th className="p-3">Data Type</th>
-                <th className="p-3">Uploaded By</th>
-                <th className="p-3">Date & Time</th>
-                <th className="p-3">Total Rows</th>
-                <th className="p-3">Success / Failed</th>
+                <th className="p-3">ID Impor & Nama Berkas</th>
+                <th className="p-3">Tipe Data</th>
+                <th className="p-3">Diunggah Oleh</th>
+                <th className="p-3">Tanggal & Waktu</th>
+                <th className="p-3">Total Baris</th>
+                <th className="p-3">Berhasil / Gagal</th>
                 <th className="p-3 text-right">Status</th>
               </tr>
             </thead>
@@ -128,8 +123,8 @@ export const ImportHistoryPage: React.FC = () => {
                   </td>
                   <td className="p-3 text-right">
                     <span
-                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 -full text-[10px] font-bold ${
-                        item.status === "Success"
+                      className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                        item.status === "Berhasil"
                           ? "bg-emerald-50 text-emerald-700"
                           : "bg-amber-50 text-amber-700"
                       }`}

@@ -74,3 +74,52 @@ export interface ComplianceItem {
   daysRemaining: number;
   assignedTo: string;
 }
+
+export interface DivisionLabourCost {
+  id: string;
+  divisionName: string;
+  headcount: number;
+  monthlyLabourCost: number;
+  annualLabourCost: number;
+  revenueContribution: number;
+  labourCostRatio: number;
+  budgetMonthly: number;
+  variancePct: number;
+  status: 'Within Budget' | 'Over Budget';
+  notes: string;
+}
+
+export interface DepartmentLabourCost {
+  id: string;
+  departmentName: string;
+  divisionName: string;
+  headcount: number;
+  avgSalaryPerFte: number;
+  monthlyLabourCost: number;
+  revenueContribution: number;
+  labourCostRatio: number;
+  budgetMonthly: number;
+  variancePct: number;
+  status: 'Within Budget' | 'Over Budget';
+  scope: 'HQ' | 'Store';
+  rankingCostRatio: number;
+  keyDriver: string;
+}
+
+export interface RegionalLabourCostMetric {
+  region: 'All' | 'Barat' | 'Tengah' | 'Timur';
+  name: string;
+  totalHeadcount: number;
+  storeHeadcount: number;
+  hqHeadcount: number;
+  monthlySales: number;
+  monthlyLabourCost: number;
+  labourCostRatio: number;
+  revenuePerFte: number;
+  avgCostPerFte: number;
+  storeCount: number;
+  chartSalesData: number[];
+  chartRatioData: number[];
+  chartMonths: string[];
+}
+

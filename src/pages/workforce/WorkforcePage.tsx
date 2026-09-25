@@ -36,7 +36,7 @@ export const WorkforcePage: React.FC = () => {
 
   // Chart options for Division Breakdown
   const divisionOptions: ApexCharts.ApexOptions = {
-    chart: { type: "bar", height: 280, toolbar: { show: false } },
+    chart: { type: "bar", height: 280, toolbar: { show: false }, fontFamily: "Inter, sans-serif" },
     colors: ["#172B4D"],
     plotOptions: {
       bar: { horizontal: true, borderRadius: 6, barHeight: "55%" },
@@ -49,72 +49,77 @@ export const WorkforcePage: React.FC = () => {
     },
     xaxis: {
       categories: [
-        "Retail Store Ops",
-        "Supply Chain",
-        "Design & Merch",
-        "Marketing & Brand",
-        "Business Support",
-        "Digital & IT",
+        "Operasional Toko Retail",
+        "Rantai Pasok & Gudang",
+        "Desain & Merchandising",
+        "Pemasaran & Brand",
+        "Dukungan Korporat (HQ)",
+        "Digital & TI",
       ],
     },
     grid: { borderColor: "#F1F5F9" },
+    tooltip: {
+      y: { formatter: (val) => `${val} Karyawan` }
+    }
   }
   const divisionSeries = [
-    { name: "Headcount", data: [6850, 2140, 1420, 1230, 630, 210] },
+    { name: "Jumlah Karyawan", data: [6850, 2140, 1420, 1230, 630, 210] },
   ]
 
   // Gender chart
   const genderOptions: ApexCharts.ApexOptions = {
-    chart: { type: "donut" },
+    chart: { type: "donut", fontFamily: "Inter, sans-serif" },
     colors: ["#2563EB", "#EC4899"],
-    labels: ["Male (52%)", "Female (48%)"],
+    labels: ["Laki-laki (52%)", "Perempuan (48%)"],
     legend: { position: "bottom" },
   }
   const genderSeries = [6490, 5990]
 
   // Age group chart
   const ageOptions: ApexCharts.ApexOptions = {
-    chart: { type: "bar", height: 260, toolbar: { show: false } },
+    chart: { type: "bar", height: 260, toolbar: { show: false }, fontFamily: "Inter, sans-serif" },
     colors: ["#C8102E"],
     plotOptions: { bar: { borderRadius: 4, columnWidth: "50%" } },
-    xaxis: { categories: ["<25", "25–29", "30–34", "35–39", "40–44", "45+"] },
+    xaxis: { categories: ["<25 Thn", "25–29 Thn", "30–34 Thn", "35–39 Thn", "40–44 Thn", "45+ Thn"] },
     grid: { borderColor: "#F1F5F9" },
+    tooltip: {
+      y: { formatter: (val) => `${val} Staf` }
+    }
   }
   const ageSeries = [
-    { name: "Employees", data: [4210, 4850, 2100, 890, 310, 120] },
+    { name: "Karyawan", data: [4210, 4850, 2100, 890, 310, 120] },
   ]
 
   return (
     <div className="space-y-6 no-scrollbar">
       {/* Page Title */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">
-            Workforce Analytics
-          </h1>
-          <p className="text-xs text-slate-500 mt-1">
-            Headcount distribution, demographics, organizational hierarchy &
-            contract statuses
-          </p>
-        </div>
+      <div>
+        <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+          Analitik Tenaga Kerja & Demografi
+        </h1>
+        <p className="text-xs text-slate-500 mt-1">
+          Distribusi jumlah karyawan, demografi usia, keragaman gender, hierarki organisasi, dan pemantauan kontrak PKWT.
+        </p>
+      </div>
 
-        {/* Tab switch with quest tags */}
-        <div className="inline-flex flex-wrap p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-semibold gap-1">
+      {/* Tab Switch: Sejajar Horizontal 1 Baris (Tidak Ada yang Turun ke Bawah) */}
+      <div className="w-full bg-slate-100/90 p-1 rounded-xl border border-slate-200 overflow-x-auto no-scrollbar shadow-2xs">
+        <div className="flex items-center flex-nowrap whitespace-nowrap min-w-max gap-1 text-xs font-semibold">
           {[
-            { id: "headcount", label: "Headcount" },
-            { id: "demographics", label: "Demographics & Gender" },
-            { id: "rnd-design", label: "R&D & Design" },
-            { id: "recruitment", label: "Recruitment & Intern" },
-            { id: "organization", label: "Organization" },
-            { id: "employment", label: "Employment (PKWT)" },
+            { id: "headcount", label: "Headcount & Divisi" },
+            { id: "demographics", label: "Demografi & Gender" },
+            { id: "rnd-design", label: "R&D & Desain" },
+            { id: "recruitment", label: "Rekrutmen & Magang" },
+            { id: "organization", label: "Struktur Organisasi" },
+            { id: "employment", label: "Status Kontrak (PKWT)" },
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 activeTab === tab.id
                   ? "bg-white text-slate-900 shadow-xs font-bold"
-                  : "text-slate-500 hover:text-slate-800"
+                  : "text-slate-500 hover:text-slate-800 hover:bg-slate-200/50"
               }`}
             >
               {tab.label}
@@ -128,62 +133,62 @@ export const WorkforcePage: React.FC = () => {
         <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-              Total Workforce
+              Total Tenaga Kerja
             </span>
             <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-red-50 text-[#c8102e] border border-red-200">
-               Quest #1
+              Quest #1
             </span>
           </div>
-          <div className="text-2xl font-black text-slate-900 mt-1">12,480</div>
+          <div className="text-2xl font-black text-slate-900 mt-1">12.480</div>
           <span className="text-xs text-emerald-600 font-semibold">
-            ↑ +3.2% MoM
+            ↑ +3.2% vs Bulan Lalu
           </span>
         </div>
 
         <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-              HQ Roster
+              Staf Kantor Pusat (HQ)
             </span>
             <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-amber-50 text-amber-700 border border-amber-200">
-               Quest #18
+              Quest #18
             </span>
           </div>
-          <div className="text-2xl font-black text-slate-900 mt-1">1,240</div>
+          <div className="text-2xl font-black text-slate-900 mt-1">1.240</div>
           <span className="text-xs text-slate-500 font-medium">
-            9.9% of workforce
+            9.9% dari total tenaga kerja
           </span>
         </div>
 
         <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-              Store Network
+              Jaringan Gerai Toko
             </span>
             <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-blue-50 text-blue-700 border border-blue-200">
-               Quest #1
+              Quest #1
             </span>
           </div>
-          <div className="text-2xl font-black text-slate-900 mt-1">11,240</div>
+          <div className="text-2xl font-black text-slate-900 mt-1">11.240</div>
           <span className="text-xs text-blue-600 font-medium">
-            342 active retail stores
+            342 gerai aktif nasional
           </span>
         </div>
 
         <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-              Avg Employee Age
+              Rata-rata Usia Staf
             </span>
             <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-purple-50 text-purple-700 border border-purple-200">
-               Quest #8 & #10
+              Quest #8 & #10
             </span>
           </div>
           <div className="text-2xl font-black text-slate-900 mt-1">
-            26.8 yrs
+            26.8 Tahun
           </div>
           <span className="text-xs text-purple-600 font-medium">
-            Gen Z & Millennial Core
+            Inti Gen Z & Milenial Muda
           </span>
         </div>
       </div>
@@ -193,10 +198,10 @@ export const WorkforcePage: React.FC = () => {
           <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
             <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
               <h3 className="text-sm font-bold text-slate-900 font-heading">
-                Headcount by Division
+                Jumlah Karyawan per Divisi
               </h3>
               <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
-                 Quest #26 (Med): Commercial vs Marketing
+                Quest #26 (Med): Komersial vs Pemasaran
               </span>
             </div>
             <Chart
@@ -210,85 +215,85 @@ export const WorkforcePage: React.FC = () => {
           <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs">
             <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
               <h3 className="text-sm font-bold text-slate-900 font-heading">
-                Department Headcount & Budget Variance
+                Headcount Departemen & Varians Anggaran
               </h3>
               <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-red-50 text-red-700 border border-red-200">
-                 Quest #23 (Med): Target & Bottleneck
+                Quest #23 (Med): Target & Kendala
               </span>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-xs text-left">
                 <thead className="bg-slate-50 text-slate-500 font-bold uppercase text-[10px]">
                   <tr>
-                    <th className="p-2.5">Department</th>
-                    <th className="p-2.5">Actual HC</th>
-                    <th className="p-2.5">Budget</th>
-                    <th className="p-2.5">Gap</th>
-                    <th className="p-2.5">Fulfillment</th>
+                    <th className="p-2.5">Departemen</th>
+                    <th className="p-2.5">Aktual HC</th>
+                    <th className="p-2.5">Anggaran</th>
+                    <th className="p-2.5">Selisih</th>
+                    <th className="p-2.5">Pemenuhan</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 font-medium">
                   <tr>
                     <td className="p-2.5 font-bold text-slate-900">
-                      Store Operations – West Java
+                      Operasional Toko – Jawa Barat
                     </td>
-                    <td className="p-2.5">3,420</td>
-                    <td className="p-2.5 text-slate-500">3,500</td>
+                    <td className="p-2.5">3.420</td>
+                    <td className="p-2.5 text-slate-500">3.500</td>
                     <td className="p-2.5 text-red-600">-80</td>
                     <td className="p-2.5">
-                      <span className="px-2 py-0.5  bg-emerald-50 text-emerald-700 font-bold">
+                      <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">
                         97.7%
                       </span>
                     </td>
                   </tr>
                   <tr>
                     <td className="p-2.5 font-bold text-slate-900">
-                      Store Operations – Jabodetabek
+                      Operasional Toko – Jabodetabek
                     </td>
-                    <td className="p-2.5">3,430</td>
-                    <td className="p-2.5 text-slate-500">3,450</td>
+                    <td className="p-2.5">3.430</td>
+                    <td className="p-2.5 text-slate-500">3.450</td>
                     <td className="p-2.5 text-red-600">-20</td>
                     <td className="p-2.5">
-                      <span className="px-2 py-0.5  bg-emerald-50 text-emerald-700 font-bold">
+                      <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">
                         99.4%
                       </span>
                     </td>
                   </tr>
                   <tr>
                     <td className="p-2.5 font-bold text-slate-900">
-                      Supply Chain & Hub Logistik
+                      Rantai Pasok & Hub Logistik
                     </td>
-                    <td className="p-2.5">2,140</td>
-                    <td className="p-2.5 text-slate-500">2,100</td>
+                    <td className="p-2.5">2.140</td>
+                    <td className="p-2.5 text-slate-500">2.100</td>
                     <td className="p-2.5 text-blue-600">+40</td>
                     <td className="p-2.5">
-                      <span className="px-2 py-0.5  bg-blue-50 text-blue-700 font-bold">
+                      <span className="px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-bold">
                         101.9%
                       </span>
                     </td>
                   </tr>
                   <tr>
                     <td className="p-2.5 font-bold text-slate-900">
-                      Fashion Design HQ
+                      Desain Fashion HQ
                     </td>
                     <td className="p-2.5">185</td>
                     <td className="p-2.5 text-slate-500">190</td>
                     <td className="p-2.5 text-red-600">-5</td>
                     <td className="p-2.5">
-                      <span className="px-2 py-0.5  bg-emerald-50 text-emerald-700 font-bold">
+                      <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold">
                         97.3%
                       </span>
                     </td>
                   </tr>
                   <tr>
                     <td className="p-2.5 font-bold text-slate-900">
-                      Digital Omnichannel & IT
+                      Digital Omnichannel & TI
                     </td>
                     <td className="p-2.5">210</td>
                     <td className="p-2.5 text-slate-500">225</td>
                     <td className="p-2.5 text-red-600">-15</td>
                     <td className="p-2.5">
-                      <span className="px-2 py-0.5  bg-amber-50 text-amber-700 font-bold">
+                      <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-700 font-bold">
                         93.3%
                       </span>
                     </td>
@@ -300,129 +305,129 @@ export const WorkforcePage: React.FC = () => {
         </div>
       )}
 
-      {/* Demographics & Gender (Non-scrollable, balanced 3-column layout) */}
+      {/* Demographics & Gender */}
       {activeTab === "demographics" && (
         <div className="space-y-4">
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 no-scrollbar">
-          {/* Card 1: Age Distribution */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-sm font-bold text-slate-900 font-heading">
-                  Workforce Age Distribution
-                </h3>
-                <span className="text-xs font-semibold text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full">
-                  Avg 26.8 yrs
-                </span>
-              </div>
-              <p className="text-xs text-slate-500 mb-3">
-                Generational workforce demographic breakdown
-              </p>
-              <Chart
-                options={ageOptions}
-                series={ageSeries}
-                type="bar"
-                height={220}
-              />
-            </div>
-            <div className="p-3 bg-slate-50 rounded-xl text-xs text-slate-600 mt-2 border border-slate-100">
-              <strong className="text-slate-900">Demographic Profile:</strong> Core retail workforce is concentrated in the 20–29 age bracket (72.6% Gen Z & Early Millennials).
-            </div>
-          </div>
-
-          {/* Card 2: Company-Wide Gender Diversity */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-sm font-bold text-slate-900 font-heading">
-                  Gender Diversity (Company-Wide)
-                </h3>
-                <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full">
-                  12,480 Total
-                </span>
-              </div>
-              <p className="text-xs text-slate-500 mb-3">
-                Male & female headcount balance across all divisions
-              </p>
-              <Chart
-                options={genderOptions}
-                series={genderSeries}
-                type="donut"
-                height={220}
-              />
-            </div>
-            <div className="p-3 bg-slate-50 rounded-xl text-xs text-slate-600 mt-2 border border-slate-100">
-              <strong className="text-slate-900">Diversity Index:</strong> Highly balanced male/female ratio across store network (52% M / 48% F) and HQ divisions.
-            </div>
-          </div>
-
-          {/* Card 3: Q29 Managerial Gender Representation */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between space-y-3">
-            <div>
-              <div className="flex items-start justify-between mb-1">
-                <div>
-                  <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-bold bg-pink-50 text-pink-700 mb-1">
-                    <Award className="w-3.5 h-3.5 text-pink-600" />
-                    <span>Critical Question #29</span>
-                  </div>
+            {/* Card 1: Age Distribution */}
+            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-2">
                   <h3 className="text-sm font-bold text-slate-900 font-heading">
-                    Managerial Gender Diversity
+                    Distribusi Usia Karyawan
                   </h3>
+                  <span className="text-xs font-semibold text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full">
+                    Rata-rata 26.8 Thn
+                  </span>
                 </div>
-                <span className="text-xs font-bold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg">
-                  {managerialGenderData.totalManagerialPositions} Roles
-                </span>
+                <p className="text-xs text-slate-500 mb-3">
+                  Rincian demografi generasi tenaga kerja
+                </p>
+                <Chart
+                  options={ageOptions}
+                  series={ageSeries}
+                  type="bar"
+                  height={220}
+                />
               </div>
-              <p className="text-xs text-slate-500 mb-3">
-                Store Manager up to Corporate Director leadership
-              </p>
-
-              <div className="grid grid-cols-2 gap-3 mb-3">
-                <div className="p-3 rounded-xl border border-blue-200 bg-blue-50/40">
-                  <div className="flex items-center justify-between text-xs font-bold text-blue-900">
-                    <span>Male</span>
-                    <span className="text-sm font-black">{managerialGenderData.malePct}%</span>
-                  </div>
-                  <div className="text-lg font-black text-slate-900 mt-0.5">
-                    {managerialGenderData.maleLeaders} Leaders
-                  </div>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Area Store Managers & Logistics
-                  </p>
-                </div>
-
-                <div className="p-3 rounded-xl border border-pink-200 bg-pink-50/40">
-                  <div className="flex items-center justify-between text-xs font-bold text-pink-900">
-                    <span>Female</span>
-                    <span className="text-sm font-black">{managerialGenderData.femalePct}%</span>
-                  </div>
-                  <div className="text-lg font-black text-slate-900 mt-0.5">
-                    {managerialGenderData.femaleLeaders} Leaders
-                  </div>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Design, VM & Flagship Managers
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <div className="flex justify-between text-xs font-semibold text-slate-700">
-                  <span>Male ({managerialGenderData.malePct}%)</span>
-                  <span>Female ({managerialGenderData.femalePct}%)</span>
-                </div>
-                <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden flex">
-                  <div className="h-full bg-blue-600 rounded-l-full" style={{ width: `${managerialGenderData.malePct}%` }} />
-                  <div className="h-full bg-pink-500 rounded-r-full" style={{ width: `${managerialGenderData.femalePct}%` }} />
-                </div>
+              <div className="p-3 bg-slate-50 rounded-xl text-xs text-slate-600 mt-2 border border-slate-100">
+                <strong className="text-slate-900">Profil Demografis:</strong> Mayoritas tenaga kerja toko terkonsentrasi pada rentang usia 20–29 tahun (72.6% Gen Z & Milenial Muda).
               </div>
             </div>
 
-            <div className="p-3 bg-pink-50/50 rounded-xl text-xs text-pink-950 border border-pink-100">
-              <strong className="text-pink-900">Parity Benchmark:</strong> Balanced within 46%–54%, surpassing the retail national benchmark of 35% female store managers.
+            {/* Card 2: Company-Wide Gender Diversity */}
+            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-sm font-bold text-slate-900 font-heading">
+                    Keragaman Gender (Perusahaan)
+                  </h3>
+                  <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full">
+                    Total 12.480
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500 mb-3">
+                  Keseimbangan jumlah karyawan laki-laki dan perempuan di seluruh divisi
+                </p>
+                <Chart
+                  options={genderOptions}
+                  series={genderSeries}
+                  type="donut"
+                  height={220}
+                />
+              </div>
+              <div className="p-3 bg-slate-50 rounded-xl text-xs text-slate-600 mt-2 border border-slate-100">
+                <strong className="text-slate-900">Indeks Keragaman:</strong> Rasio gender sangat seimbang di seluruh jaringan toko ritel (52% L / 48% P) dan kantor pusat.
+              </div>
+            </div>
+
+            {/* Card 3: Q29 Managerial Gender Representation */}
+            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between space-y-3">
+              <div>
+                <div className="flex items-start justify-between mb-1">
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-bold bg-pink-50 text-pink-700 mb-1">
+                      <Award className="w-3.5 h-3.5 text-pink-600" />
+                      <span>Pertanyaan Kritis #29</span>
+                    </div>
+                    <h3 className="text-sm font-bold text-slate-900 font-heading">
+                      Keragaman Gender Tingkat Manajerial
+                    </h3>
+                  </div>
+                  <span className="text-xs font-bold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg">
+                    {managerialGenderData.totalManagerialPositions} Posisi
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500 mb-3">
+                  Kepemimpinan level Store Manager hingga Direksi Korporat
+                </p>
+
+                <div className="grid grid-cols-2 gap-3 mb-3">
+                  <div className="p-3 rounded-xl border border-blue-200 bg-blue-50/40">
+                    <div className="flex items-center justify-between text-xs font-bold text-blue-900">
+                      <span>Laki-laki</span>
+                      <span className="text-sm font-black">{managerialGenderData.malePct}%</span>
+                    </div>
+                    <div className="text-lg font-black text-slate-900 mt-0.5">
+                      {managerialGenderData.maleLeaders} Pemimpin
+                    </div>
+                    <p className="text-xs text-slate-500 mt-1">
+                      Area Store Manager & Logistik
+                    </p>
+                  </div>
+
+                  <div className="p-3 rounded-xl border border-pink-200 bg-pink-50/40">
+                    <div className="flex items-center justify-between text-xs font-bold text-pink-900">
+                      <span>Perempuan</span>
+                      <span className="text-sm font-black">{managerialGenderData.femalePct}%</span>
+                    </div>
+                    <div className="text-lg font-black text-slate-900 mt-0.5">
+                      {managerialGenderData.femaleLeaders} Pemimpin
+                    </div>
+                    <p className="text-xs text-slate-500 mt-1">
+                      Desain, VM & Manajer Gerai Utama
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <div className="flex justify-between text-xs font-semibold text-slate-700">
+                    <span>Laki-laki ({managerialGenderData.malePct}%)</span>
+                    <span>Perempuan ({managerialGenderData.femalePct}%)</span>
+                  </div>
+                  <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden flex">
+                    <div className="h-full bg-blue-600 rounded-l-full" style={{ width: `${managerialGenderData.malePct}%` }} />
+                    <div className="h-full bg-pink-500 rounded-r-full" style={{ width: `${managerialGenderData.femalePct}%` }} />
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-3 bg-pink-50/50 rounded-xl text-xs text-pink-950 border border-pink-100">
+                <strong className="text-pink-900">Tolok Ukur Kesetaraan:</strong> Seimbang di angka 46%–54%, melampaui tolok ukur ritel nasional (35% perempuan).
+              </div>
             </div>
           </div>
         </div>
-      </div>
       )}
 
       {/* Q9 & Q24: R&D, Design & Product Development Demographics */}
@@ -433,43 +438,43 @@ export const WorkforcePage: React.FC = () => {
               <div>
                 <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-50 text-purple-700 mb-1.5">
                   <Palette className="w-3 h-3 text-purple-600" />
-                  <span>Critical Questions #9 & #24 • High & Medium Priority</span>
+                  <span>Pertanyaan Kritis #9 & #24 • Prioritas Tinggi & Sedang</span>
                 </div>
                 <h3 className="text-base font-bold text-slate-900">
-                  R&D, Design & Product Development Talent Intelligence
+                  Intelijen Talenta R&D, Desain & Pengembangan Produk
                 </h3>
                 <p className="text-xs text-slate-500">
-                  Tenure retention, youth generation demographics (Gen Z & Millennials), and creative division structure
+                  Retensi masa kerja, demografi generasi muda (Gen Z & Milenial), dan struktur divisi kreatif fashion
                 </p>
               </div>
               <div className="text-xs font-bold text-purple-700 bg-purple-50 px-3 py-1.5 rounded-xl border border-purple-100">
-                {designProductDevData.headcount} Creative Specialists
+                {designProductDevData.headcount} Spesialis Kreatif
               </div>
             </div>
 
             {/* Quick Metrics */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
               <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Average Age</span>
-                <div className="text-xl font-black text-slate-900 mt-0.5">{designProductDevData.avgAge} yrs</div>
-                <span className="text-[10px] text-purple-600 font-semibold">78% Gen Z & Early Millennials</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Rata-rata Usia</span>
+                <div className="text-xl font-black text-slate-900 mt-0.5">{designProductDevData.avgAge} Thn</div>
+                <span className="text-[10px] text-purple-600 font-semibold">78% Gen Z & Milenial Muda</span>
               </div>
               <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Gender Ratio</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Rasio Gender</span>
                 <div className="text-xl font-black text-slate-900 mt-0.5">
-                  {designProductDevData.genderSplit.female}% F / {designProductDevData.genderSplit.male}% M
+                  {designProductDevData.genderSplit.female}% P / {designProductDevData.genderSplit.male}% L
                 </div>
-                <span className="text-[10px] text-slate-500 font-medium">Creative design parity</span>
+                <span className="text-[10px] text-slate-500 font-medium">Kesetaraan desain kreatif</span>
               </div>
               <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Growth Core (1-3 yrs)</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Inti Pertumbuhan (1-3 Thn)</span>
                 <div className="text-xl font-black text-emerald-600 mt-0.5">40%</div>
-                <span className="text-[10px] text-slate-500 font-medium">Highest productive bracket</span>
+                <span className="text-[10px] text-slate-500 font-medium">Kelompok paling produktif</span>
               </div>
               <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Senior Guardians (&gt;5 yrs)</span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Senior Penjaga Brand (&gt;5 Thn)</span>
                 <div className="text-xl font-black text-slate-900 mt-0.5">12%</div>
-                <span className="text-[10px] text-blue-600 font-semibold">Brand identity custodians</span>
+                <span className="text-[10px] text-blue-600 font-semibold">Penjaga DNA identitas brand</span>
               </div>
             </div>
 
@@ -477,7 +482,7 @@ export const WorkforcePage: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-4 border-t border-slate-100">
               <div className="space-y-3">
                 <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-                  Tenure Cohorts in Design & R&D (Q9)
+                  Kohort Masa Kerja di Desain & R&D (Quest #9)
                 </h4>
                 <div className="space-y-2.5">
                   {designProductDevData.tenureDistribution.map((item) => (
@@ -499,27 +504,27 @@ export const WorkforcePage: React.FC = () => {
 
               <div className="p-4 rounded-xl bg-slate-50/70 border border-slate-200/80 space-y-3">
                 <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-                  Brand Allocation & Strategic Retention (Q24)
+                  Alokasi Brand & Retensi Strategis (Quest #24)
                 </h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Design teams are distributed across 3SECOND (Casualwear), GREENLIGHT (Modern Contemporary), FAMO (Minimalist Chic), and FMC (Activewear).
+                  Tim desain terbagi ke dalam portofolio 3SECOND (Casualwear), GREENLIGHT (Modern Contemporary), FAMO (Minimalist Chic), dan FMC (Activewear).
                 </p>
                 <div className="space-y-2 text-xs">
                   <div className="flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200">
                     <span className="font-semibold text-slate-800">3SECOND & 3SECOND KIDS</span>
-                    <span className="font-bold text-slate-900">82 Designers & Merchandisers</span>
+                    <span className="font-bold text-slate-900">82 Desainer & Merchandiser</span>
                   </div>
                   <div className="flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200">
                     <span className="font-semibold text-slate-800">GREENLIGHT & FAMO</span>
-                    <span className="font-bold text-slate-900">64 Designers & Visual Merch</span>
+                    <span className="font-bold text-slate-900">64 Desainer & Visual Merch</span>
                   </div>
                   <div className="flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200">
-                    <span className="font-semibold text-slate-800">R&D Fabric & Pattern Hub</span>
-                    <span className="font-bold text-slate-900">39 Technical Fabric Specialists</span>
+                    <span className="font-semibold text-slate-800">Hub Riset Kain & Pola</span>
+                    <span className="font-bold text-slate-900">39 Spesialis Tekstil Teknis</span>
                   </div>
                 </div>
                 <div className="text-[11px] text-purple-900 bg-purple-50 p-2.5 rounded-lg border border-purple-100">
-                  <strong>Retention Policy:</strong> Fast-track creative promotion cycles (18 months) prevent poaching by competitor fashion labels in Bandung & Jakarta.
+                  <strong>Kebijakan Retensi:</strong> Jalur promosi kreatif berkala 18 bulan mencegah pembajakan talenta oleh kompetitor garmen ritel di Bandung & Jakarta.
                 </div>
               </div>
             </div>
@@ -537,56 +542,56 @@ export const WorkforcePage: React.FC = () => {
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 mb-1.5">
                     <Clock className="w-3 h-3 text-blue-600" />
-                    <span>Critical Question #20 • High Priority</span>
+                    <span>Pertanyaan Kritis #20 • Prioritas Tinggi</span>
                   </div>
                   <h3 className="text-sm font-bold text-slate-900">
-                    Recruitment Time-to-Fill & Request Fulfillment
+                    Waktu Pemenuhan Lowongan (Time-to-Fill)
                   </h3>
                   <p className="text-xs text-slate-500">
-                    Lead time for store crew fulfillment ahead of retail peak season
+                    Kecepatan pemenuhan staf toko menjelang musim ramai ritel
                   </p>
                 </div>
                 <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-lg">
-                  {recruitmentKpiData.fulfillmentRate}% Filled
+                  {recruitmentKpiData.fulfillmentRate}% Terpenuhi
                 </span>
               </div>
 
               <div className="grid grid-cols-2 gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-100">
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                    Avg Time-to-Hire
+                    Rata-rata Waktu Rekrut
                   </span>
                   <div className="text-2xl font-black text-slate-900 mt-0.5">
-                    {recruitmentKpiData.avgTimeToHireDays} Days
+                    {recruitmentKpiData.avgTimeToHireDays} Hari
                   </div>
                   <span className="text-[11px] text-emerald-600 font-semibold">
-                    Benchmark: &lt; 21 Days (-32% faster)
+                    Tolok Ukur: &lt; 21 Hari (-32% lebih cepat)
                   </span>
                 </div>
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                    Manpower Fulfillment
+                    Realisasi Permintaan Staf
                   </span>
                   <div className="text-2xl font-black text-slate-900 mt-0.5">
                     {recruitmentKpiData.positionsFilled.toLocaleString()} / {recruitmentKpiData.totalManpowerRequest2026.toLocaleString()}
                   </div>
                   <span className="text-[11px] text-blue-600 font-semibold">
-                    270 remaining in pipeline
+                    270 posisi dalam proses seleksi
                   </span>
                 </div>
               </div>
 
               <div className="p-3 rounded-xl border border-slate-200 text-xs space-y-2">
                 <div className="flex justify-between text-slate-700 font-semibold">
-                  <span>Recruitment Cost per Hire:</span>
-                  <span className="font-bold text-slate-900">Rp {(recruitmentKpiData.costPerHire / 1000000).toFixed(2)}M</span>
+                  <span>Biaya Rekrutmen per Karyawan:</span>
+                  <span className="font-bold text-slate-900">Rp {(recruitmentKpiData.costPerHire / 1000000).toFixed(2)} Jt</span>
                 </div>
                 <div className="flex justify-between text-slate-700 font-semibold">
-                  <span>First-Year Turnover Rate:</span>
+                  <span>Tingkat Turnover Tahun Pertama:</span>
                   <span className="font-bold text-emerald-600">{recruitmentKpiData.turnoverUnderOneYear}% (Target &lt;10%)</span>
                 </div>
                 <div className="text-[11px] text-slate-500 pt-1 border-t border-slate-100">
-                  Walk-in store auditions and digital CV screening reduced store associate hiring cycles from 24 days to 14.2 days.
+                  Audisi langsung di toko dan seleksi CV digital mempercepat siklus perekrutan staf dari 24 hari menjadi 14.2 hari.
                 </div>
               </div>
             </div>
@@ -597,39 +602,39 @@ export const WorkforcePage: React.FC = () => {
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 mb-1.5">
                     <GraduationCap className="w-3 h-3 text-emerald-600" />
-                    <span>Critical Question #27 • Medium Priority</span>
+                    <span>Pertanyaan Kritis #27 • Prioritas Sedang</span>
                   </div>
                   <h3 className="text-sm font-bold text-slate-900">
-                    Internship to Full-Time Conversion Pipeline
+                    Konversi Magang Menjadi Staf Purna Waktu
                   </h3>
                   <p className="text-xs text-slate-500">
-                    Conversion rate of retail interns and fashion design apprentices to PKWT / Permanent
+                    Tingkat konversi pemagang ritel dan desain fashion menjadi karyawan PKWT / Tetap
                   </p>
                 </div>
                 <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-lg">
-                  {internshipConversionData.conversionRate}% Converted
+                  {internshipConversionData.conversionRate}% Dikonversi
                 </span>
               </div>
 
               <div className="grid grid-cols-3 gap-2 text-center">
                 <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
                   <div className="text-xl font-black text-slate-900">{internshipConversionData.totalInterns}</div>
-                  <div className="text-[10px] font-bold uppercase text-slate-400 mt-0.5">Total Interns</div>
+                  <div className="text-[10px] font-bold uppercase text-slate-400 mt-0.5">Total Pemagang</div>
                 </div>
                 <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-100">
                   <div className="text-xl font-black text-emerald-700">{internshipConversionData.convertedToFulltimePKWT}</div>
-                  <div className="text-[10px] font-bold uppercase text-emerald-700 mt-0.5">Hired to PKWT</div>
+                  <div className="text-[10px] font-bold uppercase text-emerald-700 mt-0.5">Diangkat ke PKWT</div>
                 </div>
                 <div className="p-3 rounded-xl bg-blue-50 border border-blue-100">
                   <div className="text-xl font-black text-blue-700">{internshipConversionData.activeInterns}</div>
-                  <div className="text-[10px] font-bold uppercase text-blue-700 mt-0.5">Active In-Training</div>
+                  <div className="text-[10px] font-bold uppercase text-blue-700 mt-0.5">Aktif Pelatihan</div>
                 </div>
               </div>
 
               <div className="space-y-1.5">
                 <div className="flex justify-between text-xs">
-                  <span className="text-slate-600 font-medium">Conversion Rate: {internshipConversionData.conversionRate}%</span>
-                  <span className="font-bold text-emerald-600">65 of 190 Graduated</span>
+                  <span className="text-slate-600 font-medium">Tingkat Keberhasilan Konversi: {internshipConversionData.conversionRate}%</span>
+                  <span className="font-bold text-emerald-600">65 dari 190 Lulus Evaluasi</span>
                 </div>
                 <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
                   <div
@@ -649,72 +654,72 @@ export const WorkforcePage: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="text-sm font-bold text-slate-900 font-heading">
-                  Organizational Hierarchy (3SECOND / BIENSI)
+                  Hierarki Organisasi (3SECOND / BIENSI)
                 </h3>
                 <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-rose-50 text-[#C8102E] border border-rose-200">
-                   Quest #12 & #18
+                  Quest #12 & #18
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">
-                Corporate HQ vs Field Operations structure & Distribution Center staffing breakdown
+                Struktur Kantor Pusat (HQ) vs Operasional Lapangan & rincian staf Pusat Distribusi
               </p>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold text-slate-700 bg-slate-100 px-3 py-1 rounded-lg">
-                HQ to Store Ratio: 1 : 5.8 (Lean Enterprise)
+                Rasio HQ terhadap Toko: 1 : 5.8 (Organisasi Ramping)
               </span>
             </div>
           </div>
 
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs font-mono space-y-3">
             <div className="p-2 rounded-lg bg-slate-900 text-white font-bold inline-block shadow-xs">
-              Board of Directors (PT BIENSI FESYENINDO)
+              Dewan Direksi (PT BIENSI FESYENINDO)
             </div>
             <div className="pl-6 border-l-2 border-red-500 space-y-3">
               <div className="p-2 rounded-lg bg-white border border-slate-300 font-bold flex items-center justify-between">
-                <span>├── Commercial Business Directorate (Headcount: 7,450)</span>
-                <span className="text-[11px] font-sans font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Field Network (Quest #18)</span>
+                <span>├── Direktorat Bisnis Komersial (Headcount: 7.450)</span>
+                <span className="text-[11px] font-sans font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Jaringan Lapangan (Quest #18)</span>
               </div>
               <div className="pl-6 border-l-2 border-slate-300 space-y-2">
                 <div className="text-slate-700">
-                  ├── Store Operations (342 Stores nationwide)
+                  ├── Operasional Toko (342 Toko Nasional)
                 </div>
                 <div className="text-slate-700">
-                  ├── Regional Area Management (West, Central, East)
+                  ├── Manajemen Area Regional (Barat, Tengah, Timur)
                 </div>
                 <div className="text-slate-700">
-                  └── Visual Merchandising & Store Experience
+                  └── Visual Merchandising & Pengalaman Toko
                 </div>
               </div>
 
               <div className="p-2 rounded-lg bg-white border border-slate-300 font-bold flex items-center justify-between">
-                <span>├── Supply Chain & Manufacturing Logistics (Headcount: 2,140)</span>
-                <span className="text-[11px] font-sans font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">Warehouse Ratio (Quest #12)</span>
+                <span>├── Rantai Pasok & Logistik Manufaktur (Headcount: 2.140)</span>
+                <span className="text-[11px] font-sans font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">Rasio Pergudangan (Quest #12)</span>
               </div>
               <div className="pl-6 border-l-2 border-slate-300 space-y-2">
                 <div className="text-slate-700">
-                  ├── Central Distribution Centers (Bandung, Surabaya, Medan — 68% Full-Time / 32% Seasonal PKWT)
+                  ├── Pusat Distribusi Sentral (Bandung, Surabaya, Medan — 68% Staf Tetap / 32% PKWT Musiman)
                 </div>
                 <div className="text-slate-700">
-                  └── Quality Assurance & Inventory Audit
+                  └── Jaminan Kualitas (QA) & Audit Persediaan
                 </div>
               </div>
 
               <div className="p-2 rounded-lg bg-white border border-slate-300 font-bold">
-                ├── Brand Creative, Fashion & Marketing (Headcount: 1,420)
+                ├── Brand Kreatif, Fashion & Pemasaran (Headcount: 1.420)
               </div>
               <div className="pl-6 border-l-2 border-slate-300 space-y-2">
                 <div className="text-slate-700">
-                  ├── 3SECOND, GREENLIGHT, FAMO, MOUTLEY, FMC Design Teams
+                  ├── Tim Desain 3SECOND, GREENLIGHT, FAMO, MOUTLEY, FMC
                 </div>
                 <div className="text-slate-700">
-                  └── Brand Communications & Digital Media
+                  └── Komunikasi Brand & Media Digital
                 </div>
               </div>
 
               <div className="p-2 rounded-lg bg-white border border-slate-300 font-bold flex items-center justify-between">
-                <span>└── Human Capital, Finance & Digital Technology (Headcount: 1,470)</span>
-                <span className="text-[11px] font-sans font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">HQ Corporate (Quest #18)</span>
+                <span>└── Human Capital, Keuangan & Teknologi Digital (Headcount: 1.470)</span>
+                <span className="text-[11px] font-sans font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">Korporat Pusat (Quest #18)</span>
               </div>
             </div>
           </div>
@@ -727,18 +732,18 @@ export const WorkforcePage: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="text-sm font-bold text-slate-900 font-heading">
-                  Contract (PKWT) Expiry Monitoring & Operational Actions
+                  Pemantauan Masa Habis Kontrak (PKWT) & Tindakan Operasional
                 </h3>
                 <span className="px-2 py-0.5 text-xs font-bold rounded-full bg-rose-50 text-[#C8102E] border border-rose-200">
-                   Quest #13
+                  Quest #13
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">
-                Track contracts ending in next 7, 14, and 30 days for proactive renewal or offboarding
+                Pantau kontrak yang berakhir dalam 7, 14, dan 30 hari ke depan untuk perpanjangan proaktif atau offboarding
               </p>
             </div>
             <span className="px-2.5 py-1 text-xs font-bold rounded-lg bg-red-100 text-red-700">
-              9 Contracts Expiring in 30 Days
+              9 Kontrak Berakhir dalam 30 Hari
             </span>
           </div>
 
@@ -746,13 +751,13 @@ export const WorkforcePage: React.FC = () => {
             <table className="w-full text-xs text-left">
               <thead className="bg-slate-50 text-slate-500 uppercase text-[11px] tracking-wider border-y border-slate-100">
                 <tr>
-                  <th className="p-3">Associate</th>
-                  <th className="p-3">Department / Store</th>
-                  <th className="p-3">Position</th>
-                  <th className="p-3">Contract End</th>
-                  <th className="p-3">Days Left</th>
-                  <th className="p-3">Status</th>
-                  <th className="p-3 text-right">Action</th>
+                  <th className="p-3">Nama Karyawan</th>
+                  <th className="p-3">Departemen / Gerai Toko</th>
+                  <th className="p-3">Jabatan</th>
+                  <th className="p-3">Jatuh Tempo Kontrak</th>
+                  <th className="p-3">Sisa Hari</th>
+                  <th className="p-3">Tingkat Urgensi</th>
+                  <th className="p-3 text-right">Aksi HR</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -761,26 +766,26 @@ export const WorkforcePage: React.FC = () => {
                     Rendi Wahyudi
                   </td>
                   <td className="p-3 text-slate-600">
-                    Store Ops – PVJ Bandung
+                    Operasional Toko – PVJ Bandung
                   </td>
-                  <td className="p-3 text-slate-600">Cashier</td>
+                  <td className="p-3 text-slate-600">Kasir</td>
                   <td className="p-3 font-mono font-medium text-slate-800">
-                    30 Oct 2026
+                    30 Okt 2026
                   </td>
                   <td className="p-3">
-                    <span className="text-red-600 font-bold">6 days</span>
+                    <span className="text-red-600 font-bold">6 hari lagi</span>
                   </td>
                   <td className="p-3">
                     <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-red-50 text-red-700">
-                      Critical
+                      Kritis
                     </span>
                   </td>
                   <td className="p-3 text-right space-x-1">
                     <button className="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors">
-                      Renew
+                      Perbarui
                     </button>
                     <button className="px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">
-                      Extend
+                      Perpanjang
                     </button>
                   </td>
                 </tr>
@@ -789,26 +794,26 @@ export const WorkforcePage: React.FC = () => {
                     Rizka Febriani
                   </td>
                   <td className="p-3 text-slate-600">
-                    Store Ops – Pondok Indah
+                    Operasional Toko – Pondok Indah
                   </td>
                   <td className="p-3 text-slate-600">Senior Store Associate</td>
                   <td className="p-3 font-mono font-medium text-slate-800">
                     05 Nov 2026
                   </td>
                   <td className="p-3">
-                    <span className="text-amber-600 font-bold">12 days</span>
+                    <span className="text-amber-600 font-bold">12 hari lagi</span>
                   </td>
                   <td className="p-3">
                     <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700">
-                      Warning
+                      Peringatan
                     </span>
                   </td>
                   <td className="p-3 text-right space-x-1">
                     <button className="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors">
-                      Renew
+                      Perbarui
                     </button>
                     <button className="px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">
-                      Extend
+                      Perpanjang
                     </button>
                   </td>
                 </tr>
@@ -817,14 +822,14 @@ export const WorkforcePage: React.FC = () => {
                     Ilham Pratama
                   </td>
                   <td className="p-3 text-slate-600">
-                    Distribution Hub Cimahi
+                    Hub Distribusi Cimahi
                   </td>
-                  <td className="p-3 text-slate-600">Warehouse Staff</td>
+                  <td className="p-3 text-slate-600">Staf Gudang</td>
                   <td className="p-3 font-mono font-medium text-slate-800">
                     18 Nov 2026
                   </td>
                   <td className="p-3">
-                    <span className="text-slate-600 font-bold">25 days</span>
+                    <span className="text-slate-600 font-bold">25 hari lagi</span>
                   </td>
                   <td className="p-3">
                     <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700">
@@ -833,10 +838,10 @@ export const WorkforcePage: React.FC = () => {
                   </td>
                   <td className="p-3 text-right space-x-1">
                     <button className="px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors">
-                      Renew
+                      Perbarui
                     </button>
                     <button className="px-2.5 py-1 text-xs font-bold rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">
-                      Extend
+                      Perpanjang
                     </button>
                   </td>
                 </tr>

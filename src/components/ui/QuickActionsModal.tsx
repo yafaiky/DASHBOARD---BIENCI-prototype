@@ -59,13 +59,13 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
             <div>
               <h3 className="text-sm font-bold text-slate-900">
                 {activeTab === "menu"
-                  ? "Executive Quick Actions"
-                  : "Onboard New Employee"}
+                  ? "Aksi Cepat Eksekutif"
+                  : "Onboard Karyawan Baru"}
               </h3>
               <p className="text-[11px] text-slate-500">
                 {activeTab === "menu"
-                  ? "Trigger key operational workflows across 3SECOND Group"
-                  : "Fast-track onboarding directly into BIENSI Live HR Engine"}
+                  ? "Jalankan alur kerja operasional utama di 3SECOND Group"
+                  : "Proses onboarding cepat langsung ke BIENSI Live HR Engine"}
               </p>
             </div>
           </div>
@@ -91,10 +91,10 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
                   <UserPlus className="w-5 h-5" />
                 </div>
                 <span className="text-sm font-bold text-slate-900">
-                  Onboard Employee
+                  Onboard Karyawan
                 </span>
                 <span className="text-xs text-slate-500 mt-1">
-                  Add associate to roster, store, or HQ department
+                  Tambahkan staf ke daftar karyawan, toko, atau kantor pusat
                 </span>
               </button>
 
@@ -110,10 +110,10 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
                   <FileSpreadsheet className="w-5 h-5" />
                 </div>
                 <span className="text-sm font-bold text-slate-900">
-                  Import Excel Sheet
+                  Impor Lembar Excel
                 </span>
                 <span className="text-xs text-slate-500 mt-1">
-                  Upload multiple stores batch recruitment file
+                  Unggah file rekrutmen massal beberapa toko
                 </span>
               </button>
 
@@ -129,10 +129,10 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
                   <RefreshCw className="w-5 h-5" />
                 </div>
                 <span className="text-sm font-bold text-slate-900">
-                  Contract Renewal
+                  Pembaruan Kontrak
                 </span>
                 <span className="text-xs text-slate-500 mt-1">
-                  Review & renew expiring PKWT contracts
+                  Tinjau & perbarui kontrak PKWT yang akan berakhir
                 </span>
               </button>
 
@@ -148,10 +148,10 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
                   <AlertTriangle className="w-5 h-5" />
                 </div>
                 <span className="text-sm font-bold text-slate-900">
-                  Issue SP / IR Case
+                  Terbitkan SP / Kasus IR
                 </span>
                 <span className="text-xs text-slate-500 mt-1">
-                  Log discipline warning, fraud audit or mediation
+                  Catat surat peringatan disiplin, audit fraud, atau mediasi
                 </span>
               </button>
             </div>
@@ -163,10 +163,10 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
                     <Check className="w-8 h-8" />
                   </div>
                   <h4 className="text-base font-bold text-slate-900">
-                    Employee Successfully Enrolled!
+                    Karyawan Berhasil Didaftarkan!
                   </h4>
                   <p className="text-xs text-slate-500 mt-1">
-                    {formData.name} has been added to {formData.department}.
+                    {formData.name} telah ditambahkan ke {formData.department}.
                   </p>
                 </div>
               ) : (
@@ -174,12 +174,12 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="block text-xs font-semibold text-slate-700 mb-1">
-                        Full Name *
+                        Nama Lengkap *
                       </label>
                       <input
                         type="text"
                         required
-                        placeholder="e.g. Rizky Fauzan"
+                        placeholder="cth: Rizky Fauzan"
                         value={formData.name}
                         onChange={(e) =>
                           setFormData({ ...formData, name: e.target.value })
@@ -189,11 +189,11 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
                     </div>
                     <div>
                       <label className="block text-xs font-semibold text-slate-700 mb-1">
-                        Work Email
+                        Email Kerja
                       </label>
                       <input
                         type="email"
-                        placeholder="e.g. rizky.f@biensi.co.id"
+                        placeholder="cth: rizky.f@biensi.co.id"
                         value={formData.email}
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
@@ -206,7 +206,7 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="block text-xs font-semibold text-slate-700 mb-1">
-                        Position Title
+                        Jabatan
                       </label>
                       <input
                         type="text"
@@ -219,7 +219,7 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
                     </div>
                     <div>
                       <label className="block text-xs font-semibold text-slate-700 mb-1">
-                        Department
+                        Departemen
                       </label>
                       <select
                         value={formData.department}
@@ -261,7 +261,7 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
                     </div>
                     <div>
                       <label className="block text-xs font-semibold text-slate-700 mb-1">
-                        Employment Type
+                        Tipe Ketenagakerjaan
                       </label>
                       <select
                         value={formData.employmentType}
@@ -273,10 +273,10 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
                         }
                         className="w-full px-3 py-2 text-xs border border-slate-300 -lg focus:outline-hidden focus:ring-1 focus:ring-red-500 bg-white"
                       >
-                        <option>PKWT (Contract)</option>
-                        <option>PKWTT (Permanent)</option>
-                        <option>Probation</option>
-                        <option>Internship</option>
+                        <option>PKWT (Kontrak)</option>
+                        <option>PKWTT (Tetap)</option>
+                        <option>Masa Percobaan</option>
+                        <option>Magang</option>
                       </select>
                     </div>
                   </div>
@@ -287,13 +287,13 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
                       onClick={() => setActiveTab("menu")}
                       className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 -lg"
                     >
-                      Back
+                      Kembali
                     </button>
                     <button
                       type="submit"
                       className="px-4 py-2 text-xs font-semibold text-white bg-[#c8102e] hover:bg-red-700 -lg shadow-sm"
                     >
-                      Save & Add to Roster
+                      Simpan & Tambah ke Daftar
                     </button>
                   </div>
                 </>
@@ -305,16 +305,16 @@ export const QuickActionsModal: React.FC<QuickActionsModalProps> = ({
         {/* Footer */}
         {activeTab === "menu" && (
           <div className="px-6 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-            <span>Logged in as Budi Santoso</span>
+            <span>Masuk sebagai Budi Santoso</span>
             <button
               onClick={() => {
                 alert(
-                  "Exporting complete BIENSI Executive HR Dataset as XLSX...",
+                  "Mengekspor Dataset Lengkap BIENSI Executive HR sebagai XLSX...",
                 )
               }}
               className="flex items-center gap-1.5 font-semibold text-red-600 hover:text-red-700"
             >
-              <Download className="w-4 h-4" /> Download Complete HR Dossier
+              <Download className="w-4 h-4" /> Unduh Berkas Lengkap HR
             </button>
           </div>
         )}

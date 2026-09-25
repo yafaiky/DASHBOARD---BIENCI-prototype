@@ -1,15 +1,15 @@
 import React, { useState } from "react"
-import { ShieldCheck, Check, Save } from "lucide-react"
+import { Check, Save } from "lucide-react"
 
 export const RolesPage: React.FC = () => {
   const [selectedRole, setSelectedRole] = useState<
-    "Super Admin" | "HR Manager" | "HR Staff" | "Viewer"
-  >("HR Manager")
+    "Super Admin" | "Manajer HR" | "Staf HR" | "Viewer"
+  >("Manajer HR")
   const [saved, setSaved] = useState(false)
 
   const modules = [
     {
-      name: "Dashboard",
+      name: "Dashboard Beranda",
       view: true,
       create: false,
       edit: false,
@@ -17,7 +17,7 @@ export const RolesPage: React.FC = () => {
       export: true,
     },
     {
-      name: "Employees",
+      name: "Data Karyawan (Employees)",
       view: true,
       create: true,
       edit: true,
@@ -25,7 +25,7 @@ export const RolesPage: React.FC = () => {
       export: true,
     },
     {
-      name: "Import Data",
+      name: "Impor Data Excel",
       view: true,
       create: true,
       edit: false,
@@ -33,7 +33,7 @@ export const RolesPage: React.FC = () => {
       export: false,
     },
     {
-      name: "Labour Cost",
+      name: "Labour Cost & Simulasi",
       view: true,
       create: false,
       edit: false,
@@ -41,7 +41,7 @@ export const RolesPage: React.FC = () => {
       export: true,
     },
     {
-      name: "Turnover",
+      name: "Analitik Turnover",
       view: true,
       create: false,
       edit: false,
@@ -49,7 +49,7 @@ export const RolesPage: React.FC = () => {
       export: true,
     },
     {
-      name: "Attendance",
+      name: "Presensi & Kehadiran",
       view: true,
       create: true,
       edit: true,
@@ -57,7 +57,7 @@ export const RolesPage: React.FC = () => {
       export: true,
     },
     {
-      name: "Discipline / SP",
+      name: "Disiplin & Surat Peringatan (SP)",
       view: true,
       create: true,
       edit: true,
@@ -65,7 +65,7 @@ export const RolesPage: React.FC = () => {
       export: true,
     },
     {
-      name: "Fraud & Audit",
+      name: "Audit Fraud & Hubungan Industrial",
       view: true,
       create: true,
       edit: false,
@@ -73,7 +73,7 @@ export const RolesPage: React.FC = () => {
       export: false,
     },
     {
-      name: "Master Data",
+      name: "Pengelolaan Data Master",
       view: true,
       create: true,
       edit: true,
@@ -81,7 +81,7 @@ export const RolesPage: React.FC = () => {
       export: true,
     },
     {
-      name: "User Management",
+      name: "Manajemen Akun Pengguna",
       view: true,
       create: true,
       edit: true,
@@ -89,7 +89,7 @@ export const RolesPage: React.FC = () => {
       export: false,
     },
     {
-      name: "Activity Log",
+      name: "Log Aktivitas Sistem",
       view: true,
       create: false,
       edit: false,
@@ -107,10 +107,10 @@ export const RolesPage: React.FC = () => {
     <div className="space-y-6">
       {/* Toast */}
       {saved && (
-        <div className="p-3 bg-emerald-600 text-white text-xs font-semibold -xl shadow-lg flex items-center gap-2">
+        <div className="p-3 bg-emerald-600 text-white text-xs font-semibold rounded-xl shadow-lg flex items-center gap-2">
           <Check className="w-4 h-4" />
           <span>
-            Role permissions matrix successfully updated for {selectedRole}!
+            Matriks izin hak akses berhasil diperbarui untuk peran {selectedRole}!
           </span>
         </div>
       )}
@@ -119,32 +119,31 @@ export const RolesPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">
-            Role & Permission Matrix
+            Matriks Peran & Izin Hak Akses
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Fine-grained access rights covering operational actions, financial
-            data visibility, and data purging
+            Hak akses mendalam mencakup tindakan operasional, visibilitas data finansial tenaga kerja, dan izin penghapusan
           </p>
         </div>
 
         <button
           onClick={handleSave}
-          className="flex items-center gap-1.5 px-4 py-2 bg-[#c8102e] hover:bg-red-700 text-white -xl text-xs font-bold shadow-xs"
+          className="flex items-center gap-1.5 px-4 py-2 bg-[#c8102e] hover:bg-red-700 text-white rounded-xl text-xs font-bold shadow-xs"
         >
           <Save className="w-4 h-4" />
-          <span>Save Changes</span>
+          <span>Simpan Perubahan</span>
         </button>
       </div>
 
       {/* Role Picker */}
-      <div className="bg-white p-4 -2xl border border-slate-200 shadow-2xs">
+      <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
         <div className="flex items-center gap-2 overflow-x-auto text-xs font-bold">
-          {(["Super Admin", "HR Manager", "HR Staff", "Viewer"] as const).map(
+          {(["Super Admin", "Manajer HR", "Staf HR", "Viewer"] as const).map(
             (r) => (
               <button
                 key={r}
                 onClick={() => setSelectedRole(r)}
-                className={`px-4 py-2 -xl transition-all ${
+                className={`px-4 py-2 rounded-xl transition-all ${
                   selectedRole === r
                     ? "bg-slate-900 text-white shadow-xs"
                     : "bg-slate-50 text-slate-600 hover:bg-slate-100 border border-slate-200"
@@ -158,17 +157,17 @@ export const RolesPage: React.FC = () => {
       </div>
 
       {/* Permissions Matrix Table */}
-      <div className="bg-white -2xl border border-slate-200 shadow-2xs overflow-hidden">
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left">
             <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider border-b border-slate-100 font-bold">
               <tr>
-                <th className="p-3">Module Feature</th>
-                <th className="p-3 text-center">View</th>
-                <th className="p-3 text-center">Create</th>
-                <th className="p-3 text-center">Edit</th>
-                <th className="p-3 text-center">Delete</th>
-                <th className="p-3 text-center">Export</th>
+                <th className="p-3">Fitur Modul</th>
+                <th className="p-3 text-center">Lihat</th>
+                <th className="p-3 text-center">Tambah</th>
+                <th className="p-3 text-center">Ubah</th>
+                <th className="p-3 text-center">Hapus</th>
+                <th className="p-3 text-center">Ekspor</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -182,7 +181,7 @@ export const RolesPage: React.FC = () => {
                     <input
                       type="checkbox"
                       defaultChecked={m.view}
-                      className="w-4 h-4  text-red-600 accent-red-600 cursor-pointer"
+                      className="w-4 h-4 text-red-600 accent-red-600 cursor-pointer"
                     />
                   </td>
                   <td className="p-3 text-center">
@@ -191,7 +190,7 @@ export const RolesPage: React.FC = () => {
                       defaultChecked={
                         selectedRole === "Super Admin" ? true : m.create
                       }
-                      className="w-4 h-4  text-red-600 accent-red-600 cursor-pointer"
+                      className="w-4 h-4 text-red-600 accent-red-600 cursor-pointer"
                     />
                   </td>
                   <td className="p-3 text-center">
@@ -200,7 +199,7 @@ export const RolesPage: React.FC = () => {
                       defaultChecked={
                         selectedRole === "Super Admin" ? true : m.edit
                       }
-                      className="w-4 h-4  text-red-600 accent-red-600 cursor-pointer"
+                      className="w-4 h-4 text-red-600 accent-red-600 cursor-pointer"
                     />
                   </td>
                   <td className="p-3 text-center">
@@ -209,7 +208,7 @@ export const RolesPage: React.FC = () => {
                       defaultChecked={
                         selectedRole === "Super Admin" ? true : m.delete
                       }
-                      className="w-4 h-4  text-red-600 accent-red-600 cursor-pointer"
+                      className="w-4 h-4 text-red-600 accent-red-600 cursor-pointer"
                     />
                   </td>
                   <td className="p-3 text-center">
@@ -218,7 +217,7 @@ export const RolesPage: React.FC = () => {
                       defaultChecked={
                         selectedRole === "Viewer" ? false : m.export
                       }
-                      className="w-4 h-4  text-red-600 accent-red-600 cursor-pointer"
+                      className="w-4 h-4 text-red-600 accent-red-600 cursor-pointer"
                     />
                   </td>
                 </tr>

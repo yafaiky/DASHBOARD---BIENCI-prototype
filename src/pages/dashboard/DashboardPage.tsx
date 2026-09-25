@@ -32,7 +32,7 @@ export const DashboardPage: React.FC = () => {
   const [timeRange, setTimeRange] = useState<"7D" | "30D" | "YTD">("30D")
   const [selectedBrand, setSelectedBrand] = useState("3SECOND")
   const [departmentFilter, setDepartmentFilter] = useState(
-    "All Departments (14)",
+    "Semua Departemen (14)",
   )
   const [tableSearch, setTableSearch] = useState("")
   const [quickActionsOpen, setQuickActionsOpen] = useState(false)
@@ -51,7 +51,7 @@ export const DashboardPage: React.FC = () => {
     .slice(0, 5)
 
   const handleQuickActionSuccess = (name: string) => {
-    setToastMessage(`New associate ${name} added to live roster!`)
+    setToastMessage(`Karyawan baru ${name} berhasil ditambahkan ke daftar aktif!`)
     setTimeout(() => setToastMessage(null), 4000)
   }
 
@@ -70,15 +70,15 @@ export const DashboardPage: React.FC = () => {
         <div>
           <div className="flex items-center gap-2.5">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Welcome back, Muntazier ganteng
+              Selamat datang kembali, Muntazier
             </h1>
           </div>
           <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-2xl">
-            Here's what's happening with your workforce today across{" "}
+            Berikut ringkasan tenaga kerja Anda hari ini di seluruh{" "}
             <strong className="text-slate-700 font-semibold">
               3SECOND Group
             </strong>{" "}
-            & BIENSI retail footprint nationwide.
+            & jaringan ritel BIENSI secara nasional.
           </p>
         </div>
 
@@ -97,7 +97,7 @@ export const DashboardPage: React.FC = () => {
                     : "text-slate-500 hover:text-slate-800"
                 }`}
               >
-                {range}
+                {range === "7D" ? "7 Hari" : range === "30D" ? "30 Hari" : "YTD"}
               </button>
             ))}
           </div>
@@ -109,7 +109,7 @@ export const DashboardPage: React.FC = () => {
               className="flex items-center gap-2 px-3 py-2 bg-white border border-slate-200 -xl text-xs font-semibold text-slate-700 hover:bg-slate-50 shadow-2xs"
             >
               <Calendar className="w-4 h-4 text-slate-500" />
-              <span>This Month: October 2026</span>
+              <span>Bulan Ini: Oktober 2026</span>
               <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
             </button>
           </div>
@@ -121,7 +121,7 @@ export const DashboardPage: React.FC = () => {
             className="flex items-center gap-2 px-4 py-2 bg-[#c8102e] hover:bg-[#b00d27] text-white -xl text-xs font-bold shadow-sm shadow-red-900/20 transition-colors"
           >
             <Zap className="w-4 h-4 fill-white" />
-            <span>Quick Actions</span>
+            <span>Aksi Cepat</span>
             <ChevronDown className="w-3.5 h-3.5 opacity-80" />
           </button>
         </div>
@@ -133,46 +133,46 @@ export const DashboardPage: React.FC = () => {
           {/* Department */}
           <div>
             <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Department
+              Departemen
             </label>
             <select
               value={departmentFilter}
               onChange={(e) => setDepartmentFilter(e.target.value)}
               className="w-full px-3 py-2 text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 -xl focus:outline-hidden focus:ring-1 focus:ring-red-500"
             >
-              <option>All Departments (14)</option>
-              <option>Retail Store Operations</option>
-              <option>Supply Chain & Logistics</option>
-              <option>Marketing, Brand & Creative</option>
-              <option>Finance, Tax & Accounting</option>
-              <option>Digital, Omnichannel & IT</option>
+              <option>Semua Departemen (14)</option>
+              <option>Operasional Toko Retail</option>
+              <option>Rantai Pasok & Logistik</option>
+              <option>Pemasaran, Brand & Kreatif</option>
+              <option>Keuangan, Pajak & Akuntansi</option>
+              <option>Digital, Omnichannel & TI</option>
             </select>
           </div>
 
           {/* Division */}
           <div>
             <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Division
+              Divisi
             </label>
             <select className="w-full px-3 py-2 text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 -xl focus:outline-hidden focus:ring-1 focus:ring-red-500">
-              <option>Retail Operations (Active)</option>
-              <option>Fashion & Design</option>
-              <option>Supply Chain & Logistics</option>
-              <option>Commercial Business</option>
-              <option>Corporate Support</option>
+              <option>Operasional Retail (Aktif)</option>
+              <option>Fashion & Desain</option>
+              <option>Rantai Pasok & Logistik</option>
+              <option>Bisnis Komersial</option>
+              <option>Dukungan Korporat</option>
             </select>
           </div>
 
           {/* Location / Store Cluster */}
           <div>
             <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Location / Store Cluster
+              Lokasi / Klaster Toko
             </label>
             <select className="w-full px-3 py-2 text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 -xl focus:outline-hidden focus:ring-1 focus:ring-red-500">
-              <option>Bandung HQ & Stores (Primary)</option>
-              <option>Jabodetabek Flagship Hub</option>
-              <option>East Java Region</option>
-              <option>Sumatera Regional Hub</option>
+              <option>Kantor Pusat Bandung & Toko (Utama)</option>
+              <option>Hub Unggulan Jabodetabek</option>
+              <option>Wilayah Jawa Timur</option>
+              <option>Hub Regional Sumatera</option>
               <option>Bali & Nusa Tenggara</option>
             </select>
           </div>
@@ -180,21 +180,21 @@ export const DashboardPage: React.FC = () => {
           {/* Employment Status */}
           <div>
             <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Employment Status
+              Status Kepegawaian
             </label>
             <select className="w-full px-3 py-2 text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 -xl focus:outline-hidden focus:ring-1 focus:ring-red-500">
-              <option>All Statuses</option>
-              <option>Active</option>
-              <option>Probation</option>
-              <option>Contract (PKWT)</option>
-              <option>Permanent (PKWTT)</option>
+              <option>Semua Status</option>
+              <option>Aktif</option>
+              <option>Masa Percobaan</option>
+              <option>Kontrak (PKWT)</option>
+              <option>Tetap (PKWTT)</option>
             </select>
           </div>
 
           {/* Brand Portfolio Pills */}
           <div>
             <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Brand Portfolio
+              Portofolio Brand
             </label>
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
               {["3SECOND", "GREENLIGHT", "FAMO"].map((brand) => (
@@ -224,7 +224,7 @@ export const DashboardPage: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1 flex-wrap">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                  Total
+                  Total Staf
                 </span>
                 <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-red-50 text-[#c8102e] border border-red-200">
                    Quest #1 & #18
@@ -235,16 +235,16 @@ export const DashboardPage: React.FC = () => {
               </div>
             </div>
             <div className="text-2xl font-black text-slate-900 mt-2">
-              12,480
+              12.480
             </div>
             <div className="flex items-center gap-1 mt-1 text-xs font-semibold text-emerald-600">
               <TrendingUp className="w-3.5 h-3.5" />
-              <span>+3.2% vs last month</span>
+              <span>+3.2% vs bulan lalu</span>
             </div>
           </div>
           <div className="pt-3 mt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs font-medium text-slate-500">
             <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span>HQ 1,240 • Store 11,240</span>
+            <span>Pusat 1.240 • Toko 11.240</span>
           </div>
         </div>
 
@@ -253,14 +253,14 @@ export const DashboardPage: React.FC = () => {
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                Active Staff
+                Staf Aktif
               </span>
               <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
                 <UserCheck className="w-3.5 h-3.5" />
               </div>
             </div>
             <div className="text-2xl font-black text-slate-900 mt-2">
-              11,920
+              11.920
             </div>
             <div className="flex items-center gap-1 mt-1 text-xs font-semibold text-emerald-600">
               <TrendingUp className="w-3.5 h-3.5" />
@@ -269,7 +269,7 @@ export const DashboardPage: React.FC = () => {
           </div>
           <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
             <span className="text-slate-500 font-medium">
-              95.5% active roster
+              95.5% staf aktif
             </span>
             <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700">
               Optimal
@@ -282,7 +282,7 @@ export const DashboardPage: React.FC = () => {
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                New Joiners
+                Karyawan Baru
               </span>
               <div className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
                 <UserPlus className="w-3.5 h-3.5" />
@@ -291,16 +291,16 @@ export const DashboardPage: React.FC = () => {
             <div className="flex items-baseline gap-1 mt-2">
               <span className="text-2xl font-black text-slate-900">284</span>
               <span className="text-xs text-slate-400 font-medium">
-                / 300 target
+                / target 300
               </span>
             </div>
             <div className="text-xs font-semibold text-emerald-600 mt-1">
-              94.7% of monthly quota
+              94.7% dari kuota bulanan
             </div>
           </div>
           <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-            <span>Retail + HQ intakes</span>
-            <span className="font-bold text-slate-700">16 left</span>
+            <span>Penerimaan Toko + Pusat</span>
+            <span className="font-bold text-slate-700">Sisa 16</span>
           </div>
         </div>
 
@@ -310,7 +310,7 @@ export const DashboardPage: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1 flex-wrap">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                  Resigned
+                  Karyawan Keluar (Resign)
                 </span>
                 <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-red-50 text-[#c8102e] border border-red-200">
                    Quest #4
@@ -323,12 +323,12 @@ export const DashboardPage: React.FC = () => {
             <div className="text-2xl font-black text-slate-900 mt-2">96</div>
             <div className="flex items-center gap-1 mt-1 text-xs font-semibold text-emerald-600">
               <TrendingDown className="w-3.5 h-3.5" />
-              <span>-12.0% turnover dropped</span>
+              <span>-12.0% penurunan turnover</span>
             </div>
           </div>
           <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span className="text-slate-500 font-medium">Turnover Rate</span>
-            <span className="font-bold text-emerald-600">0.77% (Low)</span>
+            <span className="text-slate-500 font-medium">Tingkat Turnover</span>
+            <span className="font-bold text-emerald-600">0.77% (Rendah)</span>
           </div>
         </div>
 
@@ -348,13 +348,13 @@ export const DashboardPage: React.FC = () => {
                 <FileText className="w-3.5 h-3.5" />
               </div>
             </div>
-            <div className="text-2xl font-black text-slate-900 mt-2">2,180</div>
+            <div className="text-2xl font-black text-slate-900 mt-2">2.180</div>
             <div className="text-xs text-slate-500 font-medium mt-1">
-              Store associates & seasonal
+              Staf toko & musiman
             </div>
           </div>
           <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-            <span>17.5% of total force</span>
+            <span>17.5% dari total tenaga kerja</span>
             <Building className="w-3.5 h-3.5 text-slate-400" />
           </div>
         </div>
@@ -375,13 +375,13 @@ export const DashboardPage: React.FC = () => {
                 <ShieldCheck className="w-3.5 h-3.5" />
               </div>
             </div>
-            <div className="text-2xl font-black text-slate-900 mt-2">9,740</div>
+            <div className="text-2xl font-black text-slate-900 mt-2">9.740</div>
             <div className="text-xs text-slate-500 font-medium mt-1">
-              HQ core & retail leaders
+              Inti kantor pusat & pimpinan toko
             </div>
           </div>
           <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-            <span>78.0% workforce core</span>
+            <span>78.0% inti tenaga kerja</span>
             <Lock className="w-3.5 h-3.5 text-slate-400" />
           </div>
         </div>
@@ -396,31 +396,31 @@ export const DashboardPage: React.FC = () => {
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-sm font-bold text-slate-900 font-heading">
-                    Workforce Trajectory Trend
+                    Tren Lintasan Tenaga Kerja
                   </h3>
                   <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-red-50 text-[#c8102e] border border-red-200">
-                     Quest #1 (High): Headcount Growth vs Sales
+                     Quest #1 (Tinggi): Pertumbuhan Staf vs Penjualan
                   </span>
                   <span className="text-xs font-medium text-slate-400">
-                    Jan – Oct 2026
+                    Jan – Okt 2026
                   </span>
                 </div>
                 <p className="text-xs text-slate-500 mt-0.5 font-inter">
-                  Progression of active staff headcount alongside onboarding &
-                  attrition velocity
+                  Perkembangan jumlah staf aktif seiring laju penerimaan &
+                  keluar karyawan
                 </p>
               </div>
 
               {/* Legend matching screenshot */}
               <div className="flex items-center gap-4 text-xs font-semibold text-slate-600">
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#172B4D]" /> Active
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#172B4D]" /> Aktif
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#16A34A]" /> Joiners
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#16A34A]" /> Masuk
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#DC2626]" /> Resigned
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#DC2626]" /> Keluar
                 </span>
               </div>
             </div>
@@ -440,28 +440,28 @@ export const DashboardPage: React.FC = () => {
           <div className="grid grid-cols-3 gap-4 pt-4 mt-2 border-t border-slate-100 text-center">
             <div>
               <span className="text-xs text-slate-400 font-medium block">
-                Avg Monthly Joiners
+                Rata-rata Karyawan Baru / Bln
               </span>
               <span className="text-sm sm:text-base font-extrabold text-slate-800">
-                292 / mo
+                292 / bln
               </span>
             </div>
             <div>
               <span className="text-xs text-slate-400 font-medium block">
-                Net Headcount Gain
+                Kenaikan Bersih Headcount
               </span>
               <span className="text-sm sm:text-base font-extrabold text-emerald-600">
-                +188 this mo
+                +188 bulan ini
               </span>
             </div>
             <div>
               <span className="text-xs text-slate-400 font-medium block">
-                Annualized Turnover
+                Turnover Tahunan
               </span>
               <span className="text-sm sm:text-base font-extrabold text-slate-800">
                 9.2%{" "}
                 <span className="text-xs text-slate-400 font-normal">
-                  (Benchmark 18%)
+                  (Tolok ukur 18%)
                 </span>
               </span>
             </div>
@@ -475,14 +475,14 @@ export const DashboardPage: React.FC = () => {
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-1.5 flex-wrap">
                 <h3 className="text-sm font-bold text-slate-900 font-heading">
-                  Contract Types
+                  Tipe Kontrak
                 </h3>
                 <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">
                    Quest #19
                 </span>
               </div>
               <span className="text-xs font-semibold text-slate-500">
-                12,480 Headcount
+                12.480 Staf
               </span>
             </div>
 
@@ -496,26 +496,25 @@ export const DashboardPage: React.FC = () => {
             <div className="space-y-1.5 pt-2 text-xs">
               <div className="flex items-center justify-between text-slate-700">
                 <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#172B4D]" /> Permanent
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#172B4D]" /> Tetap (PKWTT)
                 </span>
                 <span className="font-bold">
-                  9,740{" "}
+                  9.740{" "}
                   <span className="text-slate-400 font-normal">(78%)</span>
                 </span>
               </div>
               <div className="flex items-center justify-between text-slate-700">
                 <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#C8102E]" /> Contract
-                  (PKWT)
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#C8102E]" /> Kontrak (PKWT)
                 </span>
                 <span className="font-bold">
-                  2,180{" "}
+                  2.180{" "}
                   <span className="text-slate-400 font-normal">(17.5%)</span>
                 </span>
               </div>
               <div className="flex items-center justify-between text-slate-700">
                 <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]" /> Probation
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]" /> Masa Percobaan
                 </span>
                 <span className="font-bold">
                   370 <span className="text-slate-400 font-normal">(3.0%)</span>
@@ -523,8 +522,7 @@ export const DashboardPage: React.FC = () => {
               </div>
               <div className="flex items-center justify-between text-slate-700">
                 <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#38BDF8]" /> Internship
-                  / Seasonal
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#38BDF8]" /> Magang / Musiman
                 </span>
                 <span className="font-bold">
                   190 <span className="text-slate-400 font-normal">(1.5%)</span>
@@ -538,14 +536,14 @@ export const DashboardPage: React.FC = () => {
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-1.5 flex-wrap">
                 <h3 className="text-sm font-bold text-slate-900 font-heading">
-                  Staffing by Department
+                  Karyawan per Departemen
                 </h3>
                 <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
                    Quest #26
                 </span>
               </div>
               <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                DISTRIBUTION
+                DISTRIBUSI
               </span>
             </div>
 
@@ -586,17 +584,17 @@ export const DashboardPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div className="flex items-center gap-3">
               <h3 className="text-sm font-bold text-slate-900">
-                Recent Onboarded Employees
+                Karyawan Baru Bergabung
               </h3>
               <span className="px-2 py-0.5 -full text-[10px] font-bold bg-slate-100 text-slate-600">
-                Latest 5 Records
+                5 Data Terbaru
               </span>
             </div>
 
             <div className="flex items-center gap-3">
               <input
                 type="text"
-                placeholder="Filter table..."
+                placeholder="Saring tabel..."
                 value={tableSearch}
                 onChange={(e) => setTableSearch(e.target.value)}
                 className="px-3 py-1.5 text-xs bg-slate-50 border border-slate-200 -lg placeholder-slate-400 focus:outline-hidden focus:ring-1 focus:ring-red-500"
@@ -605,7 +603,7 @@ export const DashboardPage: React.FC = () => {
                 to="/employees"
                 className="text-xs font-bold text-red-600 hover:text-red-700 flex items-center gap-1 shrink-0"
               >
-                <span>View All</span>
+                <span>Lihat Semua</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -616,13 +614,13 @@ export const DashboardPage: React.FC = () => {
             <table className="w-full text-left text-xs">
               <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider border-y border-slate-100">
                 <tr>
-                  <th className="py-2.5 px-3 font-bold">EMP ID</th>
-                  <th className="py-2.5 px-3 font-bold">EMPLOYEE DETAILS</th>
-                  <th className="py-2.5 px-3 font-bold">DEPARTMENT</th>
-                  <th className="py-2.5 px-3 font-bold">POSITION</th>
+                  <th className="py-2.5 px-3 font-bold">NIK</th>
+                  <th className="py-2.5 px-3 font-bold">DETAIL KARYAWAN</th>
+                  <th className="py-2.5 px-3 font-bold">DEPARTEMEN</th>
+                  <th className="py-2.5 px-3 font-bold">JABATAN</th>
                   <th className="py-2.5 px-3 font-bold">STATUS</th>
-                  <th className="py-2.5 px-3 font-bold">JOIN DATE</th>
-                  <th className="py-2.5 px-3 font-bold text-right">ACTION</th>
+                  <th className="py-2.5 px-3 font-bold">TANGGAL BERGABUNG</th>
+                  <th className="py-2.5 px-3 font-bold text-right">AKSI</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -681,7 +679,13 @@ export const DashboardPage: React.FC = () => {
                                   : "bg-slate-400"
                           }`}
                         />
-                        {emp.status}
+                        {emp.status === "Active"
+                          ? "Aktif"
+                          : emp.status === "Probation"
+                            ? "Percobaan"
+                            : emp.status === "Promotion"
+                              ? "Promosi"
+                              : emp.status}
                       </span>
                     </td>
                     <td className="py-3 px-3 text-slate-600 font-medium">
@@ -707,14 +711,14 @@ export const DashboardPage: React.FC = () => {
 
           {/* Table Footer with pagination */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-4 mt-2 border-t border-slate-100 text-xs text-slate-500">
-            <span>Showing 5 of 284 new joiners this period</span>
+            <span>Menampilkan 5 dari 284 karyawan baru periode ini</span>
             <div className="inline-flex items-center gap-1 font-semibold">
               <button
                 type="button"
                 className="px-2.5 py-1 -lg border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-50"
                 disabled
               >
-                Previous
+                Sebelumnya
               </button>
               <button
                 type="button"
@@ -738,7 +742,7 @@ export const DashboardPage: React.FC = () => {
                 type="button"
                 className="px-2.5 py-1 -lg border border-slate-200 text-slate-700 hover:bg-slate-50"
               >
-                Next
+                Berikutnya
               </button>
             </div>
           </div>
@@ -749,10 +753,10 @@ export const DashboardPage: React.FC = () => {
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <h3 className="text-sm font-bold text-slate-900">
-                System Activity Stream
+                Arus Aktivitas Sistem
               </h3>
               <span className="flex items-center gap-1 text-[11px] font-semibold text-emerald-600">
-                <span className="w-2 h-2 -full bg-emerald-500" /> Real-time
+                <span className="w-2 h-2 -full bg-emerald-500" /> Waktu Nyata
               </span>
             </div>
 
@@ -790,7 +794,7 @@ export const DashboardPage: React.FC = () => {
               to="/activity-log"
               className="w-full flex items-center justify-center gap-2 py-2.5 px-4 -xl bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-colors"
             >
-              <span>View All Activity Log</span>
+              <span>Lihat Semua Log Aktivitas</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>

@@ -54,7 +54,7 @@ export const ContractDonutChart: React.FC<ContractDonutChartProps> = ({
             },
             total: {
               show: true,
-              label: 'PERMANENT',
+              label: 'TETAP',
               color: '#64748B',
               fontSize: '11px',
               fontWeight: 700,
@@ -66,7 +66,7 @@ export const ContractDonutChart: React.FC<ContractDonutChartProps> = ({
     },
     tooltip: {
       y: {
-        formatter: (val) => `${val.toLocaleString()} employees (${((val / 12480) * 100).toFixed(1)}%)`,
+        formatter: (val) => `${val.toLocaleString()} karyawan (${((val / 12480) * 100).toFixed(1)}%)`,
       },
     },
   };

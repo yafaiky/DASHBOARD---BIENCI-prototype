@@ -9,10 +9,10 @@ import {
 import { mockComplianceItems } from "../../data/mockData"
 
 export const CompliancePage: React.FC = () => {
-  const [filterArea, setFilterArea] = useState("All")
+  const [filterArea, setFilterArea] = useState("Semua")
 
   const filteredItems =
-    filterArea === "All"
+    filterArea === "Semua"
       ? mockComplianceItems
       : mockComplianceItems.filter((i) =>
           i.area.toLowerCase().includes(filterArea.toLowerCase()),
@@ -24,20 +24,19 @@ export const CompliancePage: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">
-            Legal & Statutory Compliance
+            Kepatuhan Hukum & Legalitas Ketenagakerjaan
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Kemnaker WLKP, BPJS Ketenagakerjaan & Kesehatan, Peraturan
-            Perusahaan (PP), and retail facility licensing
+            Pemantauan WLKP Kemnaker, BPJS Ketenagakerjaan & Kesehatan, Peraturan Perusahaan (PP), serta sertifikasi K3 kelistrikan & genset toko.
           </p>
         </div>
 
-        <div className="inline-flex p-1 bg-slate-100 -xl border border-slate-200 text-xs font-semibold">
-          {["All", "BPJS", "WLKP", "Peraturan Perusahaan"].map((item) => (
+        <div className="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-semibold">
+          {["Semua", "BPJS", "WLKP", "Peraturan Perusahaan"].map((item) => (
             <button
               key={item}
               onClick={() => setFilterArea(item)}
-              className={`px-3 py-1.5 -lg transition-all ${
+              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                 filterArea === item
                   ? "bg-white text-slate-900 shadow-xs font-bold"
                   : "text-slate-500 hover:text-slate-800"
@@ -51,65 +50,65 @@ export const CompliancePage: React.FC = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
           <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Compliant Items
+            Kepatuhan Terpenuhi
           </span>
           <div className="text-2xl font-black text-emerald-600 mt-1">
-            28 Areas
+            28 Area
           </div>
           <span className="text-[11px] text-slate-500 font-medium">
-            93.3% compliance score
+            Skor kepatuhan 93.3%
           </span>
         </div>
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
           <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Expiring in ≤ 30 Days
+            Jatuh Tempo ≤ 30 Hari
           </span>
-          <div className="text-2xl font-black text-amber-600 mt-1">1 Item</div>
+          <div className="text-2xl font-black text-amber-600 mt-1">1 Butir</div>
           <span className="text-[11px] text-amber-600 font-semibold">
-            WLKP 2026 Submission
+            Pelaporan WLKP 2026
           </span>
         </div>
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
           <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Overdue / Expired
+            Lewat Jatuh Tempo / Kadaluarsa
           </span>
-          <div className="text-2xl font-black text-red-600 mt-1">1 Item</div>
+          <div className="text-2xl font-black text-red-600 mt-1">1 Butir</div>
           <span className="text-[11px] text-red-600 font-semibold">
-            Store Surabaya SLF K3
+            Riksa Uji K3 Toko Surabaya
           </span>
         </div>
-        <div className="bg-white p-4 -xl border border-slate-200/90 shadow-2xs">
+        <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs">
           <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-            Audit Status
+            Status Audit Disnaker
           </span>
-          <div className="text-2xl font-black text-slate-900 mt-1">Pass</div>
+          <div className="text-2xl font-black text-slate-900 mt-1">Lolos</div>
           <span className="text-[11px] text-emerald-600 font-semibold">
-            Disnaker Bandung Validated
+            Tervalidasi Disnaker Bandung
           </span>
         </div>
       </div>
 
       {/* Table */}
-      <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs space-y-4">
+      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold text-slate-900">
-            Mandatory Statutory & Corporate Compliance Items
+            Daftar Instrumen Kepatuhan Wajib Perusahaan & Gerai Ritel
           </h3>
-          <span className="text-xs text-slate-500">Real-time status</span>
+          <span className="text-xs text-slate-500">Status Waktu Nyata</span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left">
             <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider border-y border-slate-100 font-bold">
               <tr>
-                <th className="p-3">Compliance Area</th>
-                <th className="p-3">Item Description</th>
-                <th className="p-3">Entity Scope</th>
-                <th className="p-3">Valid Until</th>
-                <th className="p-3">Timeline</th>
-                <th className="p-3">PIC / Department</th>
+                <th className="p-3">Area Kepatuhan</th>
+                <th className="p-3">Deskripsi Instrumen</th>
+                <th className="p-3">Entitas / Cakupan</th>
+                <th className="p-3">Berlaku Hingga</th>
+                <th className="p-3">Tenggat Waktu</th>
+                <th className="p-3">PIC / Departemen</th>
                 <th className="p-3 text-right">Status</th>
               </tr>
             </thead>
@@ -130,18 +129,18 @@ export const CompliancePage: React.FC = () => {
                   <td className="p-3">
                     {item.daysRemaining > 0 ? (
                       <span className="text-slate-600 font-semibold">
-                        {item.daysRemaining} days remaining
+                        Sisa {item.daysRemaining} hari
                       </span>
                     ) : (
                       <span className="text-red-600 font-bold">
-                        {Math.abs(item.daysRemaining)} days overdue
+                        Terlambat {Math.abs(item.daysRemaining)} hari
                       </span>
                     )}
                   </td>
                   <td className="p-3 text-slate-600">{item.assignedTo}</td>
                   <td className="p-3 text-right">
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 -full text-[10px] font-bold ${
+                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${
                         item.status === "Compliant"
                           ? "bg-emerald-50 text-emerald-700"
                           : item.status === "Expiring"
@@ -152,15 +151,24 @@ export const CompliancePage: React.FC = () => {
                       }`}
                     >
                       {item.status === "Compliant" && (
-                        <CheckCircle className="w-3 h-3" />
+                        <>
+                          <CheckCircle className="w-3 h-3" />
+                          <span>Patuh</span>
+                        </>
                       )}
                       {item.status === "Expiring" && (
-                        <Clock className="w-3 h-3" />
+                        <>
+                          <Clock className="w-3 h-3" />
+                          <span>Segera Habis</span>
+                        </>
                       )}
                       {item.status === "Expired" && (
-                        <XCircle className="w-3 h-3" />
+                        <>
+                          <XCircle className="w-3 h-3" />
+                          <span>Kadaluarsa</span>
+                        </>
                       )}
-                      {item.status}
+                      {item.status === "Missing" && <span>Belum Ada</span>}
                     </span>
                   </td>
                 </tr>

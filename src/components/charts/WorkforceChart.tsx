@@ -62,9 +62,9 @@ export const WorkforceChart: React.FC<WorkforceChartProps> = ({
     },
     yaxis: [
       {
-        seriesName: 'Active Roster',
+        seriesName: 'Karyawan Aktif',
         title: {
-          text: 'Active Headcount',
+          text: 'Karyawan Aktif',
           style: { color: '#172B4D', fontSize: '11px', fontWeight: 600 },
         },
         min: 9500,
@@ -75,10 +75,10 @@ export const WorkforceChart: React.FC<WorkforceChartProps> = ({
         },
       },
       {
-        seriesName: 'New Joiners',
+        seriesName: 'Karyawan Baru',
         opposite: true,
         title: {
-          text: 'Joiners / Departures',
+          text: 'Karyawan Masuk / Keluar',
           style: { color: '#16A34A', fontSize: '11px', fontWeight: 600 },
         },
         min: 0,
@@ -89,7 +89,7 @@ export const WorkforceChart: React.FC<WorkforceChartProps> = ({
         },
       },
       {
-        seriesName: 'Resigned',
+        seriesName: 'Karyawan Keluar (Resign)',
         opposite: true,
         show: false,
         min: 0,
@@ -101,7 +101,7 @@ export const WorkforceChart: React.FC<WorkforceChartProps> = ({
       intersect: false,
       theme: 'light',
       y: {
-        formatter: (val) => `${val.toLocaleString()} employees`,
+        formatter: (val) => `${val.toLocaleString()} karyawan`,
       },
     },
     legend: { show: false },
@@ -114,17 +114,17 @@ export const WorkforceChart: React.FC<WorkforceChartProps> = ({
 
   const series = [
     {
-      name: 'Active Roster',
+      name: 'Karyawan Aktif',
       type: 'area',
       data: activeData,
     },
     {
-      name: 'New Joiners',
+      name: 'Karyawan Baru',
       type: 'line',
       data: joinersData,
     },
     {
-      name: 'Resigned',
+      name: 'Karyawan Keluar (Resign)',
       type: 'line',
       data: resignedData,
     },

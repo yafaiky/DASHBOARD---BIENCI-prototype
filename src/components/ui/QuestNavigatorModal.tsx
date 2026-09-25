@@ -435,7 +435,13 @@ export const QuestNavigatorModal: React.FC<QuestNavigatorModalProps> = ({
                     : "text-slate-500 hover:text-slate-800"
                 }`}
               >
-                {p === "All" ? "Semua (30)" : `${p} (${QUEST_LIST.filter(q => q.priority === p).length})`}
+                {p === "All"
+                  ? "Semua (30)"
+                  : p === "High"
+                  ? `Tinggi (${QUEST_LIST.filter((q) => q.priority === p).length})`
+                  : p === "Medium"
+                  ? `Sedang (${QUEST_LIST.filter((q) => q.priority === p).length})`
+                  : `Rendah (${QUEST_LIST.filter((q) => q.priority === p).length})`}
               </button>
             ))}
           </div>
@@ -464,7 +470,12 @@ export const QuestNavigatorModal: React.FC<QuestNavigatorModalProps> = ({
                           : "bg-blue-50 text-blue-700 border border-blue-200"
                       }`}
                     >
-                      Prioritas: {q.priority}
+                      Prioritas:{" "}
+                      {q.priority === "High"
+                        ? "Tinggi"
+                        : q.priority === "Medium"
+                        ? "Sedang"
+                        : "Rendah"}
                     </span>
                     <span className="text-xs text-slate-400">•</span>
                     <span className="text-xs font-bold text-slate-700">

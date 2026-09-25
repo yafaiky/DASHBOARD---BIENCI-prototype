@@ -29,21 +29,21 @@ export const EmployeeDetailPage: React.FC = () => {
       <div>
         <Link
           to="/employees"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to Employee Roster</span>
+          <span>Kembali ke Daftar Karyawan</span>
         </Link>
       </div>
 
       {/* Profile Header Card */}
-      <div className="bg-white p-6 -2xl border border-slate-200 shadow-2xs">
+      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
             <img
               src={employee.avatar}
               alt={employee.name}
-              className="w-20 h-20 -2xl object-cover rounded-full ring-4 ring-slate-100 shadow-sm"
+              className="w-20 h-20 object-cover rounded-full ring-4 ring-slate-100 shadow-sm"
             />
             <div>
               <div className="flex items-center gap-3">
@@ -51,7 +51,7 @@ export const EmployeeDetailPage: React.FC = () => {
                   {employee.name}
                 </h1>
                 <span
-                  className={`inline-flex items-center gap-1 px-2.5 py-0.5 -full text-xs font-bold ${
+                  className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold ${
                     employee.status === "Active"
                       ? "bg-emerald-50 text-emerald-700"
                       : employee.status === "Probation"
@@ -59,8 +59,13 @@ export const EmployeeDetailPage: React.FC = () => {
                         : "bg-blue-50 text-blue-700"
                   }`}
                 >
-                  {/* <span className="w-1.5 h-1.5 -full bg-current" /> */}
-                  {employee.status}
+                  {employee.status === "Active"
+                    ? "Aktif"
+                    : employee.status === "Probation"
+                    ? "Masa Percobaan"
+                    : employee.status === "Promotion"
+                    ? "Promosi"
+                    : employee.status}
                 </span>
               </div>
               <div className="text-sm font-semibold text-slate-600 mt-0.5">
@@ -85,19 +90,19 @@ export const EmployeeDetailPage: React.FC = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() =>
-                alert(`Generating HR Dossier PDF for ${employee.name}...`)
+                alert(`Membuat PDF Berkas HR untuk ${employee.name}...`)
               }
-              className="px-4 py-2 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 -xl transition-colors"
+              className="px-4 py-2 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer"
             >
-              Export Dossier
+              Ekspor Berkas
             </button>
             <button
               onClick={() =>
-                alert(`Initiating PKWT contract review for ${employee.name}...`)
+                alert(`Membuka evaluasi kontrak PKWT untuk ${employee.name}...`)
               }
-              className="px-4 py-2 text-xs font-bold text-white bg-[#c8102e] hover:bg-red-700 -xl shadow-xs transition-colors"
+              className="px-4 py-2 text-xs font-bold text-white bg-[#c8102e] hover:bg-red-700 rounded-xl shadow-xs transition-colors cursor-pointer"
             >
-              Manage Contract
+              Kelola Kontrak
             </button>
           </div>
         </div>
@@ -105,16 +110,16 @@ export const EmployeeDetailPage: React.FC = () => {
         {/* Tab navigation */}
         <div className="flex items-center gap-2 border-t border-slate-100 pt-4 mt-6 overflow-x-auto text-xs font-bold">
           {[
-            { id: "overview", label: "Overview" },
-            { id: "employment", label: "Employment & Contract" },
-            { id: "attendance", label: "Attendance Roster" },
-            { id: "discipline", label: "Discipline / SP" },
-            { id: "history", label: "Movement History" },
+            { id: "overview", label: "Ringkasan Profil" },
+            { id: "employment", label: "Kontrak & Pekerjaan" },
+            { id: "attendance", label: "Roster Kehadiran" },
+            { id: "discipline", label: "Kedisiplinan & SP" },
+            { id: "history", label: "Riwayat Mutasi & Karir" },
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`px-4 py-2 -xl transition-all whitespace-nowrap ${
+              className={`px-4 py-2 rounded-xl transition-all whitespace-nowrap cursor-pointer ${
                 activeTab === tab.id
                   ? "bg-slate-900 text-white shadow-xs"
                   : "text-slate-500 hover:text-slate-800 hover:bg-slate-50"
@@ -129,31 +134,31 @@ export const EmployeeDetailPage: React.FC = () => {
       {/* Tab Contents */}
       {activeTab === "overview" && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs space-y-4">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
             <h3 className="text-sm font-bold text-slate-900">
-              Personal Information
+              Informasi Pribadi
             </h3>
             <div className="space-y-3 text-xs">
               <div>
-                <span className="text-slate-400 block">Full Legal Name</span>
+                <span className="text-slate-400 block">Nama Lengkap Sesuai KTP</span>
                 <span className="font-semibold text-slate-800">
                   {employee.name}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 block">Gender & Age</span>
+                <span className="text-slate-400 block">Gender & Usia</span>
                 <span className="font-semibold text-slate-800">
-                  {employee.gender || "Male"} • {employee.age || 26} Years Old
+                  {employee.gender === "Female" ? "Perempuan" : "Laki-laki"} • {employee.age || 26} Tahun
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 block">Highest Education</span>
+                <span className="text-slate-400 block">Pendidikan Terakhir</span>
                 <span className="font-semibold text-slate-800">
-                  {employee.education || "Bachelor Degree"}
+                  {employee.education || "Sarjana S1"}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 block">Direct Contact</span>
+                <span className="text-slate-400 block">Kontak Telepon</span>
                 <span className="font-semibold text-slate-800">
                   {employee.phone || "+62 812-3456-7890"}
                 </span>
@@ -161,31 +166,31 @@ export const EmployeeDetailPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs space-y-4">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
             <h3 className="text-sm font-bold text-slate-900">
-              Job & Organizational Placement
+              Penempatan Kerja & Organisasi
             </h3>
             <div className="space-y-3 text-xs">
               <div>
-                <span className="text-slate-400 block">Brand Portfolio</span>
+                <span className="text-slate-400 block">Portofolio Brand</span>
                 <span className="font-extrabold text-red-600">
                   {employee.brand}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 block">Division</span>
+                <span className="text-slate-400 block">Divisi</span>
                 <span className="font-semibold text-slate-800">
                   {employee.division}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 block">Department & Unit</span>
+                <span className="text-slate-400 block">Departemen & Unit</span>
                 <span className="font-semibold text-slate-800">
                   {employee.department}
                 </span>
               </div>
               <div>
-                <span className="text-slate-400 block">Cluster & Branch</span>
+                <span className="text-slate-400 block">Klaster & Cabang Toko</span>
                 <span className="font-semibold text-slate-800">
                   {employee.storeCluster}
                 </span>
@@ -193,14 +198,14 @@ export const EmployeeDetailPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs space-y-4">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
             <h3 className="text-sm font-bold text-slate-900">
-              Remuneration & Contract
+              Kompensasi & Status Kontrak
             </h3>
             <div className="space-y-3 text-xs">
               <div>
                 <span className="text-slate-400 block">
-                  Contract Classification
+                  Klasifikasi Kontrak
                 </span>
                 <span className="font-bold text-slate-900">
                   {employee.employmentType}
@@ -208,7 +213,7 @@ export const EmployeeDetailPage: React.FC = () => {
               </div>
               <div>
                 <span className="text-slate-400 block">
-                  First Date of Joining
+                  Tanggal Mulai Bekerja
                 </span>
                 <span className="font-semibold text-slate-800">
                   {employee.joinDate}
@@ -216,20 +221,20 @@ export const EmployeeDetailPage: React.FC = () => {
               </div>
               <div>
                 <span className="text-slate-400 block">
-                  Contract Valid Until
+                  Kontrak Berlaku Hingga
                 </span>
                 <span className="font-semibold text-slate-800">
-                  {employee.contractEndDate || "Permanent (PKWTT)"}
+                  {employee.contractEndDate || "Karyawan Tetap (PKWTT)"}
                 </span>
               </div>
               <div>
                 <span className="text-slate-400 block">
-                  Monthly Base Compensation
+                  Gaji Pokok Bulanan (Labour Cost)
                 </span>
                 <span className="font-mono font-bold text-slate-900">
                   {employee.salary
                     ? `Rp ${employee.salary.toLocaleString()}`
-                    : "Confidential"}
+                    : "Konfidensial"}
                 </span>
               </div>
             </div>
@@ -238,35 +243,35 @@ export const EmployeeDetailPage: React.FC = () => {
       )}
 
       {activeTab === "employment" && (
-        <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs space-y-4">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
           <h3 className="text-sm font-bold text-slate-900">
-            Contract Journey & Lifecycle
+            Perjalanan & Siklus Kontrak Karyawan
           </h3>
           <div className="space-y-3 text-xs">
-            <div className="p-4 -xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">
               <div>
                 <span className="font-bold text-slate-900 block">
-                  PKWT Contract 2026/2027
+                  Perjanjian Kerja Waktu Tertentu (PKWT) 2026/2027
                 </span>
                 <span className="text-slate-500">
-                  Period: 24 Oct 2026 – 24 Oct 2027 (12 Months)
+                  Periode: 24 Okt 2026 – 24 Okt 2027 (12 Bulan)
                 </span>
               </div>
-              <span className="px-2.5 py-1 -full text-[10px] font-bold bg-emerald-100 text-emerald-800">
-                Active
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                Aktif
               </span>
             </div>
-            <div className="p-4 -xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between">
               <div>
                 <span className="font-bold text-slate-900 block">
-                  Probation Period Evaluation
+                  Evaluasi Masa Percobaan (Probation)
                 </span>
                 <span className="text-slate-500">
-                  Passed evaluation score 92.4/100 by Store Manager
+                  Lolos evaluasi nilai 92.4/100 oleh Store Leader
                 </span>
               </div>
-              <span className="px-2.5 py-1 -full text-[10px] font-bold bg-blue-100 text-blue-800">
-                Passed
+              <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800">
+                Lolos Evaluasi
               </span>
             </div>
           </div>
@@ -274,37 +279,37 @@ export const EmployeeDetailPage: React.FC = () => {
       )}
 
       {activeTab === "attendance" && (
-        <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs space-y-4">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
           <h3 className="text-sm font-bold text-slate-900">
-            Biometric Attendance Summary (Last 30 Days)
+            Ringkasan Presensi Biometrik (30 Hari Terakhir)
           </h3>
           <div className="grid grid-cols-4 gap-3 text-center">
-            <div className="p-3 -xl bg-slate-50">
+            <div className="p-3 rounded-xl bg-slate-50">
               <span className="text-slate-400 text-[10px] uppercase font-bold block">
-                Present
+                Hadir
               </span>
               <span className="text-xl font-bold text-emerald-600">
-                22 Days
+                22 Hari
               </span>
             </div>
-            <div className="p-3 -xl bg-slate-50">
+            <div className="p-3 rounded-xl bg-slate-50">
               <span className="text-slate-400 text-[10px] uppercase font-bold block">
-                Day Off
+                Libur Shift
               </span>
-              <span className="text-xl font-bold text-slate-700">6 Days</span>
+              <span className="text-xl font-bold text-slate-700">6 Hari</span>
             </div>
-            <div className="p-3 -xl bg-slate-50">
+            <div className="p-3 rounded-xl bg-slate-50">
               <span className="text-slate-400 text-[10px] uppercase font-bold block">
-                Sick
+                Sakit
               </span>
               <span className="text-xl font-bold text-blue-600">0</span>
             </div>
-            <div className="p-3 -xl bg-slate-50">
+            <div className="p-3 rounded-xl bg-slate-50">
               <span className="text-slate-400 text-[10px] uppercase font-bold block">
-                Late Clock-in
+                Terlambat
               </span>
               <span className="text-xl font-bold text-amber-600">
-                1 (8 mins)
+                1 (8 mnt)
               </span>
             </div>
           </div>
@@ -312,37 +317,36 @@ export const EmployeeDetailPage: React.FC = () => {
       )}
 
       {activeTab === "discipline" && (
-        <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs space-y-4">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
           <h3 className="text-sm font-bold text-slate-900">
-            Disciplinary Record
+            Catatan Kedisiplinan & Surat Peringatan (SP)
           </h3>
-          <div className="p-4 -xl bg-emerald-50 border border-emerald-100 text-xs text-emerald-800 font-medium">
-            No active disciplinary letters (SP) or IR investigation cases
-            recorded. Clean conduct record.
+          <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-100 text-xs text-emerald-800 font-medium">
+            Tidak ada surat peringatan (SP) aktif atau catatan perselisihan kerja. Rekam jejak kedisiplinan bersih.
           </div>
         </div>
       )}
 
       {activeTab === "history" && (
-        <div className="bg-white p-5 -2xl border border-slate-200 shadow-2xs space-y-4">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-4">
           <h3 className="text-sm font-bold text-slate-900">
-            Career & Transfer History
+            Riwayat Karir & Mutasi
           </h3>
           <div className="pl-4 border-l-2 border-slate-200 space-y-4 text-xs">
             <div>
               <span className="font-bold text-slate-900">
-                Onboarding to Store Ops – Bandung 01
+                Onboarding ke Store Ops – Bandung 01
               </span>
               <span className="text-slate-400 block">
-                24 Oct 2026 • Verified by HR Admin Budi Santoso
+                24 Okt 2026 • Diverifikasi oleh HR Admin Budi Santoso
               </span>
             </div>
             <div>
               <span className="font-bold text-slate-900">
-                Pre-employment Medical Check-up Passed
+                Lolos Pemeriksaan Kesehatan Kerja (MCU)
               </span>
               <span className="text-slate-400 block">
-                18 Oct 2026 • Fit to Work Certification
+                18 Okt 2026 • Sertifikasi Laik Kerja
               </span>
             </div>
           </div>

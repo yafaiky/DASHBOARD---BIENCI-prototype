@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const EmployeeHistoryPage: React.FC = () => {
   const [search, setSearch] = useState('');
-  const [filterType, setFilterType] = useState('All');
+  const [filterType, setFilterType] = useState('Semua');
 
   const historyRecords = [
     {
@@ -12,36 +12,36 @@ export const EmployeeHistoryPage: React.FC = () => {
       employeeId: 'EMP-10234',
       name: 'Maya Anggraeni',
       avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
-      type: 'Promotion',
-      event: 'Promoted to Regional VM Specialist',
+      type: 'Promosi',
+      event: 'Promosi Jabatan ke Regional VM Specialist',
       previous: 'Store Visual Merchandiser (Store Bandung 01)',
       current: 'Regional VM Specialist (Jakarta Flagship Hub)',
-      date: '18 Oct 2026',
-      approvedBy: 'Creative Director & HR VP'
+      date: '18 Okt 2026',
+      approvedBy: 'Direktur Kreatif & VP HR'
     },
     {
       id: 'HIST-902',
       employeeId: 'EMP-10233',
       name: 'Budi Hartono',
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-      type: 'Transfer',
-      event: 'Branch Transfer to Central Logistics Hub A',
-      previous: 'Inventory Control Assistant (Warehouse Hub C)',
-      current: 'Shift Supervisor Hub A (Cimahi)',
-      date: '20 Oct 2026',
-      approvedBy: 'Supply Chain Operations Head'
+      type: 'Mutasi',
+      event: 'Mutasi Cabang ke Hub Logistik Sentral A',
+      previous: 'Staf Kontrol Inventori (Warehouse Hub C)',
+      current: 'Supervisor Shift Hub A (Cimahi)',
+      date: '20 Okt 2026',
+      approvedBy: 'Kepala Operasional Rantai Pasok'
     },
     {
       id: 'HIST-903',
       employeeId: 'EMP-10235',
       name: 'Reza Pahlevi',
       avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
-      type: 'Contract Renewal',
-      event: 'PKWT Contract Renewal 2026/2027',
-      previous: 'Cashier Store Staff (PKWT Year 1)',
-      current: 'Chief Cashier Leader (PKWT Year 2)',
-      date: '17 Oct 2026',
-      approvedBy: 'Retail HR West Java Cluster'
+      type: 'Perpanjangan Kontrak',
+      event: 'Perpanjangan Kontrak PKWT 2026/2027',
+      previous: 'Staf Kasir Toko (PKWT Tahun 1)',
+      current: 'Chief Cashier Leader (PKWT Tahun 2)',
+      date: '17 Okt 2026',
+      approvedBy: 'HR Retail Klaster Jawa Barat'
     },
     {
       id: 'HIST-904',
@@ -49,11 +49,11 @@ export const EmployeeHistoryPage: React.FC = () => {
       name: 'Andi Pratama',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
       type: 'Onboarding',
-      event: 'Initial Employment Contract Execution',
-      previous: 'Candidate / Roster Applicant',
+      event: 'Penandatanganan Kontrak Kerja Awal',
+      previous: 'Kandidat Pelamar Roster',
       current: 'Senior Store Associate (3SECOND Bandung 01)',
-      date: '24 Oct 2026',
-      approvedBy: 'HR Recruitment Bandung'
+      date: '24 Okt 2026',
+      approvedBy: 'HR Rekrutmen Bandung'
     }
   ];
 
@@ -62,7 +62,7 @@ export const EmployeeHistoryPage: React.FC = () => {
       rec.name.toLowerCase().includes(search.toLowerCase()) ||
       rec.employeeId.toLowerCase().includes(search.toLowerCase()) ||
       rec.event.toLowerCase().includes(search.toLowerCase());
-    const matchType = filterType === 'All' || rec.type === filterType;
+    const matchType = filterType === 'Semua' || rec.type === filterType;
     return matchSearch && matchType;
   });
 
@@ -71,18 +71,18 @@ export const EmployeeHistoryPage: React.FC = () => {
       {/* Title */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Personnel Career & Transfer History</h1>
+          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Riwayat Karir & Mutasi Karyawan</h1>
           <p className="text-xs text-slate-500 mt-1">
-            Historical milestones, branch transfers, grade promotions, and tenure contracts across all 3SECOND entities
+            Arsip riwayat promosi jabatan, mutasi antar cabang, perpanjangan kontrak kerja, dan onboarding personil di seluruh entitas 3SECOND Group.
           </p>
         </div>
 
         <div className="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-semibold">
-          {['All', 'Promotion', 'Transfer', 'Contract Renewal', 'Onboarding'].map((type) => (
+          {['Semua', 'Promosi', 'Mutasi', 'Perpanjangan Kontrak', 'Onboarding'].map((type) => (
             <button
               key={type}
               onClick={() => setFilterType(type)}
-              className={`px-3 py-1.5 rounded-lg transition-all ${
+              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                 filterType === type
                   ? 'bg-white text-slate-900 shadow-xs font-bold'
                   : 'text-slate-500 hover:text-slate-800'
@@ -100,7 +100,7 @@ export const EmployeeHistoryPage: React.FC = () => {
           <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
           <input
             type="text"
-            placeholder="Search employee name, NIK, or historical event..."
+            placeholder="Cari nama karyawan, NIK, atau peristiwa karir..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden"
@@ -114,12 +114,12 @@ export const EmployeeHistoryPage: React.FC = () => {
           <table className="w-full text-xs text-left">
             <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider border-b border-slate-100 font-bold">
               <tr>
-                <th className="p-3">Associate</th>
-                <th className="p-3">Classification</th>
-                <th className="p-3">Milestone Details</th>
-                <th className="p-3">Previous Assignment</th>
-                <th className="p-3">Effective Date</th>
-                <th className="p-3 text-right">Approval Authority</th>
+                <th className="p-3">Nama Karyawan</th>
+                <th className="p-3">Jenis Perubahan</th>
+                <th className="p-3">Peristiwa Karir</th>
+                <th className="p-3">Penugasan Sebelumnya</th>
+                <th className="p-3">Tanggal Efektif</th>
+                <th className="p-3 text-right">Otoritas Penyetuju</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -136,11 +136,11 @@ export const EmployeeHistoryPage: React.FC = () => {
                   </td>
                   <td className="p-3">
                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                      item.type === 'Promotion'
+                      item.type === 'Promosi'
                         ? 'bg-blue-50 text-blue-700'
-                        : item.type === 'Transfer'
+                        : item.type === 'Mutasi'
                         ? 'bg-amber-50 text-amber-700'
-                        : item.type === 'Contract Renewal'
+                        : item.type === 'Perpanjangan Kontrak'
                         ? 'bg-purple-50 text-purple-700'
                         : 'bg-emerald-50 text-emerald-700'
                     }`}>
@@ -149,7 +149,7 @@ export const EmployeeHistoryPage: React.FC = () => {
                   </td>
                   <td className="p-3">
                     <div className="font-semibold text-slate-900">{item.event}</div>
-                    <div className="text-[11px] text-slate-500 mt-0.5">Assigned: {item.current}</div>
+                    <div className="text-[11px] text-slate-500 mt-0.5">Penugasan Baru: {item.current}</div>
                   </td>
                   <td className="p-3 text-slate-500">{item.previous}</td>
                   <td className="p-3 font-mono font-medium text-slate-700">{item.date}</td>

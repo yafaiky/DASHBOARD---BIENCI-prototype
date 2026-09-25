@@ -52,7 +52,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           <Search className="w-5 h-5 text-slate-400 shrink-0" />
           <input
             type="text"
-            placeholder="Type employee name, NIK, department, or store..."
+            placeholder="Ketik nama karyawan, NIK, departemen, atau toko..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoFocus
@@ -75,7 +75,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         {/* Results */}
         <div className="p-3 max-h-96 overflow-y-auto">
           <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 py-1.5">
-            Employees & Associates
+            Karyawan & Rekan Kerja
           </div>
           <div className="space-y-1">
             {filteredEmployees.map((emp) => (
@@ -115,7 +115,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           </div>
 
           <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 pt-3 pb-1.5">
-            Quick Navigation Links
+            Navigasi Cepat
           </div>
           <div className="grid grid-cols-2 gap-2 px-1">
             <button
@@ -126,7 +126,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               className="flex items-center gap-2 p-2 -lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-left text-xs font-medium text-slate-700"
             >
               <User className="w-4 h-4 text-blue-500" />
-              Workforce Headcount
+              Jumlah Tenaga Kerja
             </button>
             <button
               onClick={() => {
@@ -136,7 +136,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               className="flex items-center gap-2 p-2 -lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-left text-xs font-medium text-slate-700"
             >
               <Building className="w-4 h-4 text-red-500" />
-              Batch Data Import
+              Impor Data Massal
             </button>
             <button
               onClick={() => {
@@ -146,7 +146,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               className="flex items-center gap-2 p-2 -lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-left text-xs font-medium text-slate-700"
             >
               <MapPin className="w-4 h-4 text-amber-500" />
-              Store Performance
+              Performa Toko
             </button>
             <button
               onClick={() => {
@@ -156,14 +156,14 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               className="flex items-center gap-2 p-2 -lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-left text-xs font-medium text-slate-700"
             >
               <ArrowRight className="w-4 h-4 text-emerald-500" />
-              System Activity Stream
+              Arus Aktivitas Sistem
             </button>
           </div>
         </div>
 
         {/* Footer */}
         <div className="px-4 py-2.5 bg-slate-50 border-t border-slate-200 text-right text-[11px] text-slate-500">
-          Showing BIENSI HR live records
+          Menampilkan data langsung BIENSI HR
         </div>
       </div>
     </div>

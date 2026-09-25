@@ -19,6 +19,7 @@ import {
   AlertCircle,
   HeartHandshake,
   Flame,
+  Search,
 } from "lucide-react"
 import {
   mockStorePerformances,
@@ -421,53 +422,61 @@ export const StorePerformancePage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Title */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight font-heading">
-            Retail Store Performance (HR + Sales)
-          </h1>
-          <p className="text-xs text-slate-500 mt-1">
-            Correlating store staff roster, sales achievement, labor costs, regional demographics &
-            revenue per store associate
-          </p>
-        </div>
+      {/* Page Title */}
+      <div>
+        <h1 className="text-2xl font-black text-slate-900 tracking-tight font-heading">
+          Kinerja Toko Retail (HR & Penjualan)
+        </h1>
+        <p className="text-xs text-slate-500 mt-1">
+          Korelasi jadwal staf toko, pencapaian target penjualan, biaya tenaga kerja, demografi regional, dan pendapatan per karyawan ritel
+        </p>
+      </div>
 
-        <div className="flex flex-wrap items-center gap-2">
-          <input
-            type="text"
-            placeholder="Search store name / ID..."
-            value={searchStore}
-            onChange={(e) => setSearchStore(e.target.value)}
-            className="px-3 py-2 text-xs bg-white border border-slate-200 rounded-xl shadow-2xs focus:outline-hidden"
-          />
-          {/* Brand Filter */}
-          <div className="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-semibold">
-            {["All", "3SECOND", "GREENLIGHT", "FAMO"].map((b) => (
-              <button
-                key={b}
-                onClick={() => setSelectedBrand(b)}
-                className={`px-3 py-1.5 rounded-lg transition-all ${
-                  selectedBrand === b
-                    ? "bg-white text-slate-900 shadow-xs font-bold"
-                    : "text-slate-500 hover:text-slate-800"
-                }`}
-              >
-                {b}
-              </button>
-            ))}
+      {/* Filter Toolbar: Brand & Search Tetap di Kiri, Region di Kanan (Sejajar 1 Baris) */}
+      <div className="w-full bg-slate-100/90 p-1 rounded-xl border border-slate-200 overflow-x-auto no-scrollbar shadow-2xs">
+        <div className="w-full flex items-center justify-between flex-nowrap whitespace-nowrap min-w-max gap-4 text-xs font-semibold">
+          {/* Sisi Kiri: Search Box & Brand Filter */}
+          <div className="flex items-center gap-2 shrink-0">
+            {/* Search Box */}
+            <div className="relative shrink-0">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                placeholder="Cari nama / ID toko..."
+                value={searchStore}
+                onChange={(e) => setSearchStore(e.target.value)}
+                className="pl-9 pr-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-hidden focus:ring-1 focus:ring-red-500 w-56 font-inter shadow-2xs"
+              />
+            </div>
+
+            {/* Brand Filter */}
+            <div className="inline-flex items-center flex-nowrap p-0.5 bg-slate-200/70 rounded-lg text-xs font-semibold shrink-0 gap-0.5">
+              {["All", "3SECOND", "GREENLIGHT", "FAMO"].map((b) => (
+                <button
+                  key={b}
+                  onClick={() => setSelectedBrand(b)}
+                  className={`px-3 py-1.5 rounded-md transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+                    selectedBrand === b
+                      ? "bg-white text-slate-900 shadow-xs font-bold"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-white/50"
+                  }`}
+                >
+                  {b}
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Region Filter */}
-          <div className="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-semibold">
+          {/* Sisi Kanan: Region Filter */}
+          <div className="inline-flex items-center flex-nowrap p-0.5 bg-slate-200/70 rounded-lg text-xs font-semibold shrink-0 gap-0.5 ml-auto">
             {(["All", "Barat", "Timur"] as const).map((r) => (
               <button
                 key={r}
                 onClick={() => setSelectedRegion(r)}
-                className={`px-3 py-1.5 rounded-lg transition-all ${
+                className={`px-3 py-1.5 rounded-md transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                   selectedRegion === r
                     ? "bg-[#c8102e] text-white shadow-xs font-bold"
-                    : "text-slate-500 hover:text-slate-800"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-white/50"
                 }`}
               >
                 {r === "All" ? "Semua Region" : `Area ${r}`}
@@ -833,18 +842,18 @@ export const StorePerformancePage: React.FC = () => {
             <div>
               <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 mb-1.5">
                 <Scale className="w-3 h-3 text-blue-600" />
-                <span>Critical Question #3 • High Priority</span>
+                <span>Pertanyaan Kritis #3 • Prioritas Tinggi</span>
               </div>
               <h3 className="text-sm font-bold text-slate-900 font-heading">
-                Store Staffing Ratio (SPG/B to Store Leader)
+                Rasio Komposisi Staf Toko (SPG/B terhadap Store Leader)
               </h3>
               <p className="text-xs text-slate-500">
-                Optimal supervision span across retail store formats for peak store floor productivity
+                Rentang supervisi optimal di seluruh format gerai ritel untuk produktivitas sales floor toko
               </p>
             </div>
             <div className="text-right">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
-                National Avg
+                Rata-rata Nasional
               </span>
               <span className="text-base font-black text-slate-900 font-mono">
                 {storeStaffingRatioData.nationalAverageRatio}
@@ -868,7 +877,7 @@ export const StorePerformancePage: React.FC = () => {
                   {item.ratio}
                 </div>
                 <p className="text-[10px] text-slate-500">
-                  Supervision model aligned with floor area & footprint
+                  Model pengawasan selaras dengan luas area gerai
                 </p>
               </div>
             ))}
@@ -877,7 +886,7 @@ export const StorePerformancePage: React.FC = () => {
           <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
             <span>
-              <strong>Staffing Balance:</strong> 1 Leader : 11 Associates in Family Stores maintains high customer engagement without supervisory strain.
+              <strong>Keseimbangan Staf:</strong> 1 Pimpinan : 11 Rekan di Family Store mempertahankan interaksi pelanggan tinggi tanpa membebani pimpinan.
             </span>
           </div>
         </div>
@@ -888,17 +897,17 @@ export const StorePerformancePage: React.FC = () => {
             <div>
               <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 mb-1.5">
                 <Award className="w-3 h-3 text-emerald-600" />
-                <span>Critical Question #28 • Medium Priority</span>
+                <span>Pertanyaan Kritis #28 • Prioritas Sedang</span>
               </div>
               <h3 className="text-sm font-bold text-slate-900 font-heading">
-                Store Leader Tenure vs Target Achievement
+                Masa Kerja Store Leader vs Konsistensi Capai Target
               </h3>
               <p className="text-xs text-slate-500">
-                Impact of Store Manager experience (&gt;5 yrs vs &lt;1 yr) on sales quota consistency
+                Pengaruh pengalaman Store Manager (&gt;5 thn vs &lt;1 thn) terhadap konsistensi pencapaian target toko
               </p>
             </div>
             <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-lg">
-              Direct Correlation
+              Korelasi Positif Kuat
             </span>
           </div>
 
@@ -1091,7 +1100,7 @@ export const StorePerformancePage: React.FC = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
             <h3 className="text-sm font-bold text-slate-900 font-heading">
-              Store Network Performance Leaderboard
+              Papan Peringkat Kinerja Jaringan Toko
             </h3>
             <p className="text-xs text-slate-500">
               Menampilkan {filteredStores.length} toko retail dari total 342 toko aktif
@@ -1101,7 +1110,7 @@ export const StorePerformancePage: React.FC = () => {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-xs text-slate-500 font-medium">
-              342 stores reporting real-time
+              342 toko melapor waktu-nyata
             </span>
           </div>
         </div>
@@ -1110,18 +1119,18 @@ export const StorePerformancePage: React.FC = () => {
           <table className="w-full text-xs text-left">
             <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider border-y border-slate-100 font-bold">
               <tr>
-                <th className="p-3">Store Details</th>
+                <th className="p-3">Detail Toko</th>
                 <th className="p-3">Region</th>
                 <th className="p-3">Brand</th>
-                <th className="p-3">Format</th>
-                <th className="p-3">Staff Roster</th>
-                <th className="p-3">Staff Ratio</th>
-                <th className="p-3">Leader Tenure</th>
-                <th className="p-3">Sales (IDR)</th>
-                <th className="p-3">Target</th>
-                <th className="p-3">Achievement</th>
-                <th className="p-3">Labor Cost</th>
-                <th className="p-3">Revenue / Associate</th>
+                <th className="p-3">Format Gerai</th>
+                <th className="p-3">Jumlah Staf (HC)</th>
+                <th className="p-3">Rasio SPG/B:Pimpinan</th>
+                <th className="p-3">Masa Kerja Leader</th>
+                <th className="p-3">Penjualan (Rp)</th>
+                <th className="p-3">Target (Rp)</th>
+                <th className="p-3">Pencapaian (%)</th>
+                <th className="p-3">Biaya Tenaga Kerja</th>
+                <th className="p-3">Revenue / FTE</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
