@@ -169,7 +169,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, o
           <div className="flex items-center gap-3 overflow-hidden">
             {/* Logo icon */}
             <div className="w-10 shrink-0 flex items-center justify-center">
-              <img src="/public/BiensiIcon.webp" alt="icon" className="w-9 h-9 object-contain" />
+              <img src="/BiensiIcon.webp" alt="icon" className="w-9 h-9 object-contain" />
             </div>
 
             {/* Logo text & subtext (hidden when collapsed) */}
@@ -177,7 +177,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, o
               <div className="flex flex-col overflow-hidden">
                 <div className="flex items-center gap-1.5 leading-none">
                   <div className="w-20">
-                    <img src="/public/BiensiType.webp" alt="Type" className="w-full object-contain" />
+                    <img src="/BiensiType.webp" alt="Type" className="w-full object-contain" />
                   </div>
                 </div>
                 <span className="text-[10px] text-slate-400 font-semibold tracking-widest uppercase mt-0.5 whitespace-nowrap">
