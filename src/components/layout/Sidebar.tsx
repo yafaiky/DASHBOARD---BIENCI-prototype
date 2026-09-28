@@ -17,7 +17,13 @@ import {
   ShieldCheck,
   Settings,
   DollarSign,
-  AlertCircle
+  AlertCircle,
+  Target,
+  LineChart,
+  Award,
+  Compass,
+  HeartHandshake,
+  ChevronDown
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -26,11 +32,17 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
+interface SubMenuItem {
+  name: string;
+  icon: React.ElementType;
+}
+
 interface MenuItem {
   name: string;
   path: string;
   icon: React.ElementType;
   badge?: string;
+  subItems?: SubMenuItem[];
 }
 
 interface MenuGroup {
@@ -40,6 +52,7 @@ interface MenuGroup {
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, onClose }) => {
   const location = useLocation();
+  const [executiveListOpen, setExecutiveListOpen] = React.useState(false);
 
   const isPathActive = (itemPath: string) => {
     const current = location.pathname;
@@ -88,9 +101,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, o
 
   const menuGroups: MenuGroup[] = [
     {
-      title: 'MAIN',
+      title: 'HR EXECUTIVE DASHBOARD',
       items: [
-        { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard }
+        {
+          name: 'HR Executive Dashboard',
+          path: '/dashboard',
+          icon: LayoutDashboard,
+          subItems: [
+            { name: 'KPI Management', icon: Target },
+            { name: 'Productivity Analysis', icon: LineChart },
+            { name: 'Talent', icon: Award },
+            { name: 'Go To Market - HR Analysis', icon: Compass },
+            { name: 'Employee Engagement Survey', icon: HeartHandshake }
+          ]
+        }
       ]
     },
     {
@@ -154,17 +178,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, o
       )}
 
       <aside
-        className={`fixed top-0 left-0 z-50 h-screen flex flex-col bg-[#141724] text-slate-300 border-r border-slate-800 transition-all duration-300 ease-in-out ${
-          isCollapsed ? 'lg:w-20' : 'lg:w-64'
-        } ${
-          isOpen ? 'translate-x-0 w-64' : '-translate-x-full lg:translate-x-0'
-        }`}
+        className={`fixed top-0 left-0 z-50 h-screen flex flex-col bg-[#141724] text-slate-300 border-r border-slate-800 transition-all duration-300 ease-in-out ${isCollapsed ? 'lg:w-20' : 'lg:w-64'
+          } ${isOpen ? 'translate-x-0 w-64' : '-translate-x-full lg:translate-x-0'
+          }`}
       >
         {/* Brand Header */}
         <div
-          className={`h-16 shrink-0 flex items-center border-b border-slate-800/80 bg-[#10131d] transition-all duration-300 ${
-            isCollapsed ? 'justify-center px-2' : 'justify-between px-5'
-          }`}
+          className={`h-16 shrink-0 flex items-center border-b border-slate-800/80 bg-[#10131d] transition-all duration-300 ${isCollapsed ? 'justify-center px-2' : 'justify-between px-5'
+            }`}
         >
           <div className="flex items-center gap-3 overflow-hidden">
             {/* Logo icon */}
@@ -205,6 +226,73 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, o
               <div className="space-y-1">
                 {group.items.map((item) => {
                   const active = isPathActive(item.path);
+
+                  if (item.subItems && item.subItems.length > 0) {
+                    return (
+                      <div key={item.path} className="space-y-1">
+                        <div
+                          className={`relative flex items-center font-medium transition-all ${isCollapsed
+                              ? 'justify-center p-2.5 my-0.5'
+                              : 'justify-between px-3 py-2.5'
+                            } ${active
+                              ? 'bg-[#3b1522] text-white shadow-sm border-l-2 border-red-500 font-semibold'
+                              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                            } rounded-lg`}
+                        >
+                          <Link
+                            to={item.path}
+                            title={item.name}
+                            onClick={() => {
+                              setExecutiveListOpen((prev) => !prev);
+                              if (window.innerWidth < 1024 && onClose) onClose();
+                            }}
+                            className="flex items-center gap-3 flex-1 overflow-hidden"
+                          >
+                            <item.icon
+                              className={`w-4 h-4 shrink-0 ${active ? 'text-red-400' : 'text-slate-400'
+                                }`}
+                            />
+                            {!isCollapsed && <span className="truncate">{item.name}</span>}
+                          </Link>
+
+                          {/* Arrow Down: berbentuk arrow kebawah jika tidak diklik, berotasi saat terbuka */}
+                          {!isCollapsed && (
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setExecutiveListOpen(!executiveListOpen);
+                              }}
+                              className="p-1 -mr-1 text-slate-400 hover:text-white rounded hover:bg-white/10 transition-colors cursor-pointer"
+                              title={executiveListOpen ? 'Tutup list' : 'Buka list'}
+                            >
+                              <ChevronDown
+                                className={`w-4 h-4 transition-transform duration-200 ${executiveListOpen ? 'rotate-180 text-white' : ''
+                                  }`}
+                              />
+                            </button>
+                          )}
+                        </div>
+
+                        {/* List diperlihatkan berbentuk list saat di-klik, polosan tanpa toast */}
+                        {!isCollapsed && executiveListOpen && (
+                          <div className="pl-4 ml-3 border-l border-slate-800/80 space-y-0.5 pt-0.5 pb-1 animate-in fade-in slide-in-from-top-1 duration-150">
+                            {item.subItems.map((sub, sIdx) => (
+                              <div
+                                key={sIdx}
+                                className="flex items-center gap-2.5 px-3 py-2 text-[11px] text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg cursor-pointer transition-colors"
+                              >
+                                <sub.icon className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                                <span className="truncate">{sub.name}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }
+
                   return (
                     <Link
                       key={item.path}
@@ -213,28 +301,25 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, o
                       onClick={() => {
                         if (window.innerWidth < 1024 && onClose) onClose();
                       }}
-                      className={`relative flex items-center font-medium transition-all ${
-                        isCollapsed
+                      className={`relative flex items-center font-medium transition-all ${isCollapsed
                           ? 'justify-center p-2.5 my-0.5'
                           : 'justify-between px-3 py-2.5'
-                      } ${
-                        active
+                        } ${active
                           ? 'bg-[#3b1522] text-white shadow-sm border-l-2 border-red-500 font-semibold'
                           : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
-                      }`}
+                        }`}
                     >
                       <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'}`}>
                         <item.icon
-                          className={`w-4 h-4 shrink-0 ${
-                            active ? 'text-red-400' : 'text-slate-400'
-                          }`}
+                          className={`w-4 h-4 shrink-0 ${active ? 'text-red-400' : 'text-slate-400'
+                            }`}
                         />
                         {!isCollapsed && <span className="truncate">{item.name}</span>}
                       </div>
 
                       {/* Full badge when expanded */}
                       {item.badge && !isCollapsed && (
-                        <span className="px-1.5 py-0.5 text-[10px] font-bold rounded-full bg-red-600 text-white shrink-0">
+                        <span className="px-1.5 py-0.5 text-[10px] font-mono font-bold rounded-full bg-red-600 text-white shrink-0 tracking-wider">
                           {item.badge}
                         </span>
                       )}
@@ -253,9 +338,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, o
 
         {/* Footer */}
         <div
-          className={`p-3 shrink-0 border-t border-slate-800/80 bg-[#10131d] text-center transition-all duration-300 ${
-            isCollapsed ? 'px-1' : 'px-3'
-          }`}
+          className={`p-3 shrink-0 border-t border-slate-800/80 bg-[#10131d] text-center transition-all duration-300 ${isCollapsed ? 'px-1' : 'px-3'
+            }`}
         >
           {isCollapsed ? (
             <span className="text-[10px] text-slate-500 font-mono font-bold tracking-tight">

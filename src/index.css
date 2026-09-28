@@ -1,46 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Instrument Sans', sans-serif;
-  --font-inter: 'Inter', sans-serif;
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
 }
 
 :root {
-  --font-sans: 'Instrument Sans', sans-serif;
-  --font-inter: 'Inter', sans-serif;
-  font-family: 'Instrument Sans', sans-serif;
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 body {
   background-color: #f8fafc;
-  color: #1f2937;
+  color: #0f172a;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Geist', sans-serif;
+}
+
+/* ==========================================================================
+   3 ATURAN EMAS TYPOGRAPHY ANTI "AI SLOP" (Modern Tech & Sleek)
+   Header & UI: Geist Sans | Angka & Data Table: Geist Mono (Tabular Figures)
+   ========================================================================== */
+
+/* ATURAN 1: Gunakan Monospace/Tabular Figures untuk Angka & Tabel Metrik */
+.font-mono,
+.font-number,
+.stat-number,
+.metric-value,
+.tabular-nums,
+[data-tabular="true"] {
+  font-family: 'Geist Mono', monospace !important;
+  font-variant-numeric: tabular-nums lining-nums;
   letter-spacing: -0.01em;
-  font-family: 'Instrument Sans', sans-serif;
 }
 
-/* Headings and major titles retain bold Instrument Sans branding */
-h1, h2, h3, h4, h5, h6, .font-heading {
-  font-family: 'Instrument Sans', sans-serif;
+/* ATURAN 2: Kencangkan Tracking Judul Besar (24px+) antara -0.02em s/d -0.03em */
+h1, h2, .font-heading, .title-tight, .text-2xl, .text-3xl, .text-4xl {
+  font-family: 'Geist', sans-serif;
+  letter-spacing: -0.025em; /* Kencangkan tracking judul */
 }
 
-/* Small text, explanations, descriptions, table cells, and captions use Inter */
-p, label, td, th, .text-xs, .text-sm, .text-caption, .font-inter, span:not(.font-heading) {
-  font-family: 'Inter', sans-serif;
+/* ATURAN 3: Longgarkan Tracking Teks Kecil Kapital (10px–12px) 0.04em - 0.05em */
+th,
+.text-\[10px\],
+.text-\[11px\],
+.text-caption,
+.tracking-small-caps,
+.badge-caps,
+.uppercase-tracking {
+  letter-spacing: 0.05em; /* Longgarkan teks kecil kapital / kolom / label */
 }
 
-/* Enhanced readability for small text and explanations */
-.text-xs {
-  font-size: 0.8125rem; /* 13px instead of 12px for high legibility */
-  line-height: 1.25rem;
-}
-
-.text-\[10px\], .text-\[11px\] {
-  font-size: 0.75rem !important; /* Bumps 10px and 11px up to comfortable 12px */
-  line-height: 1.15rem;
+/* UI & Text Hierarchy */
+p, label, td, .text-xs, .text-sm, span:not(.font-mono) {
+  font-family: 'Geist', sans-serif;
 }
 
 /* Disable scrollbars on the window and demographic views */

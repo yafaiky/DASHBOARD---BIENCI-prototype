@@ -20,7 +20,7 @@ export const WorkforceChart: React.FC<WorkforceChartProps> = ({
       height: 310,
       toolbar: { show: false },
       zoom: { enabled: false },
-      fontFamily: "'Instrument Sans', sans-serif",
+      fontFamily: "'Geist', sans-serif",
     },
     colors: ['#172B4D', '#16A34A', '#DC2626'],
     dataLabels: { enabled: false },

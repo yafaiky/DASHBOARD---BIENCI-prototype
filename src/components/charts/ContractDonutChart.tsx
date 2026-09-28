@@ -15,7 +15,7 @@ export const ContractDonutChart: React.FC<ContractDonutChartProps> = ({
   const options: ApexCharts.ApexOptions = {
     chart: {
       type: 'donut',
-      fontFamily: "'Instrument Sans', sans-serif",
+      fontFamily: "'Geist', sans-serif",
     },
     colors,
     labels,

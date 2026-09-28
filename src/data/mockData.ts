@@ -1098,7 +1098,7 @@ export const storeFormatTurnoverData = [
     headcount: 6240,
     departuresYtd: 112,
     benchmarkMax: 3.0,
-    status: 'Optimal 🟢',
+    status: 'Optimal',
     primaryReasons: 'Habis Kontrak (52%), Resign SOP (28%), Kelalaian SO (20%)'
   },
   {
@@ -1107,7 +1107,7 @@ export const storeFormatTurnoverData = [
     headcount: 3180,
     departuresYtd: 76,
     benchmarkMax: 3.0,
-    status: 'Normal 🟡',
+    status: 'Normal',
     primaryReasons: 'Target Tekanan Mall (45%), Tawaran Karir Lain (35%), Closing Toko (20%)'
   },
   {
@@ -1116,7 +1116,7 @@ export const storeFormatTurnoverData = [
     headcount: 1820,
     departuresYtd: 71,
     benchmarkMax: 3.0,
-    status: 'Perlu Evaluasi 🔴',
+    status: 'Perlu Evaluasi',
     primaryReasons: 'Single-brand fatigue, Jam kerja shift mall panjang, Komisi kompetitor'
   }
 ];

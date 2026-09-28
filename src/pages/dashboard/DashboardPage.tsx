@@ -1,57 +1,40 @@
 import React, { useState } from "react"
 import {
-  TrendingUp,
-  TrendingDown,
-  UserCheck,
-  UserPlus,
-  UserMinus,
-  FileText,
-  ShieldCheck,
   Calendar,
   Zap,
-  MoreVertical,
-  ArrowRight,
   ChevronDown,
   Building,
-  Lock,
+  Filter,
+  BarChart2,
+  Table as TableIcon,
+  Sparkles,
+  Download,
+  Share2,
+  HelpCircle,
+  Eye,
+  CheckCircle2,
   Layers,
+  ArrowRight
 } from "lucide-react"
-import { Link, useNavigate } from "react-router-dom"
-import { WorkforceChart } from "../../components/charts/WorkforceChart"
-import { ContractDonutChart } from "../../components/charts/ContractDonutChart"
-import {
-  mockEmployees,
-  mockActivityStream,
-  workforceTrendData,
-  departmentDistribution,
-  contractTypesData,
-} from "../../data/mockData"
+import { useNavigate } from "react-router-dom"
+import { ExecutiveHeroMetrics } from "../../components/dashboard/ExecutiveHeroMetrics"
+import { Phase1VisualCharts } from "../../components/dashboard/Phase1VisualCharts"
+import { Phase1MetricsTable } from "../../components/dashboard/Phase1MetricsTable"
 import { QuickActionsModal } from "../../components/ui/QuickActionsModal"
 
 export const DashboardPage: React.FC = () => {
-  const [timeRange, setTimeRange] = useState<"7D" | "30D" | "YTD">("30D")
-  const [selectedBrand, setSelectedBrand] = useState("3SECOND")
-  const [departmentFilter, setDepartmentFilter] = useState(
-    "Semua Departemen (14)",
-  )
-  const [tableSearch, setTableSearch] = useState("")
+  const [activeTab, setActiveTab] = useState<"visual" | "matrix" | "both">("visual")
+  const [selectedYear, setSelectedYear] = useState<"2026" | "2025" | "2024">("2026")
+  const [selectedScope, setSelectedScope] = useState<"corporate" | "hq" | "store">("corporate")
+  const [departmentFilter, setDepartmentFilter] = useState("Semua Departemen")
+  const [divisionFilter, setDivisionFilter] = useState("Semua Divisi")
+  const [storeTypeFilter, setStoreTypeFilter] = useState("Semua Tipe Store")
   const [quickActionsOpen, setQuickActionsOpen] = useState(false)
   const [toastMessage, setToastMessage] = useState<string | null>(null)
   const navigate = useNavigate()
 
-  // Filtered recent employees
-  const displayEmployees = mockEmployees
-    .filter(
-      (emp) =>
-        emp.name.toLowerCase().includes(tableSearch.toLowerCase()) ||
-        emp.id.toLowerCase().includes(tableSearch.toLowerCase()) ||
-        emp.position.toLowerCase().includes(tableSearch.toLowerCase()) ||
-        emp.department.toLowerCase().includes(tableSearch.toLowerCase()),
-    )
-    .slice(0, 5)
-
   const handleQuickActionSuccess = (name: string) => {
-    setToastMessage(`Karyawan baru ${name} berhasil ditambahkan ke daftar aktif!`)
+    setToastMessage(`Karyawan baru ${name} berhasil ditambahkan ke database!`)
     setTimeout(() => setToastMessage(null), 4000)
   }
 
@@ -59,747 +42,268 @@ export const DashboardPage: React.FC = () => {
     <div className="space-y-6">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-8 z-50 bg-emerald-600 text-white px-4 py-3 -xl shadow-lg flex items-center gap-3 animate-in slide-in-from-top duration-200">
-          <span className="w-2 h-2 -full bg-white" />
-          <span className="text-xs font-semibold">{toastMessage}</span>
+        <div className="fixed top-20 right-8 z-50 bg-slate-900 border border-red-500/40 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 backdrop-blur-md animate-in slide-in-from-top duration-200">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-xs font-medium">{toastMessage}</span>
         </div>
       )}
 
-      {/* Top Welcome & Executive Header */}
-      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+      {/* =========================================================================
+          TOP EXECUTIVE HEADER & CONTROLS
+          Title: HR EXECUTIVE DASHBOARD
+          Subtitle: HR DASHBOARD KPI 2026 Version 1.0 • Reporting : Monthly
+          ========================================================================= */}
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 pb-1">
         <div>
-          <div className="flex items-center gap-2.5">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Selamat datang kembali, Muntazier
+          <div className="flex items-center gap-3 flex-wrap">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-heading">
+              HR EXECUTIVE DASHBOARD
             </h1>
+            <span className="px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+              3SECOND GROUP
+            </span>
           </div>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-2xl">
-            Berikut ringkasan tenaga kerja Anda hari ini di seluruh{" "}
-            <strong className="text-slate-700 font-semibold">
-              3SECOND Group
-            </strong>{" "}
-            & jaringan ritel BIENSI secara nasional.
+          <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-3xl">
+            <strong className="text-slate-800 font-semibold">HR DASHBOARD KPI 2026 Version 1.0</strong> • Pelaporan Bulanan (Monthly Reporting) PT Biensi Fesyenindo secara terpadu nasional.
           </p>
         </div>
 
-        {/* Date controls and Quick Action button */}
-        <div className="flex flex-wrap items-center gap-2.5">
-          {/* Period selector */}
-          <div className="inline-flex p-1 bg-slate-100 -xl border border-slate-200 text-xs font-semibold">
-            {(["7D", "30D", "YTD"] as const).map((range) => (
+        {/* Executive Action Controls */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Year Switcher (2026, 2025, 2024 from Phase 1.0 column) */}
+          <div className="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-mono font-semibold">
+            {(["2026", "2025", "2024"] as const).map((year) => (
               <button
-                key={range}
+                key={year}
                 type="button"
-                onClick={() => setTimeRange(range)}
-                className={`px-3 py-1.5 -lg transition-all ${
-                  timeRange === range
-                    ? "bg-white text-slate-900 shadow-xs font-bold"
-                    : "text-slate-500 hover:text-slate-800"
-                }`}
+                onClick={() => setSelectedYear(year)}
+                className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${selectedYear === year
+                    ? "bg-slate-900 text-white shadow-xs font-bold"
+                    : "text-slate-600 hover:text-slate-900"
+                  }`}
               >
-                {range === "7D" ? "7 Hari" : range === "30D" ? "30 Hari" : "YTD"}
+                {year}
               </button>
             ))}
           </div>
 
-          {/* Month Dropdown Button */}
-          <div className="relative">
+          {/* Scope Switcher: Total Corporate / HQ / Store */}
+          <div className="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-medium">
             <button
               type="button"
-              className="flex items-center gap-2 px-3 py-2 bg-white border border-slate-200 -xl text-xs font-semibold text-slate-700 hover:bg-slate-50 shadow-2xs"
+              onClick={() => setSelectedScope("corporate")}
+              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${selectedScope === "corporate"
+                  ? "bg-white text-slate-900 shadow-xs font-bold"
+                  : "text-slate-600 hover:text-slate-900"
+                }`}
             >
-              <Calendar className="w-4 h-4 text-slate-500" />
-              <span>Bulan Ini: Oktober 2026</span>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+              Corporate
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedScope("hq")}
+              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${selectedScope === "hq"
+                  ? "bg-white text-slate-900 shadow-xs font-bold"
+                  : "text-slate-600 hover:text-slate-900"
+                }`}
+            >
+              HQ (Pusat)
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedScope("store")}
+              className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${selectedScope === "store"
+                  ? "bg-white text-slate-900 shadow-xs font-bold"
+                  : "text-slate-600 hover:text-slate-900"
+                }`}
+            >
+              Store (Ritel)
             </button>
           </div>
 
-          {/* Red Primary Quick Action Button */}
+          {/* Primary Action Button */}
           <button
             type="button"
             onClick={() => setQuickActionsOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-[#c8102e] hover:bg-[#b00d27] text-white -xl text-xs font-bold shadow-sm shadow-red-900/20 transition-colors"
+            className="flex items-center gap-2 px-3.5 py-2 bg-[#C8102E] hover:bg-[#b00d27] text-white rounded-xl text-xs font-bold shadow-xs transition-colors cursor-pointer"
           >
-            <Zap className="w-4 h-4 fill-white" />
+            <Zap className="w-3.5 h-3.5 fill-white" />
             <span>Aksi Cepat</span>
-            <ChevronDown className="w-3.5 h-3.5 opacity-80" />
+            <ChevronDown className="w-3 h-3 opacity-80" />
           </button>
         </div>
       </div>
 
-      {/* Filters Bar */}
-      <div className="bg-white p-4 -2xl border border-slate-200/90 shadow-2xs">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-end">
-          {/* Department */}
+      {/* =========================================================================
+          VIEW MODE TABS: TAMPILAN VISUAL vs KATALOG MATRIKS PHASE 1.0
+          ========================================================================= */}
+      <div className="bg-white p-2 rounded-2xl border border-slate-200/90 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="inline-flex p-1 bg-slate-100/80 rounded-xl border border-slate-200/80 text-xs font-medium">
+          <button
+            type="button"
+            onClick={() => setActiveTab("visual")}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all cursor-pointer ${activeTab === "visual"
+                ? "bg-white text-slate-900 font-bold shadow-xs"
+                : "text-slate-600 hover:text-slate-900"
+              }`}
+          >
+            <BarChart2 className="w-4 h-4 text-[#C8102E]" />
+            <span>Tampilan Visual (Visual Charts)</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab("matrix")}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all cursor-pointer ${activeTab === "matrix"
+                ? "bg-white text-slate-900 font-bold shadow-xs"
+                : "text-slate-600 hover:text-slate-900"
+              }`}
+          >
+            <TableIcon className="w-4 h-4 text-slate-700" />
+            <span>Matriks Metrik (51 KPI)</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab("both")}
+            className={`hidden md:flex items-center gap-2 px-3.5 py-2 rounded-lg transition-all cursor-pointer ${activeTab === "both"
+                ? "bg-white text-slate-900 font-bold shadow-xs"
+                : "text-slate-600 hover:text-slate-900"
+              }`}
+          >
+            <Layers className="w-4 h-4 text-slate-700" />
+            <span>Lengkap (Keduanya)</span>
+          </button>
+        </div>
+
+        {/* Quick Context Summary Tag */}
+        <div className="flex items-center gap-2 px-3 py-1.5 text-xs text-slate-500 font-mono">
+          <span className="w-2 h-2 rounded-full bg-emerald-500" />
+          <span>Skop: <strong className="text-slate-800 uppercase">{selectedScope}</strong> • Tahun: <strong className="text-slate-800">{selectedYear}</strong></span>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          FILTERS BAR (Based on Phase 1.0 breakdown in Excel)
+          ========================================================================= */}
+      <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-end text-xs">
+          {/* Divisi */}
           <div>
             <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Departemen
+              Divisi HQ
+            </label>
+            <select
+              value={divisionFilter}
+              onChange={(e) => setDivisionFilter(e.target.value)}
+              className="w-full px-3 py-2 text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-1 focus:ring-red-500"
+            >
+              <option>Semua Divisi</option>
+              <option>Commercial Business</option>
+              <option>Supply Chain</option>
+              <option>Business Support</option>
+            </select>
+          </div>
+
+          {/* Departemen */}
+          <div>
+            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+              Departemen HQ
             </label>
             <select
               value={departmentFilter}
               onChange={(e) => setDepartmentFilter(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 -xl focus:outline-hidden focus:ring-1 focus:ring-red-500"
+              className="w-full px-3 py-2 text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-1 focus:ring-red-500"
             >
-              <option>Semua Departemen (14)</option>
-              <option>Operasional Toko Retail</option>
-              <option>Rantai Pasok & Logistik</option>
-              <option>Pemasaran, Brand & Kreatif</option>
-              <option>Keuangan, Pajak & Akuntansi</option>
-              <option>Digital, Omnichannel & TI</option>
+              <option>Semua Departemen</option>
+              <option>Marketing</option>
+              <option>Sales Online</option>
+              <option>Sales Offline</option>
+              <option>Merchandising</option>
+              <option>Product Development</option>
+              <option>Production</option>
+              <option>Research & Development</option>
+              <option>Warehouse Finished Goods</option>
+              <option>Logistics</option>
+              <option>Finance</option>
+              <option>IT</option>
+              <option>Human Resource</option>
             </select>
           </div>
 
-          {/* Division */}
+          {/* Tipe Store */}
           <div>
             <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Divisi
+              Tipe Store Ritel
             </label>
-            <select className="w-full px-3 py-2 text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 -xl focus:outline-hidden focus:ring-1 focus:ring-red-500">
-              <option>Operasional Retail (Aktif)</option>
-              <option>Fashion & Desain</option>
-              <option>Rantai Pasok & Logistik</option>
-              <option>Bisnis Komersial</option>
-              <option>Dukungan Korporat</option>
-            </select>
-          </div>
-
-          {/* Location / Store Cluster */}
-          <div>
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Lokasi / Klaster Toko
-            </label>
-            <select className="w-full px-3 py-2 text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 -xl focus:outline-hidden focus:ring-1 focus:ring-red-500">
-              <option>Kantor Pusat Bandung & Toko (Utama)</option>
-              <option>Hub Unggulan Jabodetabek</option>
-              <option>Wilayah Jawa Timur</option>
-              <option>Hub Regional Sumatera</option>
-              <option>Bali & Nusa Tenggara</option>
-            </select>
-          </div>
-
-          {/* Employment Status */}
-          <div>
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Status Kepegawaian
-            </label>
-            <select className="w-full px-3 py-2 text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 -xl focus:outline-hidden focus:ring-1 focus:ring-red-500">
-              <option>Semua Status</option>
-              <option>Aktif</option>
-              <option>Masa Percobaan</option>
-              <option>Kontrak (PKWT)</option>
-              <option>Tetap (PKWTT)</option>
-            </select>
-          </div>
-
-          {/* Brand Portfolio Pills */}
-          <div>
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
-              Portofolio Brand
-            </label>
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
-              {["3SECOND", "GREENLIGHT", "FAMO"].map((brand) => (
-                <button
-                  key={brand}
-                  type="button"
-                  onClick={() => setSelectedBrand(brand)}
-                  className={`px-2.5 py-1.5 -lg text-[11px] font-extrabold tracking-wide transition-colors ${
-                    selectedBrand === brand
-                      ? "bg-slate-900 text-white shadow-xs"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                  }`}
-                >
-                  {brand}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 6 Key Stat Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-        {/* 1. Total Employees */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-sm transition-shadow flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1 flex-wrap">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                  Total Staf
-                </span>
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-red-50 text-[#c8102e] border border-red-200">
-                   Quest #1 & #18
-                </span>
-              </div>
-              <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
-                <Layers className="w-3.5 h-3.5" />
-              </div>
-            </div>
-            <div className="text-2xl font-black text-slate-900 mt-2">
-              12.480
-            </div>
-            <div className="flex items-center gap-1 mt-1 text-xs font-semibold text-emerald-600">
-              <TrendingUp className="w-3.5 h-3.5" />
-              <span>+3.2% vs bulan lalu</span>
-            </div>
-          </div>
-          <div className="pt-3 mt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs font-medium text-slate-500">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span>Pusat 1.240 • Toko 11.240</span>
-          </div>
-        </div>
-
-        {/* 2. Active Employees */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-sm transition-shadow flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                Staf Aktif
-              </span>
-              <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                <UserCheck className="w-3.5 h-3.5" />
-              </div>
-            </div>
-            <div className="text-2xl font-black text-slate-900 mt-2">
-              11.920
-            </div>
-            <div className="flex items-center gap-1 mt-1 text-xs font-semibold text-emerald-600">
-              <TrendingUp className="w-3.5 h-3.5" />
-              <span>+2.4% vs Sep</span>
-            </div>
-          </div>
-          <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span className="text-slate-500 font-medium">
-              95.5% staf aktif
-            </span>
-            <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700">
-              Optimal
-            </span>
-          </div>
-        </div>
-
-        {/* 3. New Joiners */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-sm transition-shadow flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                Karyawan Baru
-              </span>
-              <div className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                <UserPlus className="w-3.5 h-3.5" />
-              </div>
-            </div>
-            <div className="flex items-baseline gap-1 mt-2">
-              <span className="text-2xl font-black text-slate-900">284</span>
-              <span className="text-xs text-slate-400 font-medium">
-                / target 300
-              </span>
-            </div>
-            <div className="text-xs font-semibold text-emerald-600 mt-1">
-              94.7% dari kuota bulanan
-            </div>
-          </div>
-          <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-            <span>Penerimaan Toko + Pusat</span>
-            <span className="font-bold text-slate-700">Sisa 16</span>
-          </div>
-        </div>
-
-        {/* 4. Resigned */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-sm transition-shadow flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1 flex-wrap">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                  Karyawan Keluar (Resign)
-                </span>
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-red-50 text-[#c8102e] border border-red-200">
-                   Quest #4
-                </span>
-              </div>
-              <div className="w-7 h-7 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
-                <UserMinus className="w-3.5 h-3.5" />
-              </div>
-            </div>
-            <div className="text-2xl font-black text-slate-900 mt-2">96</div>
-            <div className="flex items-center gap-1 mt-1 text-xs font-semibold text-emerald-600">
-              <TrendingDown className="w-3.5 h-3.5" />
-              <span>-12.0% penurunan turnover</span>
-            </div>
-          </div>
-          <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span className="text-slate-500 font-medium">Tingkat Turnover</span>
-            <span className="font-bold text-emerald-600">0.77% (Rendah)</span>
-          </div>
-        </div>
-
-        {/* 5. Contract (PKWT) */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-sm transition-shadow flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1 flex-wrap">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                  PKWT
-                </span>
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-amber-50 text-amber-700 border border-amber-200">
-                   Quest #13
-                </span>
-              </div>
-              <div className="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
-                <FileText className="w-3.5 h-3.5" />
-              </div>
-            </div>
-            <div className="text-2xl font-black text-slate-900 mt-2">2.180</div>
-            <div className="text-xs text-slate-500 font-medium mt-1">
-              Staf toko & musiman
-            </div>
-          </div>
-          <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-            <span>17.5% dari total tenaga kerja</span>
-            <Building className="w-3.5 h-3.5 text-slate-400" />
-          </div>
-        </div>
-
-        {/* 6. Permanent (PKWTT) */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-sm transition-shadow flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1 flex-wrap">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                  PKWTT
-                </span>
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-black bg-blue-50 text-blue-700 border border-blue-200">
-                   Quest #19
-                </span>
-              </div>
-              <div className="w-7 h-7 rounded-lg bg-slate-900 text-white flex items-center justify-center">
-                <ShieldCheck className="w-3.5 h-3.5" />
-              </div>
-            </div>
-            <div className="text-2xl font-black text-slate-900 mt-2">9.740</div>
-            <div className="text-xs text-slate-500 font-medium mt-1">
-              Inti kantor pusat & pimpinan toko
-            </div>
-          </div>
-          <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-            <span>78.0% inti tenaga kerja</span>
-            <Lock className="w-3.5 h-3.5 text-slate-400" />
-          </div>
-        </div>
-      </div>
-
-      {/* Middle Section: Trajectory Trend & Distribution */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Column (8 cols): Workforce Trajectory Trend */}
-        <div className="lg:col-span-8 bg-white p-5 -2xl border border-slate-200/90 shadow-2xs flex flex-col justify-between">
-          <div>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
-              <div>
-                <div className="flex items-center gap-2 flex-wrap">
-                  <h3 className="text-sm font-bold text-slate-900 font-heading">
-                    Tren Lintasan Tenaga Kerja
-                  </h3>
-                  <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-red-50 text-[#c8102e] border border-red-200">
-                     Quest #1 (Tinggi): Pertumbuhan Staf vs Penjualan
-                  </span>
-                  <span className="text-xs font-medium text-slate-400">
-                    Jan – Okt 2026
-                  </span>
-                </div>
-                <p className="text-xs text-slate-500 mt-0.5 font-inter">
-                  Perkembangan jumlah staf aktif seiring laju penerimaan &
-                  keluar karyawan
-                </p>
-              </div>
-
-              {/* Legend matching screenshot */}
-              <div className="flex items-center gap-4 text-xs font-semibold text-slate-600">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#172B4D]" /> Aktif
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#16A34A]" /> Masuk
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#DC2626]" /> Keluar
-                </span>
-              </div>
-            </div>
-
-            {/* Apex Chart */}
-            <div className="pt-2">
-              <WorkforceChart
-                categories={workforceTrendData.categories}
-                activeData={workforceTrendData.active}
-                joinersData={workforceTrendData.joiners}
-                resignedData={workforceTrendData.resigned}
-              />
-            </div>
-          </div>
-
-          {/* Chart KPI Footer */}
-          <div className="grid grid-cols-3 gap-4 pt-4 mt-2 border-t border-slate-100 text-center">
-            <div>
-              <span className="text-xs text-slate-400 font-medium block">
-                Rata-rata Karyawan Baru / Bln
-              </span>
-              <span className="text-sm sm:text-base font-extrabold text-slate-800">
-                292 / bln
-              </span>
-            </div>
-            <div>
-              <span className="text-xs text-slate-400 font-medium block">
-                Kenaikan Bersih Headcount
-              </span>
-              <span className="text-sm sm:text-base font-extrabold text-emerald-600">
-                +188 bulan ini
-              </span>
-            </div>
-            <div>
-              <span className="text-xs text-slate-400 font-medium block">
-                Turnover Tahunan
-              </span>
-              <span className="text-sm sm:text-base font-extrabold text-slate-800">
-                9.2%{" "}
-                <span className="text-xs text-slate-400 font-normal">
-                  (Tolok ukur 18%)
-                </span>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column (4 cols): Contract Types & Staffing by Department */}
-        <div className="lg:col-span-4 space-y-6">
-          {/* Card: Contract Types Donut */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <h3 className="text-sm font-bold text-slate-900 font-heading">
-                  Tipe Kontrak
-                </h3>
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">
-                   Quest #19
-                </span>
-              </div>
-              <span className="text-xs font-semibold text-slate-500">
-                12.480 Staf
-              </span>
-            </div>
-
-            <ContractDonutChart
-              series={contractTypesData.series}
-              labels={contractTypesData.labels}
-              colors={contractTypesData.colors}
-            />
-
-            {/* Donut Legend */}
-            <div className="space-y-1.5 pt-2 text-xs">
-              <div className="flex items-center justify-between text-slate-700">
-                <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#172B4D]" /> Tetap (PKWTT)
-                </span>
-                <span className="font-bold">
-                  9.740{" "}
-                  <span className="text-slate-400 font-normal">(78%)</span>
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-slate-700">
-                <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#C8102E]" /> Kontrak (PKWT)
-                </span>
-                <span className="font-bold">
-                  2.180{" "}
-                  <span className="text-slate-400 font-normal">(17.5%)</span>
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-slate-700">
-                <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]" /> Masa Percobaan
-                </span>
-                <span className="font-bold">
-                  370 <span className="text-slate-400 font-normal">(3.0%)</span>
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-slate-700">
-                <span className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#38BDF8]" /> Magang / Musiman
-                </span>
-                <span className="font-bold">
-                  190 <span className="text-slate-400 font-normal">(1.5%)</span>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card: Staffing by Department */}
-          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-2xs">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <h3 className="text-sm font-bold text-slate-900 font-heading">
-                  Karyawan per Departemen
-                </h3>
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
-                   Quest #26
-                </span>
-              </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                DISTRIBUSI
-              </span>
-            </div>
-
-            <div className="space-y-3">
-              {departmentDistribution.map((dept, idx) => (
-                <div key={idx} className="space-y-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-slate-700">
-                      {dept.name}
-                    </span>
-                    <span className="text-slate-500 font-medium">
-                      <strong className="text-slate-900">
-                        {dept.count.toLocaleString()}
-                      </strong>{" "}
-                      ({dept.percentage}%)
-                    </span>
-                  </div>
-                  <div className="w-full h-2 -full bg-slate-100 overflow-hidden">
-                    <div
-                      className="h-full -full transition-all duration-500"
-                      style={{
-                        width: `${dept.percentage}%`,
-                        backgroundColor: dept.color,
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Section: Recent Onboarded Employees & System Activity Stream */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left (8 cols): Recent Onboarded Employees Table */}
-        <div className="lg:col-span-8 bg-white p-5 -2xl border border-slate-200/90 shadow-2xs">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-            <div className="flex items-center gap-3">
-              <h3 className="text-sm font-bold text-slate-900">
-                Karyawan Baru Bergabung
-              </h3>
-              <span className="px-2 py-0.5 -full text-[10px] font-bold bg-slate-100 text-slate-600">
-                5 Data Terbaru
-              </span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <input
-                type="text"
-                placeholder="Saring tabel..."
-                value={tableSearch}
-                onChange={(e) => setTableSearch(e.target.value)}
-                className="px-3 py-1.5 text-xs bg-slate-50 border border-slate-200 -lg placeholder-slate-400 focus:outline-hidden focus:ring-1 focus:ring-red-500"
-              />
-              <Link
-                to="/employees"
-                className="text-xs font-bold text-red-600 hover:text-red-700 flex items-center gap-1 shrink-0"
-              >
-                <span>Lihat Semua</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Table Container */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider border-y border-slate-100">
-                <tr>
-                  <th className="py-2.5 px-3 font-bold">NIK</th>
-                  <th className="py-2.5 px-3 font-bold">DETAIL KARYAWAN</th>
-                  <th className="py-2.5 px-3 font-bold">DEPARTEMEN</th>
-                  <th className="py-2.5 px-3 font-bold">JABATAN</th>
-                  <th className="py-2.5 px-3 font-bold">STATUS</th>
-                  <th className="py-2.5 px-3 font-bold">TANGGAL BERGABUNG</th>
-                  <th className="py-2.5 px-3 font-bold text-right">AKSI</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {displayEmployees.map((emp) => (
-                  <tr
-                    key={emp.id}
-                    onClick={() => navigate(`/employees/${emp.id}`)}
-                    className="hover:bg-slate-50/80 cursor-pointer transition-colors"
-                  >
-                    <td className="py-3 px-3 font-mono font-semibold text-slate-600">
-                      {emp.id}
-                    </td>
-                    <td className="py-3 px-3">
-                      <div className="flex items-center gap-2.5">
-                        <img
-                          src={emp.avatar}
-                          alt={emp.name}
-                          className="w-8 h-8 -full object-cover shrink-0"
-                        />
-                        <div>
-                          <div className="font-bold text-slate-900">
-                            {emp.name}
-                          </div>
-                          <div className="text-[11px] text-slate-400">
-                            {emp.email}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="py-3 px-3 text-slate-700 font-medium">
-                      {emp.department}
-                    </td>
-                    <td className="py-3 px-3 text-slate-600 font-medium">
-                      {emp.position}
-                    </td>
-                    <td className="py-3 px-3">
-                      <span
-                        className={`inline-flex items-center gap-1 px-2 py-0.5 -full text-[10px] font-bold ${
-                          emp.status === "Active"
-                            ? "bg-emerald-50 text-emerald-700"
-                            : emp.status === "Probation"
-                              ? "bg-amber-50 text-amber-700"
-                              : emp.status === "Promotion"
-                                ? "bg-blue-50 text-blue-700"
-                                : "bg-slate-100 text-slate-600"
-                        }`}
-                      >
-                        <span
-                          className={`w-1.5 h-1.5 -full ${
-                            emp.status === "Active"
-                              ? "bg-emerald-500"
-                              : emp.status === "Probation"
-                                ? "bg-amber-500"
-                                : emp.status === "Promotion"
-                                  ? "bg-blue-500"
-                                  : "bg-slate-400"
-                          }`}
-                        />
-                        {emp.status === "Active"
-                          ? "Aktif"
-                          : emp.status === "Probation"
-                            ? "Percobaan"
-                            : emp.status === "Promotion"
-                              ? "Promosi"
-                              : emp.status}
-                      </span>
-                    </td>
-                    <td className="py-3 px-3 text-slate-600 font-medium">
-                      {emp.joinDate}
-                    </td>
-                    <td className="py-3 px-3 text-right">
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          navigate(`/employees/${emp.id}`)
-                        }}
-                        className="p-1 -md text-slate-400 hover:text-slate-600 hover:bg-slate-100"
-                      >
-                        <MoreVertical className="w-4 h-4" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Table Footer with pagination */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-4 mt-2 border-t border-slate-100 text-xs text-slate-500">
-            <span>Menampilkan 5 dari 284 karyawan baru periode ini</span>
-            <div className="inline-flex items-center gap-1 font-semibold">
-              <button
-                type="button"
-                className="px-2.5 py-1 -lg border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-50"
-                disabled
-              >
-                Sebelumnya
-              </button>
-              <button
-                type="button"
-                className="w-7 h-7 -lg bg-slate-900 text-white font-bold flex items-center justify-center text-xs"
-              >
-                1
-              </button>
-              <button
-                type="button"
-                className="w-7 h-7 -lg border border-slate-200 text-slate-700 hover:bg-slate-50 flex items-center justify-center text-xs"
-              >
-                2
-              </button>
-              <button
-                type="button"
-                className="w-7 h-7 -lg border border-slate-200 text-slate-700 hover:bg-slate-50 flex items-center justify-center text-xs"
-              >
-                3
-              </button>
-              <button
-                type="button"
-                className="px-2.5 py-1 -lg border border-slate-200 text-slate-700 hover:bg-slate-50"
-              >
-                Berikutnya
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Right (4 cols): System Activity Stream */}
-        <div className="lg:col-span-4 bg-white p-5 -2xl border border-slate-200/90 shadow-2xs flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-sm font-bold text-slate-900">
-                Arus Aktivitas Sistem
-              </h3>
-              <span className="flex items-center gap-1 text-[11px] font-semibold text-emerald-600">
-                <span className="w-2 h-2 -full bg-emerald-500" /> Waktu Nyata
-              </span>
-            </div>
-
-            {/* Stream list */}
-            <div className="divide-y divide-slate-100 mt-2">
-              {mockActivityStream.map((item) => (
-                <div key={item.id} className="py-3 flex gap-3 text-xs">
-                  <div className="mt-1">
-                    <span
-                      className="w-2.5 h-2.5 -full block"
-                      style={{ backgroundColor: item.dotColor }}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-slate-900">
-                        {item.title}
-                      </span>
-                      <span className="text-[10px] text-slate-400 font-medium">
-                        {item.timestamp}
-                      </span>
-                    </div>
-                    <p className="text-slate-600 mt-0.5 leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Action button to Activity Log */}
-          <div className="pt-4 mt-3 border-t border-slate-100">
-            <Link
-              to="/activity-log"
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 -xl bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-colors"
+            <select
+              value={storeTypeFilter}
+              onChange={(e) => setStoreTypeFilter(e.target.value)}
+              className="w-full px-3 py-2 text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-1 focus:ring-red-500"
             >
-              <span>Lihat Semua Log Aktivitas</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+              <option>Semua Tipe Store</option>
+              <option>Family Store (FS)</option>
+              <option>Showroom (Mall)</option>
+              <option>Counter (Dept Store/YDS)</option>
+            </select>
+          </div>
+
+          {/* Area Store */}
+          <div>
+            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+              Area Regional Store
+            </label>
+            <select
+              className="w-full px-3 py-2 text-xs font-medium text-slate-700 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-1 focus:ring-red-500"
+            >
+              <option>Semua Area (Barat & Timur)</option>
+              <option>Area Barat 1 (Bandung & Jabar)</option>
+              <option>Area Barat 2 (DKI, Banten, Sumatera)</option>
+              <option>Area Timur 1 (Jateng & Jatim)</option>
+              <option>Area Timur 2 (Bali, Kalimantan, Sulawesi)</option>
+            </select>
           </div>
         </div>
       </div>
+
+      {/* =========================================================================
+          TOP EXECUTIVE HERO CARDS
+          Total Headcount • All Productivity - Sales • Productivity - Production
+          ========================================================================= */}
+      <ExecutiveHeroMetrics
+        selectedYear={selectedYear}
+        selectedScope={selectedScope}
+      />
+
+      {/* =========================================================================
+          DYNAMIC MAIN CONTENT: VISUAL CHARTS OR EXACT PHASE 1.0 METRIC MATRIX
+          ========================================================================= */}
+      {activeTab === "visual" && (
+        <Phase1VisualCharts
+          selectedYear={selectedYear}
+          selectedScope={selectedScope}
+        />
+      )}
+
+      {activeTab === "matrix" && (
+        <Phase1MetricsTable
+          selectedYear={selectedYear}
+          selectedScope={selectedScope}
+        />
+      )}
+
+      {activeTab === "both" && (
+        <div className="space-y-8">
+          <Phase1VisualCharts
+            selectedYear={selectedYear}
+            selectedScope={selectedScope}
+          />
+          <Phase1MetricsTable
+            selectedYear={selectedYear}
+            selectedScope={selectedScope}
+          />
+        </div>
+      )}
 
       {/* Quick Actions Modal */}
       <QuickActionsModal
