@@ -197,13 +197,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, o
             {!isCollapsed && (
               <div className="flex flex-col overflow-hidden">
                 <div className="flex items-center gap-1.5 leading-none">
-                  <div className="w-20">
+                  <div className="w-28">
                     <img src="/BiensiType.webp" alt="Type" className="w-full object-contain" />
                   </div>
                 </div>
-                <span className="text-[10px] text-slate-400 font-semibold tracking-widest uppercase mt-0.5 whitespace-nowrap">
-                  3SECOND GROUP
-                </span>
               </div>
             )}
           </div>
@@ -232,8 +229,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, o
                       <div key={item.path} className="space-y-1">
                         <div
                           className={`relative flex items-center font-medium transition-all ${isCollapsed
-                              ? 'justify-center p-2.5 my-0.5'
-                              : 'justify-between px-3 py-2.5'
+                            ? 'justify-center p-2.5 my-0.5'
+                            : 'justify-between px-3 py-2.5'
                             } ${active
                               ? 'bg-[#3b1522] text-white shadow-sm border-l-2 border-red-500 font-semibold'
                               : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
@@ -302,8 +299,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, o
                         if (window.innerWidth < 1024 && onClose) onClose();
                       }}
                       className={`relative flex items-center font-medium transition-all ${isCollapsed
-                          ? 'justify-center p-2.5 my-0.5'
-                          : 'justify-between px-3 py-2.5'
+                        ? 'justify-center p-2.5 my-0.5'
+                        : 'justify-between px-3 py-2.5'
                         } ${active
                           ? 'bg-[#3b1522] text-white shadow-sm border-l-2 border-red-500 font-semibold'
                           : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
@@ -334,22 +331,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, isCollapsed = false, o
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Footer */}
-        <div
-          className={`p-3 shrink-0 border-t border-slate-800/80 bg-[#10131d] text-center transition-all duration-300 ${isCollapsed ? 'px-1' : 'px-3'
-            }`}
-        >
-          {isCollapsed ? (
-            <span className="text-[10px] text-slate-500 font-mono font-bold tracking-tight">
-              ©26
-            </span>
-          ) : (
-            <p className="text-[11px] text-slate-500 font-medium tracking-wide whitespace-nowrap">
-              Devtrine Studio @2026
-            </p>
-          )}
         </div>
       </aside>
     </>

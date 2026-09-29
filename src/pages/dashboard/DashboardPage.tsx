@@ -59,9 +59,6 @@ export const DashboardPage: React.FC = () => {
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight font-heading">
               HR EXECUTIVE DASHBOARD
             </h1>
-            <span className="px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-              3SECOND GROUP
-            </span>
           </div>
           <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-3xl">
             <strong className="text-slate-800 font-semibold">HR DASHBOARD KPI 2026 Version 1.0</strong> • Pelaporan Bulanan (Monthly Reporting) PT Biensi Fesyenindo secara terpadu nasional.
@@ -78,8 +75,8 @@ export const DashboardPage: React.FC = () => {
                 type="button"
                 onClick={() => setSelectedYear(year)}
                 className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${selectedYear === year
-                    ? "bg-slate-900 text-white shadow-xs font-bold"
-                    : "text-slate-600 hover:text-slate-900"
+                  ? "bg-slate-900 text-white shadow-xs font-bold"
+                  : "text-slate-600 hover:text-slate-900"
                   }`}
               >
                 {year}
@@ -93,8 +90,8 @@ export const DashboardPage: React.FC = () => {
               type="button"
               onClick={() => setSelectedScope("corporate")}
               className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${selectedScope === "corporate"
-                  ? "bg-white text-slate-900 shadow-xs font-bold"
-                  : "text-slate-600 hover:text-slate-900"
+                ? "bg-white text-slate-900 shadow-xs font-bold"
+                : "text-slate-600 hover:text-slate-900"
                 }`}
             >
               Corporate
@@ -103,8 +100,8 @@ export const DashboardPage: React.FC = () => {
               type="button"
               onClick={() => setSelectedScope("hq")}
               className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${selectedScope === "hq"
-                  ? "bg-white text-slate-900 shadow-xs font-bold"
-                  : "text-slate-600 hover:text-slate-900"
+                ? "bg-white text-slate-900 shadow-xs font-bold"
+                : "text-slate-600 hover:text-slate-900"
                 }`}
             >
               HQ (Pusat)
@@ -113,8 +110,8 @@ export const DashboardPage: React.FC = () => {
               type="button"
               onClick={() => setSelectedScope("store")}
               className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${selectedScope === "store"
-                  ? "bg-white text-slate-900 shadow-xs font-bold"
-                  : "text-slate-600 hover:text-slate-900"
+                ? "bg-white text-slate-900 shadow-xs font-bold"
+                : "text-slate-600 hover:text-slate-900"
                 }`}
             >
               Store (Ritel)
@@ -143,8 +140,8 @@ export const DashboardPage: React.FC = () => {
             type="button"
             onClick={() => setActiveTab("visual")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all cursor-pointer ${activeTab === "visual"
-                ? "bg-white text-slate-900 font-bold shadow-xs"
-                : "text-slate-600 hover:text-slate-900"
+              ? "bg-white text-slate-900 font-bold shadow-xs"
+              : "text-slate-600 hover:text-slate-900"
               }`}
           >
             <BarChart2 className="w-4 h-4 text-[#C8102E]" />
@@ -155,8 +152,8 @@ export const DashboardPage: React.FC = () => {
             type="button"
             onClick={() => setActiveTab("matrix")}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all cursor-pointer ${activeTab === "matrix"
-                ? "bg-white text-slate-900 font-bold shadow-xs"
-                : "text-slate-600 hover:text-slate-900"
+              ? "bg-white text-slate-900 font-bold shadow-xs"
+              : "text-slate-600 hover:text-slate-900"
               }`}
           >
             <TableIcon className="w-4 h-4 text-slate-700" />
@@ -167,8 +164,8 @@ export const DashboardPage: React.FC = () => {
             type="button"
             onClick={() => setActiveTab("both")}
             className={`hidden md:flex items-center gap-2 px-3.5 py-2 rounded-lg transition-all cursor-pointer ${activeTab === "both"
-                ? "bg-white text-slate-900 font-bold shadow-xs"
-                : "text-slate-600 hover:text-slate-900"
+              ? "bg-white text-slate-900 font-bold shadow-xs"
+              : "text-slate-600 hover:text-slate-900"
               }`}
           >
             <Layers className="w-4 h-4 text-slate-700" />
