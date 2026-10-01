@@ -47,12 +47,7 @@ export const DashboardPage: React.FC = () => {
           <span className="text-xs font-medium">{toastMessage}</span>
         </div>
       )}
-
-      {/* =========================================================================
-          TOP EXECUTIVE HEADER & CONTROLS
-          Title: HR EXECUTIVE DASHBOARD
-          Subtitle: HR DASHBOARD KPI 2026 Version 1.0 • Reporting : Monthly
-          ========================================================================= */}
+      
       <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 pb-1">
         <div>
           <div className="flex items-center gap-3 flex-wrap">
